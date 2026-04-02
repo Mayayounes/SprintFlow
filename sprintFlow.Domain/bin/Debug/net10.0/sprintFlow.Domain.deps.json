@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "sprintFlow.Domain/1.0.0": {
+        "runtime": {
+          "sprintFlow.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "sprintFlow.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

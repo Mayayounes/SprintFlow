@@ -1,0 +1,6 @@
+@sprintFlow.API_HostAddress = http://localhost:5134
+
+GET {{sprintFlow.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

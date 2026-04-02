@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="sprintFlow.API/sprintFlow.API.csproj" />
+  <Project Path="sprintFlow.Application/sprintFlow.Application.csproj" Id="980ba754-ebe9-4c39-a206-a8a27ce93749" />
+  <Project Path="sprintFlow.Domain/sprintFlow.Domain.csproj" Id="0227976a-dc36-4575-8268-d0f179eee30c" />
+  <Project Path="sprintFlow.Infrastructure/sprintFlow.Infrastructure.csproj" Id="113a5b81-3bef-4c77-8ed2-1bb8a811f473" />
+</Solution>
