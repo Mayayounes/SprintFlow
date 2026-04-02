@@ -1,6 +1,6 @@
 ﻿namespace sprintFlow.Domain.Entities;
 
-public class Tasks
+public class TaskItem
 {
     public Guid Id { get; set; }
     public string Title { get; set; } = default!;
@@ -12,4 +12,6 @@ public class Tasks
     //"assigned to" [Fk to users table]
 
     public Guid ProjectID { get; set; }
+    public Project Project { get; set; } = default!;
+
 }

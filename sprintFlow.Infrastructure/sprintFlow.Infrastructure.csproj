@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\sprintFlow.Application\sprintFlow.Application.csproj" />
-    <ProjectReference Include="..\sprintFlow.Domain\sprintFlow.Domain.csproj" />
   </ItemGroup>
 
 </Project>

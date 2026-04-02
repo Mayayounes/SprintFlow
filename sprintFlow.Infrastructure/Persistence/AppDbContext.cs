@@ -1,22 +1,25 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using sprintFlow.Domain.Entities;
 
 namespace sprintFlow.Infrastructure.Persistence;
 
-internal class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext<User>
 {
-    internal DbSet<Project> Projects { get; set; }
-
-    internal DbSet<Tasks> Tasks { get; set; }
-
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options)
+    : base(options)
     {
     }
+    internal DbSet<Project> Projects { get; set; }
+    internal DbSet<TaskItem> Tasks { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Project>()
             .HasMany(p => p.Tasks)
-            .WithOne()
+            .WithOne(t => t.Project)
             .HasForeignKey(t => t.ProjectID);
     }
 

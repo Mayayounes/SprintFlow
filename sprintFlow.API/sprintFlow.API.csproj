@@ -18,4 +18,8 @@
     <ProjectReference Include="..\sprintFlow.Infrastructure\sprintFlow.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>

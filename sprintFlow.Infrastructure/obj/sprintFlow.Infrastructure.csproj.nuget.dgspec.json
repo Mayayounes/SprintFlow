@@ -722,9 +722,6 @@
             "projectReferences": {
               "D:\\SprintFlow Project\\sprintFlow.Application\\sprintFlow.Application.csproj": {
                 "projectPath": "D:\\SprintFlow Project\\sprintFlow.Application\\sprintFlow.Application.csproj"
-              },
-              "D:\\SprintFlow Project\\sprintFlow.Domain\\sprintFlow.Domain.csproj": {
-                "projectPath": "D:\\SprintFlow Project\\sprintFlow.Domain\\sprintFlow.Domain.csproj"
               }
             }
           }
