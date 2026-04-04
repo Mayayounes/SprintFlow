@@ -4,7 +4,7 @@ using sprintFlow.Application.Users.Dto;
 
 namespace sprintFlow.Application.Users.Queries.GetAllUsers;
 
-public class GetAllUsersQuery : IRequest<PagedUsers<UserDto>>
+public class GetAllUsersQuery : IRequest<PagedResults<UserDto>>
 {
     public string? role { get; set; }
     public int PageNumber { get; set; }

@@ -6,6 +6,6 @@ public class Project
     public string Name { get; set; } = default!;
     public string Description { get; set; } = default!;
     public ICollection<TaskItem> Tasks { get; set; } = new List<TaskItem>();
-
-    //"managed by" (FK on user table)
+    public User Manager { get; set; } = default!;
+    public string ManagerId { get; set; } = default!;
 }

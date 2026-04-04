@@ -165,11 +165,17 @@ namespace sprintFlow.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ManagerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ManagerId");
 
                     b.ToTable("Projects");
                 });
@@ -324,6 +330,17 @@ namespace sprintFlow.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("sprintFlow.Domain.Entities.Project", b =>
+                {
+                    b.HasOne("sprintFlow.Domain.Entities.User", "Manager")
+                        .WithMany("ManagedProjects")
+                        .HasForeignKey("ManagerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Manager");
+                });
+
             modelBuilder.Entity("sprintFlow.Domain.Entities.TaskItem", b =>
                 {
                     b.HasOne("sprintFlow.Domain.Entities.Project", "Project")
@@ -338,6 +355,11 @@ namespace sprintFlow.Infrastructure.Migrations
             modelBuilder.Entity("sprintFlow.Domain.Entities.Project", b =>
                 {
                     b.Navigation("Tasks");
+                });
+
+            modelBuilder.Entity("sprintFlow.Domain.Entities.User", b =>
+                {
+                    b.Navigation("ManagedProjects");
                 });
 #pragma warning restore 612, 618
         }

@@ -28,10 +28,18 @@ public class UserRepository : IUserRepository
     public Task<IdentityResult> AddToRoleAsync(User user, string role)
             => _userManager.AddToRoleAsync(user, role);
 
-    public async Task<(IEnumerable<User>, int)> GetAllMatchingAsync(string? role, int pageSize, int pageNumber)
+    public async Task<(IEnumerable<User>, int)> GetAllMatchingAsync(string? role, int pageNumber, int pageSize)
     {
         var query = _AppDbContext.Users.AsQueryable();
 
+        if (!string.IsNullOrEmpty(role))
+        {
+            query = from user in _AppDbContext.Users
+                    join userRole in _AppDbContext.UserRoles on user.Id equals userRole.UserId
+                    join roleTable in _AppDbContext.Roles on userRole.RoleId equals roleTable.Id
+                    where roleTable.Name == role
+                    select user;
+        }
         var count = await query.CountAsync();
         var users = await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
         return (users, count);

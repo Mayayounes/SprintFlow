@@ -4,5 +4,5 @@ namespace sprintFlow.Domain.Entities;
 
 public class User : IdentityUser
 {
-
+    public List<Project> ManagedProjects { get; set; } = new List<Project>();
 }

@@ -1,3 +1,4 @@
+using sprintFlow.Application.Extensions;
 using sprintFlow.Application.Users.Queries.GetAllUsers;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Infrastructure.Extensions;
@@ -9,11 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
-builder.Services.AddMediatR(cfg =>
-{
-    cfg.RegisterServicesFromAssembly(typeof(GetAllUsersQueryHandler).Assembly);
-});
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

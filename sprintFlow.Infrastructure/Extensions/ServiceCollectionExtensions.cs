@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using sprintFlow.Application.Users.Queries.GetAllUsers;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
 using sprintFlow.Infrastructure.Persistence;
@@ -23,6 +24,12 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IProjectRepository, ProjectRepository>();
+
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(typeof(GetAllUsersQueryHandler).Assembly);
+        });
 
     }
 }

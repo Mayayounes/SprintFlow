@@ -20,10 +20,9 @@ Content-Type : application/json
 # Register a user
 POST {{sprintFlow.api_HostAddress}}/api/identity/register
 Content-Type : application/json
-Authorization : Bearer {{token}}
 {
-  "email" : "maya@test.com",
-  "password" : "Maya123.",
+  "email" : "nounou@test.com",
+  "password" : "Nounou123.",
 }
 ###
 //assign user to role
@@ -31,7 +30,7 @@ POST {{sprintFlow.api_HostAddress}}/api/identity/assignRole
 Content-Type : application/json
 Authorization : Bearer {{token}}
 {
-  "Email" : "malak@test.com",
+  "Email" : "ola@test.com",
   "Role" : "employee"
 }
 ###
@@ -40,8 +39,8 @@ PATCH {{sprintFlow.api_HostAddress}}/api/identity/changeRole
 Content-Type : application/json
 Authorization : Bearer {{token}}
 {
-  "Email" : "malak@test.com",
-  "NewRole" : "leader"
+  "Email" : "ola@test.com",
+  "NewRole" : "employee"
 }
 ###
 //delete user
@@ -49,5 +48,16 @@ DELETE {{sprintFlow.api_HostAddress}}/api/identity/deleteUser
 content-Type : application/json
 Authorization : Bearer {{token}}
 {
-  "Email" : "malak@test.com"
+  "Email" : "ola@test.com"
+}
+###
+//projects
+
+# Create project
+POST {{sprintFlow.api_HostAddress}}/api/projects/create
+content-Type : application/json
+Authorization : Bearer {{token}}
+{
+  "Name" : "project",
+  "Description" : "project description"
 }

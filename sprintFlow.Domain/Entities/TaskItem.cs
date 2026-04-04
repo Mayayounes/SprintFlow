@@ -8,9 +8,6 @@ public class TaskItem
     public string Status { get; set; } = default!;
     public DateOnly AssignedDate { get; set; }
     public DateOnly Deadline { get; set; }
-
-    //"assigned to" [Fk to users table]
-
     public Guid ProjectID { get; set; }
     public Project Project { get; set; } = default!;
 
