@@ -17,10 +17,8 @@ public static class ServiceCollectionExtensions
 
         services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString).EnableSensitiveDataLogging());
 
-        //services.AddIdentityApiEndpoints<User>()
-
-        services.AddIdentityCore<User>()
-            .AddRoles<IdentityRole>()   
+        services.AddIdentityApiEndpoints<User>()
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<AppDbContext>();
 
         services.AddScoped<IUserRepository, UserRepository>();

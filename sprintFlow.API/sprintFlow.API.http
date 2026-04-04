@@ -1,3 +1,53 @@
-@sprintFlow.API_HostAddress = http://localhost:5134
+@host = https://localhost
+@port = 7000
+@sprintFlow.api_HostAddress = {{host}}:{{port}} 
+@token =CfDJ8EKpNWjzxx5NkmgcT6qQodTS3skALyQ5Ac3_EYMCiAaPdXoeOlFFx3-3DGjUlk1my3LThtVVaG6fbCLoonIRPXiLd4dn76QyZLdgLG_sqAXT7tPjXhLKYjcS_uRCDLijqb0fduaEUMAuM4P1c-lV8r59A-SXVhAPyPERucun1wAqAPZxgC7Db5PZHT2dmNiuPA7Tkjl2DLo2G1oP-qhrRfvKalVVytc6T7IGZ-1K5K3ohyeBepEEh7D6p48WBY_qVhQ6SkENEkR34dMmlcRRhbZW3Hu-5P28mop_YPkH30O1mExI1TRvLvgxmHGiMscn55fN_dmv_BC-Tbg4Q_XOLdah79mlM1YsliKT0ilvGxydHEkOP7DvgDVqj0cNn87SVwIrBiWSJgUQIAoc8-mwnCWyA4uKbBhmvGq6lcgZWFZhtxDg5ok0F2gjYot7FS_2z2TG0MbVXEg15ltZiwH_Flf-LgPB0XI9YB3MiaOOnxBg10RbXFtcEJ0YFZV2fTiU4JHDSbn6LqwjULbF43ZrJbvXSik-qxpJCec2EZX8yNYdAXQRBenybmux7dlcdVvEUNwaBe_oCRnMi4jXfrvhYvqKHPozy8gk6FAhS332gI8XE0wsxw1AzpsFCa_bVTUS8c-b6bPnoHpk4BVRA14qyTpD_27dRi73DZFn2I1yu5FegezrSH__FrbJDLy8p1s31gLzIeCXMnaPuN4FQnEqJj01ZGlPpZJ80YzN6H3aNoiQh3MEr8okhKTZCQaipxLFq9x1cu4t65Kfdq6zA1m2Tsm7ARalSfevtEH4fZCBsQTC
+###
+# GET all users
+GET {{sprintFlow.api_HostAddress}}/api/users?role=employee&pageNumber=1&pageSize=10
+
 
 ###
+# login
+POST {{sprintFlow.api_HostAddress}}/api/identity/login
+Content-Type : application/json
+{
+    "email": "ola@test.com",
+    "password": "Ola123."
+}
+###
+
+# Register a user
+POST {{sprintFlow.api_HostAddress}}/api/identity/register
+Content-Type : application/json
+Authorization : Bearer {{token}}
+{
+  "email" : "maya@test.com",
+  "password" : "Maya123.",
+}
+###
+//assign user to role
+POST {{sprintFlow.api_HostAddress}}/api/identity/assignRole
+Content-Type : application/json
+Authorization : Bearer {{token}}
+{
+  "Email" : "malak@test.com",
+  "Role" : "employee"
+}
+###
+//change user role
+PATCH {{sprintFlow.api_HostAddress}}/api/identity/changeRole
+Content-Type : application/json
+Authorization : Bearer {{token}}
+{
+  "Email" : "malak@test.com",
+  "NewRole" : "leader"
+}
+###
+//delete user
+DELETE {{sprintFlow.api_HostAddress}}/api/identity/deleteUser
+content-Type : application/json
+Authorization : Bearer {{token}}
+{
+  "Email" : "malak@test.com"
+}

@@ -161,3 +161,10 @@ D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.pdb
 D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.genruntimeconfig.cache
 D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\ref\sprintFlow.API.dll
 D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\FluentValidation.dll
+D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\FluentValidation.AspNetCore.dll
+D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\MediatR.dll
+D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\MediatR.Contracts.dll
+D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\MediatR.Extensions.FluentValidation.AspNetCore.dll
+D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.MvcApplicationPartsAssemblyInfo.cs
