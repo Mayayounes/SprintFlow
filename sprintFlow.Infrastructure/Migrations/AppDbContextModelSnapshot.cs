@@ -196,12 +196,15 @@ namespace sprintFlow.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProjectID")
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("ProjectId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -209,7 +212,9 @@ namespace sprintFlow.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectID");
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Tasks");
                 });
@@ -343,11 +348,19 @@ namespace sprintFlow.Infrastructure.Migrations
 
             modelBuilder.Entity("sprintFlow.Domain.Entities.TaskItem", b =>
                 {
+                    b.HasOne("sprintFlow.Domain.Entities.User", "Employee")
+                        .WithMany("Tasks")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("sprintFlow.Domain.Entities.Project", "Project")
                         .WithMany("Tasks")
-                        .HasForeignKey("ProjectID")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Employee");
 
                     b.Navigation("Project");
                 });
@@ -360,6 +373,8 @@ namespace sprintFlow.Infrastructure.Migrations
             modelBuilder.Entity("sprintFlow.Domain.Entities.User", b =>
                 {
                     b.Navigation("ManagedProjects");
+
+                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

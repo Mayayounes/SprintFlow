@@ -9,5 +9,5 @@ public class UserDto
     public string Email { get; set; } = null!;
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public UserRoles Role { get; set; }
+    public UserRole Role { get; set; }
 }

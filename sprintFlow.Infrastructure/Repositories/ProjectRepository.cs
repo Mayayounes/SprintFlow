@@ -2,7 +2,6 @@
 using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
 using sprintFlow.Infrastructure.Persistence;
-using System.Linq.Expressions;
 
 namespace sprintFlow.Infrastructure.Repositories;
 
@@ -15,28 +14,52 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
         return entity.Id;
     }
 
-    public async Task<IEnumerable<Project>> GetAllAsync()
+    public IQueryable<Project> GetAll()
     {
-        var projects = await dbContext.Projects
-            .Include(r => r.Tasks)
-            .ToListAsync();
-        return projects;
+        return dbContext.Projects;
     }
-    public async Task<(IEnumerable<Project>, int)> GetAllMatchingAsync(string? searchPhrase, int pageNumber ,int pageSize)
+    //public async Task<(IEnumerable<Project>, int)> GetAllMatchingAsync(string? searchPhrase, int pageNumber ,int pageSize)
+    //{
+    //    var baseQuery = dbContext.Projects
+    //        .Where(r => searchPhrase == null || (r.Name.Contains(searchPhrase) || r.Description.Contains(searchPhrase)));
+
+
+    //    var totalCount = await baseQuery.CountAsync();
+
+    //    var projects = await baseQuery
+    //        .Skip(pageSize * (pageNumber - 1))
+    //        .Take(pageSize)
+    //        .ToListAsync();
+
+    //    return (projects, totalCount);
+    //}
+    public async Task<(IEnumerable<Project> Projects, int TotalCount)> GetAllMatchingAsync(
+    string searchPhrase, int pageNumber, int pageSize, string? managerId = null)
     {
-        var baseQuery = dbContext.Projects
-            .Where(r => searchPhrase == null || (r.Name.Contains(searchPhrase) || r.Description.Contains(searchPhrase)));
+        var query = dbContext.Projects.AsQueryable();
 
+        if (!string.IsNullOrWhiteSpace(searchPhrase))
+            query = query.Where(p => p.Name.Contains(searchPhrase));
 
-        var totalCount = await baseQuery.CountAsync();
+        if (!string.IsNullOrWhiteSpace(managerId))
+            query = query.Where(p => p.ManagerId == managerId);
 
-        var projects = await baseQuery
-            .Skip(pageSize * (pageNumber - 1))
-            .Take(pageSize)
-            .ToListAsync();
-
+        var totalCount = await query.CountAsync();
+        var projects = await query.Skip((pageNumber - 1) * pageSize)
+                                  .Take(pageSize)
+                                  .ToListAsync();
         return (projects, totalCount);
     }
+
+    public async Task<string> GetProjectManagerIdAsync(Guid projectId)
+    {
+        var managerId = await dbContext.Projects
+            .Where(p => p.Id == projectId)
+            .Select(p => p.ManagerId)
+            .FirstOrDefaultAsync();
+        return managerId;
+    }
+
 
     public async Task<Project?> GetByIdAsync(Guid id)
     {

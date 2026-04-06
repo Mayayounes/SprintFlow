@@ -4,7 +4,7 @@ using sprintFlow.Domain.Entities;
 
 namespace sprintFlow.Application.Projects.Queries.GetProjectById;
 
-public class GetProjectByIdQuery : IRequest<ProjectDto>
+public class GetProjectByIdQuery : IRequest<SingleProjectDto>
 {
     public Guid Id { get; }
     public GetProjectByIdQuery(Guid id)

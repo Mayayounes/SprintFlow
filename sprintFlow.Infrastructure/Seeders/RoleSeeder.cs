@@ -7,7 +7,7 @@ public class RoleSeeder
 {
     public static async Task SeedAsync(RoleManager<IdentityRole> roleManager)
     {
-        var roles = Enum.GetNames(typeof(UserRoles));
+        var roles = Enum.GetNames(typeof(UserRole));
 
         foreach (var role in roles)
         {

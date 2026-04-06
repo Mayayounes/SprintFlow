@@ -61,3 +61,22 @@ Authorization : Bearer {{token}}
   "Name" : "project",
   "Description" : "project description"
 }
+###
+# show all projects
+GET {{sprintFlow.api_HostAddress}}/api/projects/searchPhrase=task?pageNumber=1&pageSize=10
+content-Type : application/json
+Authorization : Bearer {{token}}
+###
+# show single project
+GET {{sprintFlow.api_HostAddress}}/api/projects/d750ce3d-37a0-469e-b505-08de928b249c
+content-Type : application/json
+Authorization : Bearer {{token}}
+###
+# edit project
+PATCH {{sprintFlow.api_HostAddress}}/api/projects/d750ce3d-37a0-469e-b505-08de928b249c
+content-Type : application/json
+Authorization : Bearer {{token}}
+{
+  "Name" : "project",
+  "Description" : "project description"
+}

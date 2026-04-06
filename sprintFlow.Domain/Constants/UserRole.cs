@@ -1,6 +1,6 @@
 ﻿namespace sprintFlow.Domain.Constants;
 
-public enum UserRoles
+public enum UserRole
 {
     Admin,
     Leader,

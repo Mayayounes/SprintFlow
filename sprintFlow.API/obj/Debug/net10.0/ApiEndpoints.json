@@ -393,13 +393,18 @@
         "IsRequired": false
       },
       {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
         "Name": "PageSize",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "PageNumber",
-        "Type": "System.Int32",
+        "Name": "ProjectId",
+        "Type": "System.Guid",
         "IsRequired": false
       }
     ],
@@ -457,6 +462,110 @@
       {
         "Name": "command",
         "Type": "sprintFlow.Application.Projects.Commands.UpdateProject.UpdateProjectCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "sprintFlow.API.Controllers.TaskController",
+    "Method": "GetAllForProject",
+    "RelativePath": "api/projects/{projectId}/tasks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[sprintFlow.Application.Tasks.Dto.TaskItemDto, sprintFlow.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "sprintFlow.API.Controllers.TaskController",
+    "Method": "GetByIdForProject",
+    "RelativePath": "api/projects/{projectId}/tasks/{taskId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "sprintFlow.Application.Tasks.Dto.TaskItemDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "sprintFlow.API.Controllers.TaskController",
+    "Method": "Updatetask",
+    "RelativePath": "api/projects/{projectId}/tasks/{taskId}/update",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "sprintFlow.Application.Tasks.Commands.UpdateTask.UpdateTaskCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "sprintFlow.API.Controllers.TaskController",
+    "Method": "CreateTask",
+    "RelativePath": "api/projects/{projectId}/tasks/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "sprintFlow.Application.Tasks.Commands.CreateTask.CreateTaskCommand",
         "IsRequired": true
       }
     ],

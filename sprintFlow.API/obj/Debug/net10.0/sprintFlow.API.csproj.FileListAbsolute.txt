@@ -1,3 +1,10 @@
+D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.csproj.AssemblyReference.cache
+D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\rpswa.dswa.cache.json
+D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.AssemblyInfoInputs.cache
+D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.AssemblyInfo.cs
+D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.csproj.CoreCompileInputs.cache
+D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.MvcApplicationPartsAssemblyInfo.cache
 D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\appsettings.Development.json
 D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\appsettings.json
 D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\sprintFlow.API.staticwebassets.endpoints.json
@@ -146,14 +153,6 @@ D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\sprintFlow.Infrastructure
 D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\sprintFlow.Application.pdb
 D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\sprintFlow.Infrastructure.pdb
 D:\SprintFlow Project\sprintFlow.API\bin\Debug\net10.0\sprintFlow.Domain.pdb
-D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.csproj.AssemblyReference.cache
-D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\rpswa.dswa.cache.json
-D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.GeneratedMSBuildEditorConfig.editorconfig
-D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.AssemblyInfoInputs.cache
-D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.AssemblyInfo.cs
-D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.csproj.CoreCompileInputs.cache
-D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.MvcApplicationPartsAssemblyInfo.cs
-D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\sprintFlow.API.MvcApplicationPartsAssemblyInfo.cache
 D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\rjimswa.dswa.cache.json
 D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 D:\SprintFlow Project\sprintFlow.API\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
