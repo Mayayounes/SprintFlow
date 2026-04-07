@@ -4,7 +4,7 @@ using sprintFlow.Application.Projects.Dto;
 
 namespace sprintFlow.Application.Projects.Queries.GetAllProjects;
 
-public class GetAllProjectsQuery : IRequest<PagedResults<ProjectDto>>
+public class GetAllProjectsQuery : IRequest<Result<PagedResults<ProjectDto>>>
 {
     public string? SearchPhrase { get; set; }
     public int PageNumber { get; set; }

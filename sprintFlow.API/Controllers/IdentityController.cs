@@ -16,16 +16,20 @@ public class IdentityController(IMediator mediator) : ControllerBase
     [Authorize(Roles = nameof(UserRole.Admin))]
     public async Task<IActionResult> AssignUserRole(AssignUserRoleCommand command)
     {
-        await mediator.Send(command);
-        return NoContent();
+        var result = await mediator.Send(command);
+        if (!result.IsSuccess)
+            return BadRequest(result);
+        return Ok(result);
     }
 
     [HttpPatch("changeRole")]
     [Authorize(Roles = nameof(UserRole.Admin))]
     public async Task<IActionResult> UpdateUserRole(UpdateUserRoleCommand command)
     {
-        await mediator.Send(command);
-        return NoContent();
+        var result = await mediator.Send(command);
+        if (!result.IsSuccess)
+            return BadRequest(result);
+        return Ok(result);
     }
 
     [HttpDelete("deleteUser")]

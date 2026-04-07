@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FluentValidation;
+using sprintFlow.Domain.Constants;
 
-namespace sprintFlow.Application.Tasks.Commands.UpdateTask
+namespace sprintFlow.Application.Tasks.Commands.UpdateTask;
+
+public class UpdateTaskCommandValidator : AbstractValidator<UpdateTaskCommand>
 {
-    internal class UpdateTaskCommandValidator
+    public UpdateTaskCommandValidator()
     {
+        RuleFor(x => x.Status)
+            .NotEmpty().WithMessage("Status is required.");
     }
 }

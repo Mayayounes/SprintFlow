@@ -19,6 +19,8 @@ public class ProjectController(IMediator mediator) : ControllerBase
     public async Task<ActionResult<IEnumerable<ProjectDto>>> GetAllProjects([FromQuery] GetAllProjectsQuery query)
     {
         var result = await mediator.Send(query);
+        if (!result.IsSuccess)
+            return BadRequest(result);
         return Ok(result);
     }
 
@@ -37,10 +39,11 @@ public class ProjectController(IMediator mediator) : ControllerBase
     [Authorize(Roles =nameof(UserRole.Leader))]
     public async Task<IActionResult> CreateProject([FromBody] CreateProjectCommand command)
     {
-        if(!ModelState.IsValid)
-            return BadRequest(ModelState);
-        Guid id = await mediator.Send(command);
-        return CreatedAtAction(nameof(GetProjectById), new { id }, null);
+        var result = await mediator.Send(command);
+        if(!result.IsSuccess)
+            return BadRequest(result);
+        return CreatedAtAction(nameof(GetProjectById), new { id=result.Data }, result);
+
     }
 
     [HttpPatch]
@@ -49,8 +52,12 @@ public class ProjectController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> UpdateProject([FromRoute] Guid id,UpdateProjectCommand command)
     {
         command.Id = id;
-        await mediator.Send(command);
-        return NoContent();
+        var result = await mediator.Send(command);
+
+        if (!result.IsSuccess)
+            return BadRequest(result);
+
+        return Ok(result);
     }
 
 }

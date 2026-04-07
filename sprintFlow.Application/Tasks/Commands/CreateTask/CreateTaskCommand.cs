@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using sprintFlow.Application.Common;
 
 namespace sprintFlow.Application.Tasks.Commands.CreateTask;
 
-public class CreateTaskCommand : IRequest<Guid>
+public class CreateTaskCommand : IRequest<Result<Guid>>
 {
     public string Title { get; set; } = default!;
     public string Description { get; set; } = default!;

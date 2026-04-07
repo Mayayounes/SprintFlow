@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using sprintFlow.Application.Common;
 using sprintFlow.Application.Tasks.Commands.CreateTask;
 using sprintFlow.Application.Tasks.Commands.UpdateTask;
 using sprintFlow.Application.Tasks.Dto;
@@ -21,8 +22,12 @@ public class TaskController(IMediator mediator) : ControllerBase
     public async Task<ActionResult> CreateTask([FromRoute] Guid projectId, CreateTaskCommand command)
     {
         command.ProjectId = projectId;
-        var taskId = await mediator.Send(command);
-        return CreatedAtAction(nameof(GetByIdForProject), new { projectId = projectId, taskId = taskId }, null);
+        var result = await mediator.Send(command);
+
+        if (!result.IsSuccess)
+            return BadRequest(result);
+
+        return CreatedAtAction(nameof(GetByIdForProject), new { projectId = projectId, taskId = result.Data }, result);
     }
     [HttpGet]
     //[Authorize(Roles = nameof(UserRole.Admin))]
@@ -30,6 +35,8 @@ public class TaskController(IMediator mediator) : ControllerBase
     public async Task<ActionResult<IEnumerable<TaskItemDto>>> GetAllForProject([FromRoute] Guid projectId)
     {
         var tasks = await mediator.Send(new GetTaskForProjectQuery(projectId));
+        if (!tasks.IsSuccess)
+            return BadRequest(tasks);
         return Ok(tasks);
     }
     [HttpGet("{taskId}")]
@@ -37,6 +44,8 @@ public class TaskController(IMediator mediator) : ControllerBase
     public async Task<ActionResult<TaskItemDto>> GetByIdForProject([FromRoute] Guid projectId, [FromRoute] Guid taskId)
     {
         var task = await mediator.Send(new GetByIdForProjectQuery(projectId, taskId));
+        if (task == null)
+            return NotFound();
         return Ok(task);
     }
     [HttpPatch("{taskId}/update")]
@@ -44,8 +53,11 @@ public class TaskController(IMediator mediator) : ControllerBase
     public async Task<ActionResult> Updatetask([FromRoute] Guid projectId, [FromRoute]Guid taskId ,[FromBody]UpdateTaskCommand command)
     {
         command.TaskId = taskId;
-        await mediator.Send(command);
-        return CreatedAtAction(nameof(GetByIdForProject), new { projectId = projectId, taskId = taskId }, null);
+        var result = await mediator.Send(command);
+        if (!result.IsSuccess)
+            return BadRequest(result);
+
+        return CreatedAtAction(nameof(GetByIdForProject), new { projectId = projectId, taskId = result.Data }, result);
 
     }
 }

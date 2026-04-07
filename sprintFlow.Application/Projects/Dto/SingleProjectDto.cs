@@ -6,6 +6,7 @@ public class SingleProjectDto
 {
     public string Name { get; set; } = default!;
     public string Description { get; set; } = default!;
+    public string ManagerId { get; set; } = default!;
     public ICollection<TaskItemDto> Tasks { get; set; } = new List<TaskItemDto>();
 
 }

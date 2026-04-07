@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FluentValidation;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using sprintFlow.Application.Common;
+using sprintFlow.Application.Users;
 using sprintFlow.Application.Users.Queries.GetAllUsers;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
@@ -22,15 +26,22 @@ public static class ServiceCollectionExtensions
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<AppDbContext>();
 
+        var applicationAssembly = typeof(ServiceCollectionExtensions).Assembly;
+
+        services.AddAutoMapper(typeof(ServiceCollectionExtensions).Assembly);
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceCollectionExtensions).Assembly));
+
+        services.AddValidatorsFromAssembly(applicationAssembly);
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+
+        services.AddScoped<IUserContext, UserContext>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IProjectRepository, ProjectRepository>();
         services.AddScoped<ITaskRepository, TaskRepository>();
 
-        services.AddMediatR(cfg =>
-        {
-            cfg.RegisterServicesFromAssembly(typeof(GetAllUsersQueryHandler).Assembly);
-        });
+
 
     }
 }

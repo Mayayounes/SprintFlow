@@ -10,19 +10,22 @@ using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Users.Queries.GetAllUsers;
 
-public class GetAllUsersQueryHandler(IUserRepository userRepository ,IMapper mapper , IRoleRepository roleRepository) : IRequestHandler<GetAllUsersQuery, PagedResults<UserDto>>
+public class GetAllUsersQueryHandler(IUserRepository userRepository, IMapper mapper, IRoleRepository roleRepository) : IRequestHandler<GetAllUsersQuery, Result<PagedResults<UserDto>>>
 {
-    public async Task<PagedResults<UserDto>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+    public async Task<Result<PagedResults<UserDto>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
-        var (users, totalCount) = await userRepository.GetAllMatchingAsync(request.role, request.PageNumber, request.PageSize);
+        var (users, totalCount) = await userRepository.GetAllMatchingAsync(request.Role, request.PageNumber, request.PageSize);
 
-        if (!string.IsNullOrEmpty(request.role) && !await roleRepository.RoleExistsAsync(request.role))
+        if (!string.IsNullOrEmpty(request.Role) && !await roleRepository.RoleExistsAsync(request.Role))
         {
-            throw new Exception("Role does not exist");
+            return Result<PagedResults<UserDto>>.Failure(
+                new List<string> { "Role does not exist" },
+                "Validation failed"
+            );
         }
         var usersDto = mapper.Map<IEnumerable<UserDto>>(users);
 
         var results = new PagedResults<UserDto>(usersDto, totalCount, request.PageNumber, request.PageSize);
-        return results;
+        return Result<PagedResults<UserDto>>.Success(results, "Users retrieved successfully");
     }
 }
