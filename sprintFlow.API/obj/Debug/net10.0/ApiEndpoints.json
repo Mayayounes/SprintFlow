@@ -526,7 +526,33 @@
   },
   {
     "ContainingType": "sprintFlow.API.Controllers.TaskController",
-    "Method": "Updatetask",
+    "Method": "AssignEmployeeToTask",
+    "RelativePath": "api/projects/{projectId}/tasks/{taskId}/assignEmployee",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "sprintFlow.Application.Tasks.Commands.AssignEmployeeToTask.AssignEmployeeToTaskCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "sprintFlow.API.Controllers.TaskController",
+    "Method": "UpdatetaskDetails",
     "RelativePath": "api/projects/{projectId}/tasks/{taskId}/update",
     "HttpMethod": "PATCH",
     "IsController": true,
@@ -544,7 +570,33 @@
       },
       {
         "Name": "command",
-        "Type": "sprintFlow.Application.Tasks.Commands.UpdateTask.UpdateTaskCommand",
+        "Type": "sprintFlow.Application.Tasks.Commands.UpdateTaskDetails.UpdateTaskDetailsCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "sprintFlow.API.Controllers.TaskController",
+    "Method": "UpdatetaskStatus",
+    "RelativePath": "api/projects/{projectId}/tasks/{taskId}/updateStatus",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "command",
+        "Type": "sprintFlow.Application.Tasks.Commands.UpdateTaskStatus.UpdateTaskStatusCommand",
         "IsRequired": true
       }
     ],

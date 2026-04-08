@@ -1,22 +1,26 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using sprintFlow.Application.Common;
 using sprintFlow.Domain.Entities;
-using sprintFlow.Domain.Exceptions;
 
 namespace sprintFlow.Application.Users.Commands.DeleteUser;
 
-public class DeleteUserCommandHandler(UserManager<User> userManager) : IRequestHandler<DeleteUserCommand>
+public class DeleteUserCommandHandler(UserManager<User> userManager) : IRequestHandler<DeleteUserCommand, Result<string>>
 {
-    public async Task Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await userManager.FindByEmailAsync(request.Email)
-            ?? throw new NotFoundException(nameof(User), request.Email);
+        var user = await userManager.FindByEmailAsync(request.Email);
+        
+        if (user == null)
+            return Result<string>.Failure(new List<string> { "User Not Found." });
 
         var result = await userManager.DeleteAsync(user);
 
         if (!result.Succeeded)
         {
-            throw new Exception("Failed to delete user");
+            return Result<string>.Failure(new List<string> { "Failed to delete user." });
         }
+        return Result<string>.Failure(new List<string> { "User Deleted successfully." });
+
     }
 }

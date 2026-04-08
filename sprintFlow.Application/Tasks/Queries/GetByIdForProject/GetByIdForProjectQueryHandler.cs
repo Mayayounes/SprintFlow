@@ -3,7 +3,6 @@ using MediatR;
 using sprintFlow.Application.Common;
 using sprintFlow.Application.Tasks.Dto;
 using sprintFlow.Application.Users;
-using sprintFlow.Domain.Exceptions;
 using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Queries.GetByIdForProject;

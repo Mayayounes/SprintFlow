@@ -1,12 +1,10 @@
 ﻿using FluentValidation;
-using sprintFlow.Domain.Constants;
-using sprintFlow.Domain.Repositories;
 
-namespace sprintFlow.Application.Tasks.Commands.CreateTask;
+namespace sprintFlow.Application.Tasks.Commands.UpdateTaskDetails;
 
-public class CreateTaskCommandValidator : AbstractValidator<CreateTaskCommand>
+public class UpdateTaskDetailsCommandValidator : AbstractValidator<UpdateTaskDetailsCommand>
 {
-    public CreateTaskCommandValidator(IUserRepository userRepository)
+    public UpdateTaskDetailsCommandValidator()
     {
         RuleFor(x => x.Title)
             .NotEmpty().WithMessage("Task title is required.")
@@ -23,5 +21,6 @@ public class CreateTaskCommandValidator : AbstractValidator<CreateTaskCommand>
         RuleFor(x => x.AssignedDate)
             .LessThan(x => x.Deadline)
             .WithMessage("Assigned date must be before deadline.");
+
     }
 }

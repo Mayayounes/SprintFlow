@@ -36,7 +36,9 @@ public class IdentityController(IMediator mediator) : ControllerBase
     [Authorize(Roles = nameof(UserRole.Admin))]
     public async Task<IActionResult> DeleteUser(DeleteUserCommand command)
     {
-        await mediator.Send(command);
-        return NoContent();
+        var result = await mediator.Send(command);
+        if(!result.IsSuccess)
+            return BadRequest(result);
+        return Ok(result);
     }
 }

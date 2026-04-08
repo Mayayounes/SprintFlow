@@ -7,7 +7,6 @@ using sprintFlow.Application.Projects.Dto;
 using sprintFlow.Application.Users;
 using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Entities;
-using sprintFlow.Domain.Exceptions;
 using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Projects.Queries.GetAllProjects;

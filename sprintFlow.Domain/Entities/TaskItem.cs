@@ -13,7 +13,7 @@ public class TaskItem
 
     //EmployeeID reference to user
     public User Employee { get; set; } = default!;
-    public string EmployeeId { get; set; } = default!;
+    public string? EmployeeId { get; set; } = default!;
     //ProjectID reference to project
     public Project Project { get; set; } = default!;
     public Guid ProjectId { get; set; }

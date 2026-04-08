@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using sprintFlow.Application.Common;
 using sprintFlow.Domain.Entities;
-using sprintFlow.Domain.Exceptions;
 
 namespace sprintFlow.Application.Users.Commands.AssignUserRole;
 

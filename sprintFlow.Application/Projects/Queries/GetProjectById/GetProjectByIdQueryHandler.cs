@@ -4,7 +4,6 @@ using sprintFlow.Application.Common;
 using sprintFlow.Application.Projects.Dto;
 using sprintFlow.Application.Users;
 using sprintFlow.Domain.Constants;
-using sprintFlow.Domain.Exceptions;
 using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Projects.Queries.GetProjectById;
