@@ -5,5 +5,5 @@ namespace sprintFlow.Application.Users.Commands.DeleteUser;
 
 public class DeleteUserCommand : IRequest<Result<string>>
 {
-    public string Email { get; set; } = default!;
+    public string UserId { get; set; } = default!;
 }

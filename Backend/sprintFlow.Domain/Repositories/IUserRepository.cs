@@ -5,13 +5,10 @@ namespace sprintFlow.Domain.Repositories;
 
 public interface IUserRepository
 {   
-    Task<User?> FindByEmailAsync(string email);
-    Task<IdentityResult> CreateAsync(User user, string password);
-    Task<IdentityResult> AddToRoleAsync(User user, string role);
     Task<(IEnumerable<User>, int)> GetAllMatchingAsync(string? searchRole, int pageNumber, int pageSize);
     Task<bool> IsUserInRoleAsync(Guid userId, UserRole role);
-    Task<List<User>> GetUsersWithoutRolesAsync();
-    Task<int> CountAllUsersAsync();
     Task<Dictionary<string, int>> CountUsersByRoleAsync();
-
+    Task<int> CountEmployeeTasksAsync(Guid userId);
+    Task<int> CountLeaderProjectsAsync(Guid userId);
+    Task<bool> DeleteUserAsync(User user);
 }

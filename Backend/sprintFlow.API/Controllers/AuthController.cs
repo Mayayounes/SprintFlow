@@ -10,7 +10,7 @@ namespace sprintFlow.API.Controllers;
 [ApiController]
 [Route("/api")]
 
-public class LoginController(IMediator mediator) : ControllerBase
+public class AuthController(IMediator mediator) : ControllerBase
 {
     [HttpPost("login")]
     [AllowAnonymous]

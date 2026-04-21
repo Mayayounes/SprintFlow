@@ -69,6 +69,7 @@
             </button>
 
             <!-- dropdown -->
+            <!-- dropdown -->
             <div *ngIf="user.showMenu"
               class="absolute right-2 mt-2 w-32 bg-[#0f172a] border border-white/10 rounded-lg shadow-lg z-50">
 
@@ -76,8 +77,12 @@
                 Edit
               </button>
 
-            </div>
+              <button (click)="deleteUser(user)"
+                class="block w-full text-left px-4 py-2 text-red-400 hover:bg-red-500/20">
+                Delete
+              </button>
 
+            </div>
           </td>
 
         </tr>

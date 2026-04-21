@@ -9,7 +9,6 @@ using sprintFlow.Application.Tasks.Dto;
 using sprintFlow.Application.Tasks.Queries.GetByIdForProject;
 using sprintFlow.Application.Tasks.Queries.GetTasksByStatus;
 using sprintFlow.Application.Tasks.Queries.GetTasksForProject;
-using sprintFlow.Application.Users.Commands.AssignUserRole;
 using sprintFlow.Domain.Constants;
 
 namespace sprintFlow.API.Controllers;

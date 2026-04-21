@@ -17,14 +17,7 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
     {
         return await dbContext.Projects.CountAsync();
     }
-
-    public IQueryable<Project> GetAll()
-    {
-        return dbContext.Projects;
-    }
- 
-    public async Task<(IEnumerable<Project> Projects, int TotalCount)> GetAllMatchingAsync(
-    string searchPhrase, int pageNumber, int pageSize, string? managerId = null)
+    public async Task<(IEnumerable<Project> Projects, int TotalCount)> GetAllMatchingAsync(string searchPhrase, int pageNumber, int pageSize, string? managerId = null)
     {
         var query = dbContext.Projects.Include(p => p.Manager).AsQueryable();
 
@@ -40,23 +33,20 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
                                   .ToListAsync();
         return (projects, totalCount);
     }
-
     public async Task<string> GetProjectManagerIdAsync(Guid projectId)
     {
         var managerId = await dbContext.Projects
             .Where(p => p.Id == projectId)
             .Select(p => p.ManagerId)
             .FirstOrDefaultAsync();
-        return managerId;
+        return managerId!;
     }
-
     public async Task<int> CountByManagerIdAsync(string managerId)
     {
         return await dbContext.Projects
             .Where(p => p.ManagerId == managerId)
             .CountAsync();
     }
-
     public async Task<Project?> GetByIdAsync(Guid id)
     {
         var projects = await dbContext.Projects
@@ -64,7 +54,6 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
             .FirstOrDefaultAsync(x => x.Id == id);
         return projects;
     }
-
     public Task SaveChanges()
         => dbContext.SaveChangesAsync();
 

@@ -80,14 +80,14 @@
   {
     "ContainingType": "sprintFlow.API.Controllers.IdentityController",
     "Method": "DeleteUser",
-    "RelativePath": "api/identity/deleteUser",
+    "RelativePath": "api/identity/deleteUser/{userId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "command",
-        "Type": "sprintFlow.Application.Users.Commands.DeleteUser.DeleteUserCommand",
+        "Name": "userId",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

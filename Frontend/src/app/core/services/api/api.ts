@@ -8,6 +8,36 @@ export class Api {
   private baseUrl = 'http://localhost:5134/api';
 
   constructor(private http: HttpClient) { }
+  //Auth
+  AddUser(data: any) {
+    return this.http.post(`${this.baseUrl}/addUser`, data);
+  }
+  login(data: any) {
+    return this.http.post(`${this.baseUrl}/login`, data);
+  }
+  //Dashboard
+  GetStats() {
+    return this.http.get(`${this.baseUrl}/dashboard/stats`);
+  }
+  //Identity
+  updateUser(userId: string, data: any) {
+    return this.http.put(`${this.baseUrl}/identity/edit/${userId}`, data);
+  }
+  deleteUser(userId: string) {
+    return this.http.delete(`${this.baseUrl}/identity/deleteUser/${userId}`);
+  }
+  //My tasks
+  getMyTasks(pageNumber: number, pageSize: number, status?: string) {
+    let params = new HttpParams()
+      .set('pageNumber', pageNumber)
+      .set('pageSize', pageSize);
+
+    if (status) {
+      params = params.set('status', status);
+    }
+
+    return this.http.get(`${this.baseUrl}/tasks/my-tasks`, { params });
+  }
   //projects
   getProjects(searchPhrase: string, pageNumber: number, pageSize: number) {
     let params = new HttpParams()
@@ -23,35 +53,17 @@ export class Api {
   createProject(data: any) {
     return this.http.post(`${this.baseUrl}/projects/create`, data);
   }
-  getSingleProject(projectId: string) {
-    return this.http.get(`${this.baseUrl}/projects/${projectId}`);
-  }
   editProject(projectId: string, data: any) {
     return this.http.patch(`${this.baseUrl}/projects/${projectId}`, data);
   }
-  //auth
-  AddUser(data: any) {
-    return this.http.post(`${this.baseUrl}/addUser`, data);
-  }
-  login(data: any) {
-    return this.http.post(`${this.baseUrl}/login`, data);
-  }
-  //users
+
+  //Users
   getAllUsers(searchRole: string, pageNumber: number, pageSize: number) {
     const params = new HttpParams()
       .set('searchRole', searchRole)
       .set('pageNumber', pageNumber)
       .set('pageSize', pageSize);
     return this.http.get(`${this.baseUrl}/users`, { params });
-  }
-  assignRole(data: any) {
-    return this.http.post(`${this.baseUrl}/identity/assignRole`, data);
-  }
-  updateUser(userId: string ,data: any) {
-    return this.http.put(`${this.baseUrl}/identity/edit/${userId}`, data);
-  }
-  deleteUser(userId: string) {
-    return this.http.delete(`${this.baseUrl}/identity/deleteUser/${userId}`);
   }
 
   //tasks
@@ -84,25 +96,5 @@ export class Api {
   //get all roles
   getRoles() {
     return this.http.get<string[]>(`${this.baseUrl}/users/roles`);
-  }
-
-  getNewUsers() {
-    return this.http.get<any[]>(`${this.baseUrl}/users/newUsers`);
-  }
-  //stats
-  GetStats() {
-    return this.http.get(`${this.baseUrl}/dashboard/stats`);
-  }
-  //my tasks
-  getMyTasks(pageNumber: number, pageSize: number, status?: string) {
-    let params = new HttpParams()
-      .set('pageNumber', pageNumber)
-      .set('pageSize', pageSize);
-
-    if (status) {
-      params = params.set('status', status);
-    }
-
-    return this.http.get(`${this.baseUrl}/tasks/my-tasks`, { params });
   }
 }

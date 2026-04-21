@@ -5,7 +5,6 @@ using sprintFlow.Application.Common;
 using sprintFlow.Application.Roles;
 using sprintFlow.Application.Users.Dto;
 using sprintFlow.Application.Users.Queries.GetAllUsers;
-using sprintFlow.Application.Users.Queries.GetNewUsers;
 using sprintFlow.Domain.Constants;
 
 namespace sprintFlow.api.Controllers;
@@ -16,22 +15,11 @@ namespace sprintFlow.api.Controllers;
 public class UsersController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    //[Authorize(Roles = nameof(UserRole.Admin))]
+    [Authorize(Roles = nameof(UserRole.Admin))]
     public async Task<ActionResult<PagedResults<UserDto>>> GetAllUsers([FromQuery] GetAllUsersQuery query)
     {
         var users = await mediator.Send(query);
         return Ok(users);
-    }
-
-    [HttpGet("newUsers")]
-    [Authorize(Roles = nameof(UserRole.Admin))]
-    public async Task<ActionResult<IEnumerable<UserDto>>> GetNewUsers()
-    {
-        var result = await mediator.Send(new GetNewUsersQuery());
-        if (!result.IsSuccess)
-            return BadRequest(result);
-
-        return Ok(result);
     }
     [HttpGet("roles")]
     [Authorize(Roles = nameof(UserRole.Admin))]

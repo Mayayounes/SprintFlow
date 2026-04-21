@@ -15,7 +15,6 @@ public class RoleRepository(RoleManager<IdentityRole> roleManager , AppDbContext
     }
     public Task<bool> RoleExistsAsync(string roleName)
         => roleManager.RoleExistsAsync(roleName);
-
     public async Task<Dictionary<string, string?>> GetRolesForUsersAsync(List<string> userIds)
     {
         var userRoles = await dbContext.UserRoles

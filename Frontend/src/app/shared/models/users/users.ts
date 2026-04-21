@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Api } from '../../../core/services/api/api';
@@ -48,6 +48,13 @@ export class Users implements OnInit {
     this.loadRoles();
   }
 
+  @HostListener('document:click', ['$event'])
+
+  onClickOutside(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (target.closest('button')) return;
+    this.users.forEach(u => u.showMenu = false);
+  }
   loadUsers() {
     this.loading = true;
 
@@ -77,6 +84,31 @@ export class Users implements OnInit {
           this.cdr.detectChanges();
         }
       });
+  }
+
+  deleteUser(user: any) {
+    user.showMenu = false;
+    this.api.deleteUser(user.id).subscribe({
+
+      next: () => {
+        this.toast.show('User deleted successfully', 'success');
+        this.loadUsers();
+      },
+
+      error: (err) => {
+        const backendErrors = err?.error?.errors;
+
+        if (backendErrors) {
+          this.errorModal.show(backendErrors);
+        } else {
+          this.errorModal.show('Unexpected error occurred');
+        }
+
+        this.loading = false;
+        this.cdr.detectChanges();
+      }
+
+    });
   }
 
   onRoleChange() {

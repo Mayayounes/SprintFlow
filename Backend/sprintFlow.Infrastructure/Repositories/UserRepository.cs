@@ -11,28 +11,6 @@ namespace sprintFlow.Infrastructure.Repositories;
 
 public class UserRepository(UserManager<User> userManager , AppDbContext dbContext , RoleManager<IdentityRole> roleManager) : IUserRepository
 {
-    public Task<User?> FindByEmailAsync(string email)
-            => userManager.FindByEmailAsync(email);
-
-    public Task<IdentityResult> CreateAsync(User user, string password)
-            => userManager.CreateAsync(user, password);
-
-    public Task<IdentityResult> AddToRoleAsync(User user, string role)
-            => userManager.AddToRoleAsync(user, role);
-
-    public async Task<List<User>> GetUsersWithoutRolesAsync()
-    {
-        var users = await dbContext.Users
-            .Where(u => !dbContext.UserRoles.Any(ur => ur.UserId == u.Id))
-            .ToListAsync();
-
-        return users;
-    }
-    public async Task<int> CountAllUsersAsync()
-    {
-        return await dbContext.Users.CountAsync();
-    }
-
     public async Task<(IEnumerable<User>, int)> GetAllMatchingAsync(string? searchRole, int pageNumber, int pageSize)
     {
         var query =
@@ -61,7 +39,6 @@ public class UserRepository(UserManager<User> userManager , AppDbContext dbConte
 
         return (users, count);
     }
-
     public async Task<bool> IsUserInRoleAsync(Guid userId, UserRole role)
     {
         var user = await userManager.FindByIdAsync(userId.ToString());
@@ -88,4 +65,20 @@ public class UserRepository(UserManager<User> userManager , AppDbContext dbConte
         )
         .ToDictionaryAsync(x => x.Role, x => x.Count);
     }
+    public async Task<int> CountEmployeeTasksAsync(Guid userId)
+    {
+        return await dbContext.Tasks
+            .CountAsync(t => t.EmployeeId == userId.ToString());
+    }
+    public async Task<int> CountLeaderProjectsAsync(Guid userId)
+    {
+        return await dbContext.Projects
+            .CountAsync(p => p.ManagerId == userId.ToString());
+    }
+    public async Task<bool> DeleteUserAsync(User user)
+    {
+        var result = await userManager.DeleteAsync(user);
+        return result.Succeeded;
+    }
+
 }

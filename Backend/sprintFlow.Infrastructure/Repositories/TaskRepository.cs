@@ -6,10 +6,6 @@ using sprintFlow.Infrastructure.Persistence;
 namespace sprintFlow.Infrastructure.Repositories;
 public class TaskRepository(AppDbContext dbContext) : ITaskRepository
 {
-    public IQueryable<TaskItem> GetAll()
-    {
-        return dbContext.Tasks;
-    }
     public async Task<(IEnumerable<TaskItem>, int)> GetMyTasksAsync(string userId,int pageNumber,int pageSize, string? status)
     {
         var query = dbContext.Tasks
@@ -32,11 +28,7 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
 
         return (items, totalCount);
     }
-    public async Task<(IEnumerable<TaskItem>, int)> GetAllMatchingAsync(
-    Guid projectId,
-    string? searchTask,
-    int pageNumber,
-    int pageSize)
+    public async Task<(IEnumerable<TaskItem>, int)> GetAllMatchingAsync(Guid projectId,string? searchTask,int pageNumber,int pageSize)
     {
         var query = dbContext.Tasks
             .Where(t => t.ProjectId == projectId)
@@ -64,24 +56,17 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
 
         return (tasks, count);
     }
-
     public async Task<Guid> Create(TaskItem entity)
     {
         dbContext.Tasks.Add(entity);
         await dbContext.SaveChangesAsync();
         return entity.Id;
     }
-    public async Task Delete(IEnumerable<TaskItem> entities)
-    {
-        dbContext.Tasks.RemoveRange(entities);
-        await dbContext.SaveChangesAsync();
-    }
     public async Task<TaskItem?> GetByIdAsync(Guid id)
     {
         return await dbContext.Tasks
             .FirstOrDefaultAsync(t => t.Id == id);
     }
-
     public async Task UpdateAsync(TaskItem task)
     {
         dbContext.Tasks.Update(task);
