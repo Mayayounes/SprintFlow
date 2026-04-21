@@ -24,7 +24,7 @@ public class AuthController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
     [HttpPost("addUser")]
-    [Authorize(Roles = nameof(UserRole.Admin))]
+    [Authorize(Policy = Policies.AdminOnly)]
     public async Task<IActionResult> AddUser(AddUserCommand command)
     {
         var result = await mediator.Send(command);

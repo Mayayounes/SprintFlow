@@ -18,7 +18,7 @@ namespace sprintFlow.API.Controllers;
 public class TaskController(IMediator mediator) : ControllerBase
 {
     [HttpPost("create")]
-    [Authorize(Roles = nameof(UserRole.Leader))]
+    [Authorize(Policy = Policies.LeaderOnly)]
     public async Task<ActionResult> CreateTask([FromRoute] Guid projectId,[FromBody]CreateTaskCommand command)
     {
         command.ProjectId = projectId;
@@ -30,8 +30,7 @@ public class TaskController(IMediator mediator) : ControllerBase
         return CreatedAtAction(nameof(GetByIdForProject), new { projectId = projectId, taskId = result.Data }, result);
     }
     [HttpGet]
-    [HttpGet]
-    [Authorize(Roles = nameof(UserRole.Admin) + "," + nameof(UserRole.Leader))]
+    [Authorize(Policy = Policies.AdminOrLeader)]
     public async Task<ActionResult> GetAllForProject([FromRoute] Guid projectId,[FromQuery] int pageNumber ,[FromQuery] int pageSize ,[FromQuery] string? searchTask = null)
     {
         var query = new GetTaskForProjectQuery(projectId)
@@ -49,7 +48,7 @@ public class TaskController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
     [HttpGet("{taskId}")]
-    [Authorize(Roles = nameof(UserRole.Leader))]
+    [Authorize(Policy = Policies.LeaderOnly)]
     public async Task<ActionResult<TaskItemDto>> GetByIdForProject([FromRoute] Guid projectId, [FromRoute] Guid taskId)
     {
         var task = await mediator.Send(new GetByIdForProjectQuery(projectId, taskId));
@@ -58,7 +57,7 @@ public class TaskController(IMediator mediator) : ControllerBase
         return Ok(task);
     }
     [HttpPatch("{taskId}/updateStatus")]
-    [Authorize(Roles =nameof(UserRole.Employee))]
+    [Authorize(Policy = Policies.EmployeeOnly)]
     public async Task<ActionResult> UpdatetaskStatus([FromRoute] Guid projectId, [FromRoute]Guid taskId ,[FromBody]UpdateTaskStatusCommand command)
     {
         command.TaskId = taskId;
@@ -69,7 +68,7 @@ public class TaskController(IMediator mediator) : ControllerBase
 
     }
     [HttpPatch("{taskId}/update")]
-    [Authorize(Roles = nameof(UserRole.Leader))]
+    [Authorize(Policy = Policies.LeaderOnly)]
     public async Task<ActionResult> UpdatetaskDetails([FromRoute] Guid projectId, [FromRoute] Guid taskId, [FromBody] UpdateTaskDetailsCommand command)
     {
         command.TaskId = taskId;
@@ -81,7 +80,7 @@ public class TaskController(IMediator mediator) : ControllerBase
 
     }
     [HttpPost("{taskId}/assignEmployee")]
-    [Authorize(Roles = nameof(UserRole.Leader))]
+    [Authorize(Policy = Policies.LeaderOnly)]
     public async Task<IActionResult> AssignEmployeeToTask([FromRoute] Guid projectId, [FromRoute] Guid taskId,AssignEmployeeToTaskCommand command)
     {
         command.TaskId = taskId;
@@ -92,7 +91,7 @@ public class TaskController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
     [HttpGet("filter")]
-    [Authorize(Roles = nameof(UserRole.Leader))]
+    [Authorize(Policy = Policies.LeaderOnly)]
     public async Task<ActionResult<IEnumerable<TaskItemDto>>> GetTasksByStatus(
         [FromRoute] Guid projectId,
         [FromQuery] TaskItemStatus status)

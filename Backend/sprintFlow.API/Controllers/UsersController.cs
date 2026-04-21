@@ -15,14 +15,14 @@ namespace sprintFlow.api.Controllers;
 public class UsersController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    [Authorize(Roles = nameof(UserRole.Admin))]
+    [Authorize(Policy = Policies.AdminOnly)]
     public async Task<ActionResult<PagedResults<UserDto>>> GetAllUsers([FromQuery] GetAllUsersQuery query)
     {
         var users = await mediator.Send(query);
         return Ok(users);
     }
     [HttpGet("roles")]
-    [Authorize(Roles = nameof(UserRole.Admin))]
+    [Authorize(Policy = Policies.AdminOnly)]
     public async Task<ActionResult<IEnumerable<string>>> GetRoles()
     {
         var roles = await mediator.Send(new GetRolesQuery());

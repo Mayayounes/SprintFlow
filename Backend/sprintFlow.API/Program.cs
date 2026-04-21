@@ -1,18 +1,21 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using sprintFlow.API.Middleware;
 using sprintFlow.Application.Extensions;
+using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Infrastructure.Extensions;
 using sprintFlow.Infrastructure.Repositories;
+using System.Security.Claims;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructure(builder.Configuration);
+
 builder.Services.AddApplication();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -25,12 +28,32 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
 
+
         ValidIssuer = builder.Configuration["JWT:Issuer"],
         ValidAudience = builder.Configuration["JWT:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!)
-        )
+        ),
+        RoleClaimType = ClaimTypes.Role,
     };
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(Policies.AdminOnly, policy =>
+        policy.RequireRole(UserRole.Admin.ToString()));
+
+    options.AddPolicy(Policies.LeaderOnly, policy =>
+        policy.RequireRole(UserRole.Leader.ToString()));
+
+    options.AddPolicy(Policies.EmployeeOnly, policy =>
+        policy.RequireRole(UserRole.Employee.ToString()));
+
+    options.AddPolicy(Policies.AdminOrLeader,policy => 
+    policy.RequireRole(
+        UserRole.Admin.ToString(),
+        UserRole.Leader.ToString()
+    ));
 });
 
 builder.Services.AddControllers()
@@ -55,7 +78,7 @@ builder.Services.AddCors(options =>
             policy.WithOrigins("http://localhost:4200")
                   .AllowAnyHeader()
                   .AllowAnyMethod()
-                  .AllowCredentials(); // if using cookies/token
+                  .AllowCredentials();
         });
 });
 

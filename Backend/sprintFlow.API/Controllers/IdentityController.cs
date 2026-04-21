@@ -13,7 +13,7 @@ namespace sprintFlow.API.Controllers;
 public class IdentityController(IMediator mediator) : ControllerBase
 {
     [HttpPut("edit/{userId}")]
-    [Authorize(Roles = nameof(UserRole.Admin))]
+    [Authorize(Policy = Policies.AdminOnly)]
     public async Task<IActionResult> UpdateUser([FromRoute] string userId,[FromBody] UpdateUserCommand command)
     {
         command.UserId = userId;
@@ -26,8 +26,7 @@ public class IdentityController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
     [HttpDelete("deleteUser/{userId}")]
-    [Authorize(Roles = nameof(UserRole.Admin))]
-    public async Task<IActionResult> DeleteUser([FromRoute] string userId)
+    [Authorize(Policy = Policies.AdminOnly)]    public async Task<IActionResult> DeleteUser([FromRoute] string userId)
     {
         var command = new DeleteUserCommand { UserId = userId };
 

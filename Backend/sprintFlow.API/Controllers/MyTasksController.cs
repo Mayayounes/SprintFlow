@@ -11,7 +11,7 @@ namespace sprintFlow.API.Controllers;
     public class MyTasksController(IMediator mediator) : ControllerBase
     {
     [HttpGet("my-tasks")]
-    [Authorize(Roles = nameof(UserRole.Employee))]
+    [Authorize(Policy = Policies.EmployeeOnly)]
     public async Task<IActionResult> GetMyTasks([FromQuery] int pageNumber ,[FromQuery] int pageSize, [FromQuery] string? status = null)
     {
         var result = await mediator.Send(new GetMyTasksQuery

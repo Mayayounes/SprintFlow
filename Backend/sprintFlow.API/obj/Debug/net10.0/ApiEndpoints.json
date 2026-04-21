@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "sprintFlow.API.Controllers.LoginController",
+    "ContainingType": "sprintFlow.API.Controllers.AuthController",
     "Method": "AddUser",
     "RelativePath": "api/addUser",
     "HttpMethod": "POST",
@@ -23,22 +23,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "sprintFlow.API.Controllers.IdentityController",
-    "Method": "AssignUserRole",
-    "RelativePath": "api/identity/assignRole",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "command",
-        "Type": "sprintFlow.Application.Users.Commands.AssignUserRole.AssignUserRoleCommand",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   },
   {
@@ -411,7 +395,7 @@
     ]
   },
   {
-    "ContainingType": "sprintFlow.API.Controllers.LoginController",
+    "ContainingType": "sprintFlow.API.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/login",
     "HttpMethod": "POST",
@@ -775,26 +759,6 @@
     "ReturnTypes": [
       {
         "Type": "sprintFlow.Application.Common.PagedResults\u00601[[sprintFlow.Application.Users.Dto.UserDto, sprintFlow.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "sprintFlow.api.Controllers.UsersController",
-    "Method": "GetNewUsers",
-    "RelativePath": "api/Users/newUsers",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[sprintFlow.Application.Users.Dto.UserDto, sprintFlow.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

@@ -15,7 +15,7 @@ namespace sprintFlow.API.Controllers;
 public class ProjectController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    [Authorize(Roles = nameof(UserRole.Admin) + "," + nameof(UserRole.Leader))]
+    [Authorize(Policy = Policies.AdminOrLeader)]
     public async Task<ActionResult<IEnumerable<ProjectDto>>> GetAllProjects([FromQuery] GetAllProjectsQuery query)
     {
         var result = await mediator.Send(query);
@@ -26,7 +26,7 @@ public class ProjectController(IMediator mediator) : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    [Authorize(Roles = nameof(UserRole.Admin) + "," + nameof(UserRole.Leader))]
+    [Authorize(Policy = Policies.AdminOrLeader)]
     public async Task<ActionResult<ProjectDto>> GetProjectById([FromRoute] Guid id)
     {
         var project = await mediator.Send(new GetProjectByIdQuery(id));
@@ -36,7 +36,7 @@ public class ProjectController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("create")]
-    [Authorize(Roles =nameof(UserRole.Leader))]
+    [Authorize(Policy = Policies.LeaderOnly)]
     public async Task<IActionResult> CreateProject([FromBody] CreateProjectCommand command)
     {
         var result = await mediator.Send(command);
@@ -48,7 +48,7 @@ public class ProjectController(IMediator mediator) : ControllerBase
 
     [HttpPatch]
     [Route("{id}")]
-    [Authorize(Roles = nameof(UserRole.Leader))]
+    [Authorize(Policy = Policies.LeaderOnly)]
     public async Task<IActionResult> UpdateProject([FromRoute] Guid id,UpdateProjectCommand command)
     {
         command.Id = id;
