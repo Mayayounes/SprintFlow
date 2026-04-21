@@ -1,0 +1,997 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\SprintFlow Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|d:\\sprintflow project\\sprintflow.api\\controllers\\identitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|solutionrelative:sprintflow.api\\controllers\\identitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\commands\\updateuser\\updateusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\commands\\updateuser\\updateusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\commands\\updateuser\\updateusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\commands\\updateuser\\updateusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\commands\\adduser\\addusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\commands\\adduser\\addusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\commands\\updateuser\\updateusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\commands\\updateuser\\updateusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\commands\\adduser\\addusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\commands\\adduser\\addusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\commands\\deleteuser\\deleteusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\commands\\deleteuser\\deleteusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\commands\\deleteuser\\deleteusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\commands\\deleteuser\\deleteusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\commands\\adduser\\addusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\commands\\adduser\\addusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\queries\\getallusers\\getallusersqueryvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\queries\\getallusers\\getallusersqueryvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\queries\\getnewusers\\getnewusersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\queries\\getnewusers\\getnewusersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\queries\\getallusers\\getallusersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\queries\\getallusers\\getallusersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\queries\\getallusers\\getallusersquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\queries\\getallusers\\getallusersquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|d:\\sprintflow project\\sprintflow.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|solutionrelative:sprintflow.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|d:\\sprintflow project\\sprintflow.domain\\constants\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|solutionrelative:sprintflow.domain\\constants\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|d:\\sprintflow project\\sprintflow.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|solutionrelative:sprintflow.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|d:\\sprintflow project\\sprintflow.api\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|solutionrelative:sprintflow.api\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|d:\\sprintflow project\\sprintflow.api\\controllers\\mytaskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|solutionrelative:sprintflow.api\\controllers\\mytaskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\queries\\getmytasks\\getmytasksqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\queries\\getmytasks\\getmytasksqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{113A5B81-3BEF-4C77-8ED2-1BB8A811F473}|sprintFlow.Infrastructure\\sprintFlow.Infrastructure.csproj|d:\\sprintflow project\\sprintflow.infrastructure\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{113A5B81-3BEF-4C77-8ED2-1BB8A811F473}|sprintFlow.Infrastructure\\sprintFlow.Infrastructure.csproj|solutionrelative:sprintflow.infrastructure\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|d:\\sprintflow project\\sprintflow.domain\\repositories\\itaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|solutionrelative:sprintflow.domain\\repositories\\itaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\queries\\getmytasks\\getmytasksquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\queries\\getmytasks\\getmytasksquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\dto\\employeetaskdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\dto\\employeetaskdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\queries\\gettasksforproject\\gettaskforprojectquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\queries\\gettasksforproject\\gettaskforprojectquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\queries\\gettasksforproject\\gettaskforprojectqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\queries\\gettasksforproject\\gettaskforprojectqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\queries\\getbyidforproject\\getbyidforprojectquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\queries\\getbyidforproject\\getbyidforprojectquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\projects\\dto\\projectprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\projects\\dto\\projectprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\queries\\getbyidforproject\\getbyidforprojectqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\queries\\getbyidforproject\\getbyidforprojectqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|d:\\sprintflow project\\sprintflow.api\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|solutionrelative:sprintflow.api\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\queries\\gettasksbystatus\\gettasksbystatusquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\queries\\gettasksbystatus\\gettasksbystatusquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\projects\\queries\\getallprojects\\getallprojectsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\projects\\queries\\getallprojects\\getallprojectsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\dto\\taskitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\dto\\taskitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{113A5B81-3BEF-4C77-8ED2-1BB8A811F473}|sprintFlow.Infrastructure\\sprintFlow.Infrastructure.csproj|d:\\sprintflow project\\sprintflow.infrastructure\\persistence\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{113A5B81-3BEF-4C77-8ED2-1BB8A811F473}|sprintFlow.Infrastructure\\sprintFlow.Infrastructure.csproj|solutionrelative:sprintflow.infrastructure\\persistence\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\dto\\taskitemprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\dto\\taskitemprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{113A5B81-3BEF-4C77-8ED2-1BB8A811F473}|sprintFlow.Infrastructure\\sprintFlow.Infrastructure.csproj|d:\\sprintflow project\\sprintflow.infrastructure\\repositories\\projectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{113A5B81-3BEF-4C77-8ED2-1BB8A811F473}|sprintFlow.Infrastructure\\sprintFlow.Infrastructure.csproj|solutionrelative:sprintflow.infrastructure\\repositories\\projectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|d:\\sprintflow project\\sprintflow.domain\\entities\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|solutionrelative:sprintflow.domain\\entities\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\projects\\dto\\projectdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\projects\\dto\\projectdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\projects\\queries\\getallprojects\\getallprojectsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\projects\\queries\\getallprojects\\getallprojectsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\dashboardstats\\query\\dashboardqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\dashboardstats\\query\\dashboardqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{113A5B81-3BEF-4C77-8ED2-1BB8A811F473}|sprintFlow.Infrastructure\\sprintFlow.Infrastructure.csproj|d:\\sprintflow project\\sprintflow.infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{113A5B81-3BEF-4C77-8ED2-1BB8A811F473}|sprintFlow.Infrastructure\\sprintFlow.Infrastructure.csproj|solutionrelative:sprintflow.infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|d:\\sprintflow project\\sprintflow.domain\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|solutionrelative:sprintflow.domain\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|d:\\sprintflow project\\sprintflow.domain\\repositories\\iprojectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|solutionrelative:sprintflow.domain\\repositories\\iprojectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|d:\\sprintflow project\\sprintflow.api\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|solutionrelative:sprintflow.api\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|d:\\sprintflow project\\sprintflow.api\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9E2D3778-55B7-0A82-B5CF-7B2F21532045}|sprintFlow.API\\sprintFlow.API.csproj|solutionrelative:sprintflow.api\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\dashboardstats\\query\\dashboardquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\dashboardstats\\query\\dashboardquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\dashboardstats\\dto\\dashboardstatsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\dashboardstats\\dto\\dashboardstatsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{113A5B81-3BEF-4C77-8ED2-1BB8A811F473}|sprintFlow.Infrastructure\\sprintFlow.Infrastructure.csproj|d:\\sprintflow project\\sprintflow.infrastructure\\repositories\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{113A5B81-3BEF-4C77-8ED2-1BB8A811F473}|sprintFlow.Infrastructure\\sprintFlow.Infrastructure.csproj|solutionrelative:sprintflow.infrastructure\\repositories\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\commands\\assignuserrole\\assignuserrolecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\commands\\assignuserrole\\assignuserrolecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\commands\\assignuserrole\\assignuserrolecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\commands\\assignuserrole\\assignuserrolecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\dto\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\dto\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\commands\\updatetaskstatus\\updatetaskstatuscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\commands\\updatetaskstatus\\updatetaskstatuscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\commands\\updatetaskdetails\\updatetaskdetailscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\commands\\updatetaskdetails\\updatetaskdetailscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\commands\\createtask\\createtaskcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\commands\\createtask\\createtaskcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\tasks\\commands\\assignemployeetotask\\assignemployeetotaskcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\tasks\\commands\\assignemployeetotask\\assignemployeetotaskcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\roles\\getrolesquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\roles\\getrolesquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\roles\\getrolesqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\roles\\getrolesqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|d:\\sprintflow project\\sprintflow.domain\\repositories\\irolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0227976A-DC36-4575-8268-D0F179EEE30C}|sprintFlow.Domain\\sprintFlow.Domain.csproj|solutionrelative:sprintflow.domain\\repositories\\irolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\sprintflow.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\sprintflow.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|d:\\sprintflow project\\sprintflow.application\\users\\queries\\getnewusers\\getnewusersquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{980BA754-EBE9-4C39-A206-A8A27CE93749}|sprintFlow.Application\\sprintFlow.Application.csproj|solutionrelative:sprintflow.application\\users\\queries\\getnewusers\\getnewusersquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UpdateUserCommandValidator.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandValidator.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandValidator.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandValidator.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T14:55:32.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UpdateUserCommand.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommand.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommand.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommand.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T14:22:22.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UpdateUserCommandHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAADwvxEAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T14:56:35.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IdentityController.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\IdentityController.cs",
+              "RelativeDocumentMoniker": "sprintFlow.API\\Controllers\\IdentityController.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\IdentityController.cs",
+              "RelativeToolTip": "sprintFlow.API\\Controllers\\IdentityController.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAwwBoAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T15:11:04.624Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AddUserCommandHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommandHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommandHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommandHandler.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAywCUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T14:43:33.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AddUserCommand.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommand.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommand.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommand.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T14:43:16.117Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Dto\\UserDto.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Dto\\UserDto.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Dto\\UserDto.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Dto\\UserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:23:45.196Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DeleteUserCommand.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommand.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommand.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommand.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T13:56:13.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DeleteUserCommandHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T14:38:23.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AddUserCommandValidator.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommandValidator.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommandValidator.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommandValidator.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Commands\\AddUser\\AddUserCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T14:23:18.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "GetAllUsersQueryValidator.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQueryValidator.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQueryValidator.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQueryValidator.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQueryValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T14:20:50.939Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "GetNewUsersQueryHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Queries\\GetNewUsers\\GetNewUsersQueryHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Queries\\GetNewUsers\\GetNewUsersQueryHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Queries\\GetNewUsers\\GetNewUsersQueryHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Queries\\GetNewUsers\\GetNewUsersQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:23:01.778Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "GetAllUsersQuery.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQuery.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQuery.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQuery.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T14:20:08.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "sprintFlow.API\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "sprintFlow.API\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:06:47.1Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "TaskRepository.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Infrastructure\\Repositories\\TaskRepository.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Infrastructure\\Repositories\\TaskRepository.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Infrastructure\\Repositories\\TaskRepository.cs",
+              "RelativeToolTip": "sprintFlow.Infrastructure\\Repositories\\TaskRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T13:35:42.108Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "GetAllUsersQueryHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAACYAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:13:36.997Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "GetMyTasksQueryHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetMyTasks\\GetMyTasksQueryHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Queries\\GetMyTasks\\GetMyTasksQueryHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetMyTasks\\GetMyTasksQueryHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Queries\\GetMyTasks\\GetMyTasksQueryHandler.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAABMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T14:52:59.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.API\\appsettings.json",
+              "RelativeDocumentMoniker": "sprintFlow.API\\appsettings.json",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.API\\appsettings.json",
+              "RelativeToolTip": "sprintFlow.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-18T16:37:48.222Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "UserRole.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Domain\\Constants\\UserRole.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Domain\\Constants\\UserRole.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Domain\\Constants\\UserRole.cs",
+              "RelativeToolTip": "sprintFlow.Domain\\Constants\\UserRole.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T13:38:15.897Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "GetMyTasksQuery.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetMyTasks\\GetMyTasksQuery.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Queries\\GetMyTasks\\GetMyTasksQuery.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetMyTasks\\GetMyTasksQuery.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Queries\\GetMyTasks\\GetMyTasksQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T14:51:45.936Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "TaskController.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\TaskController.cs",
+              "RelativeDocumentMoniker": "sprintFlow.API\\Controllers\\TaskController.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\TaskController.cs",
+              "RelativeToolTip": "sprintFlow.API\\Controllers\\TaskController.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAApwEQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T09:41:36.012Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "MyTasksController.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\MyTasksController.cs",
+              "RelativeDocumentMoniker": "sprintFlow.API\\Controllers\\MyTasksController.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\MyTasksController.cs",
+              "RelativeToolTip": "sprintFlow.API\\Controllers\\MyTasksController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAkwAYAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T14:54:49.387Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ITaskRepository.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Domain\\Repositories\\ITaskRepository.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Domain\\Repositories\\ITaskRepository.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Domain\\Repositories\\ITaskRepository.cs",
+              "RelativeToolTip": "sprintFlow.Domain\\Repositories\\ITaskRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAABsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T14:01:16.864Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "EmployeeTaskDto.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Dto\\EmployeeTaskDto.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Dto\\EmployeeTaskDto.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Dto\\EmployeeTaskDto.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Dto\\EmployeeTaskDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T14:49:38.385Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "GetTaskForProjectQueryHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetTasksForProject\\GetTaskForProjectQueryHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Queries\\GetTasksForProject\\GetTaskForProjectQueryHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetTasksForProject\\GetTaskForProjectQueryHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Queries\\GetTasksForProject\\GetTaskForProjectQueryHandler.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAqwD8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T12:01:00.196Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "GetTaskForProjectQuery.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetTasksForProject\\GetTaskForProjectQuery.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Queries\\GetTasksForProject\\GetTaskForProjectQuery.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetTasksForProject\\GetTaskForProjectQuery.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Queries\\GetTasksForProject\\GetTaskForProjectQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T13:16:10.22Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "GetByIdForProjectQuery.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetByIdForProject\\GetByIdForProjectQuery.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Queries\\GetByIdForProject\\GetByIdForProjectQuery.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetByIdForProject\\GetByIdForProjectQuery.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Queries\\GetByIdForProject\\GetByIdForProjectQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T15:23:29.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "GetByIdForProjectQueryHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetByIdForProject\\GetByIdForProjectQueryHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Queries\\GetByIdForProject\\GetByIdForProjectQueryHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetByIdForProject\\GetByIdForProjectQueryHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Queries\\GetByIdForProject\\GetByIdForProjectQueryHandler.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T15:21:55.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ProjectProfile.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Projects\\Dto\\ProjectProfile.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Projects\\Dto\\ProjectProfile.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Projects\\Dto\\ProjectProfile.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Projects\\Dto\\ProjectProfile.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAgwBcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T13:08:34.695Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "GetTasksByStatusQuery.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetTasksByStatus\\GetTasksByStatusQuery.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Queries\\GetTasksByStatus\\GetTasksByStatusQuery.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Queries\\GetTasksByStatus\\GetTasksByStatusQuery.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Queries\\GetTasksByStatus\\GetTasksByStatusQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T14:48:55.358Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "sprintFlow.API\\Controllers\\LoginController.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "sprintFlow.API\\Controllers\\LoginController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T14:25:16.858Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "GetAllProjectsQueryHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Projects\\Queries\\GetAllProjects\\GetAllProjectsQueryHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Projects\\Queries\\GetAllProjects\\GetAllProjectsQueryHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Projects\\Queries\\GetAllProjects\\GetAllProjectsQueryHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Projects\\Queries\\GetAllProjects\\GetAllProjectsQueryHandler.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAqwCwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T15:34:20.434Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "TaskItemDto.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Dto\\TaskItemDto.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Dto\\TaskItemDto.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Dto\\TaskItemDto.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Dto\\TaskItemDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T13:28:10.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "TaskItemProfile.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Dto\\TaskItemProfile.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Dto\\TaskItemProfile.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Dto\\TaskItemProfile.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Dto\\TaskItemProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T13:35:09.764Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ProjectRepository.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Infrastructure\\Repositories\\ProjectRepository.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Infrastructure\\Repositories\\ProjectRepository.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Infrastructure\\Repositories\\ProjectRepository.cs",
+              "RelativeToolTip": "sprintFlow.Infrastructure\\Repositories\\ProjectRepository.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T15:05:35.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "GetAllProjectsQuery.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Projects\\Queries\\GetAllProjects\\GetAllProjectsQuery.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Projects\\Queries\\GetAllProjects\\GetAllProjectsQuery.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Projects\\Queries\\GetAllProjects\\GetAllProjectsQuery.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Projects\\Queries\\GetAllProjects\\GetAllProjectsQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T13:04:19.853Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Infrastructure\\Persistence\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Infrastructure\\Persistence\\AppDbContext.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Infrastructure\\Persistence\\AppDbContext.cs",
+              "RelativeToolTip": "sprintFlow.Infrastructure\\Persistence\\AppDbContext.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAA5wCMAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T13:44:52.519Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "ProjectDto.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Projects\\Dto\\ProjectDto.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Projects\\Dto\\ProjectDto.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Projects\\Dto\\ProjectDto.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Projects\\Dto\\ProjectDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T13:04:42.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "IProjectRepository.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Domain\\Repositories\\IProjectRepository.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Domain\\Repositories\\IProjectRepository.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Domain\\Repositories\\IProjectRepository.cs",
+              "RelativeToolTip": "sprintFlow.Domain\\Repositories\\IProjectRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T15:05:39.546Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Project.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Domain\\Entities\\Project.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Domain\\Entities\\Project.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Domain\\Entities\\Project.cs",
+              "RelativeToolTip": "sprintFlow.Domain\\Entities\\Project.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T13:06:54.093Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "DashboardQueryHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\DashboardStats\\Query\\DashboardQueryHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\DashboardStats\\Query\\DashboardQueryHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\DashboardStats\\Query\\DashboardQueryHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\DashboardStats\\Query\\DashboardQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T14:43:15.294Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "sprintFlow.API\\Controllers\\DashboardController.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "sprintFlow.API\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T15:09:58.716Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "DashboardQuery.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\DashboardStats\\Query\\DashboardQuery.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\DashboardStats\\Query\\DashboardQuery.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\DashboardStats\\Query\\DashboardQuery.cs",
+              "RelativeToolTip": "sprintFlow.Application\\DashboardStats\\Query\\DashboardQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T14:41:31.516Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "DashboardStatsDto.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\DashboardStats\\Dto\\DashboardStatsDto.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\DashboardStats\\Dto\\DashboardStatsDto.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\DashboardStats\\Dto\\DashboardStatsDto.cs",
+              "RelativeToolTip": "sprintFlow.Application\\DashboardStats\\Dto\\DashboardStatsDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T14:40:26.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "AssignUserRoleCommandHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\AssignUserRole\\AssignUserRoleCommandHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Commands\\AssignUserRole\\AssignUserRoleCommandHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\AssignUserRole\\AssignUserRoleCommandHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Commands\\AssignUserRole\\AssignUserRoleCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T11:10:39.803Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "AssignUserRoleCommand.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\AssignUserRole\\AssignUserRoleCommand.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Commands\\AssignUserRole\\AssignUserRoleCommand.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Commands\\AssignUserRole\\AssignUserRoleCommand.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Commands\\AssignUserRole\\AssignUserRoleCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T14:53:34.686Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Dto\\LoginDto.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Dto\\LoginDto.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Dto\\LoginDto.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Dto\\LoginDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T14:44:37.819Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "UpdateTaskStatusCommandHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Commands\\UpdateTaskStatus\\UpdateTaskStatusCommandHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Commands\\UpdateTaskStatus\\UpdateTaskStatusCommandHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Commands\\UpdateTaskStatus\\UpdateTaskStatusCommandHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Commands\\UpdateTaskStatus\\UpdateTaskStatusCommandHandler.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAIAwwBYAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T12:00:39.643Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "UpdateTaskDetailsCommandHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Commands\\UpdateTaskDetails\\UpdateTaskDetailsCommandHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Commands\\UpdateTaskDetails\\UpdateTaskDetailsCommandHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Commands\\UpdateTaskDetails\\UpdateTaskDetailsCommandHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Commands\\UpdateTaskDetails\\UpdateTaskDetailsCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAACbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T12:00:29.874Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "CreateTaskCommandHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Commands\\CreateTask\\CreateTaskCommandHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Commands\\CreateTask\\CreateTaskCommandHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Commands\\CreateTask\\CreateTaskCommandHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Commands\\CreateTask\\CreateTaskCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAACUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T12:00:20.108Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "AssignEmployeeToTaskCommandHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Commands\\AssignEmployeeToTask\\AssignEmployeeToTaskCommandHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Tasks\\Commands\\AssignEmployeeToTask\\AssignEmployeeToTaskCommandHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Tasks\\Commands\\AssignEmployeeToTask\\AssignEmployeeToTaskCommandHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Tasks\\Commands\\AssignEmployeeToTask\\AssignEmployeeToTaskCommandHandler.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAUwCUAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T12:00:02.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "IRoleRepository.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Domain\\Repositories\\IRoleRepository.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Domain\\Repositories\\IRoleRepository.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Domain\\Repositories\\IRoleRepository.cs",
+              "RelativeToolTip": "sprintFlow.Domain\\Repositories\\IRoleRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:55:06.39Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "RoleRepository.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Infrastructure\\Repositories\\RoleRepository.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Infrastructure\\Repositories\\RoleRepository.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Infrastructure\\Repositories\\RoleRepository.cs",
+              "RelativeToolTip": "sprintFlow.Infrastructure\\Repositories\\RoleRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:54:47.887Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "GetRolesQueryHandler.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Roles\\GetRolesQueryHandler.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Roles\\GetRolesQueryHandler.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Roles\\GetRolesQueryHandler.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Roles\\GetRolesQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:52:59.521Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "sprintFlow.Application.csproj",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\sprintFlow.Application.csproj",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\sprintFlow.Application.csproj",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\sprintFlow.Application.csproj",
+              "RelativeToolTip": "sprintFlow.Application\\sprintFlow.Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-16T10:51:22.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "GetRolesQuery.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Roles\\GetRolesQuery.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Roles\\GetRolesQuery.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Roles\\GetRolesQuery.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Roles\\GetRolesQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:51:47.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "ProjectController.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\ProjectController.cs",
+              "RelativeDocumentMoniker": "sprintFlow.API\\Controllers\\ProjectController.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.API\\Controllers\\ProjectController.cs",
+              "RelativeToolTip": "sprintFlow.API\\Controllers\\ProjectController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwBcAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:48:00.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Domain\\Repositories\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Domain\\Repositories\\IUserRepository.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Domain\\Repositories\\IUserRepository.cs",
+              "RelativeToolTip": "sprintFlow.Domain\\Repositories\\IUserRepository.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAWwA4AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:41:09.638Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Infrastructure\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Infrastructure\\Repositories\\UserRepository.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Infrastructure\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "sprintFlow.Infrastructure\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAAAFQAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:40:18.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "GetNewUsersQuery.cs",
+              "DocumentMoniker": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Queries\\GetNewUsers\\GetNewUsersQuery.cs",
+              "RelativeDocumentMoniker": "sprintFlow.Application\\Users\\Queries\\GetNewUsers\\GetNewUsersQuery.cs",
+              "ToolTip": "D:\\SprintFlow Project\\sprintFlow.Application\\Users\\Queries\\GetNewUsers\\GetNewUsersQuery.cs",
+              "RelativeToolTip": "sprintFlow.Application\\Users\\Queries\\GetNewUsers\\GetNewUsersQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T10:21:04.949Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

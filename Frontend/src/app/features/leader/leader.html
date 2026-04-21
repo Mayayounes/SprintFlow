@@ -1,0 +1,31 @@
+<div class="min-h-screen flex bg-linear-to-br from-[#0b1f3a] via-[#0f172a] to-[#111827] text-white">
+
+  <!-- SIDEBAR -->
+  <div class="w-64 bg-black/30 backdrop-blur-xl border-r border-white/10 p-5">
+
+    <h2 class="text-xl font-bold mb-6 text-center">Leader Panel</h2>
+
+    <div class="space-y-3">
+
+      <button routerLink="/leader/statistics"
+        routerLinkActive="bg-white/10"
+        class="w-full text-left px-4 py-2 rounded hover:bg-white/10 font-semibold">
+        statistics
+      </button>
+
+      <button routerLink="/leader/projects"
+        routerLinkActive="bg-white/10"
+        class="w-full text-left px-4 py-2 rounded hover:bg-white/10 font-semibold">
+        Projects
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div class="flex-1 p-6">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

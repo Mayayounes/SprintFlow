@@ -1,0 +1,19 @@
+<div *ngIf="toast$ | async as toast"
+     class="fixed top-5 right-5 z-50 w-80 animate-slide">
+
+  <div
+    class="relative overflow-hidden rounded-lg shadow-lg p-4 text-white"
+    [ngClass]="{
+      'bg-green-600': toast.type === 'success',
+      'bg-red-600': toast.type === 'error'
+    }">
+
+    <p class="font-semibold">{{ toast.message }}</p>
+
+    <!-- Progress Bar -->
+    <div class="absolute bottom-0 left-0 h-1 bg-white/40 w-full">
+      <div class="h-full bg-white animate-progress"></div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div *ngIf="state$ | async as state"
+     class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+
+  <div class="bg-white w-100 rounded-lg shadow-lg p-5">
+
+    <h2 class="text-red-600 text-lg font-bold mb-3">
+      Error
+    </h2>
+
+    <!-- Message -->
+    <div class="text-gray-700 mb-4">
+      <ng-container *ngIf="isArray(state.message); else single">
+          <ul class="list-disc pl-5">
+            @for (msg of state.message; track msg) {
+              <li>{{ msg }}</li>
+            }
+          </ul>
+      </ng-container>
+
+      <ng-template #single>
+        {{ state.message }}
+      </ng-template>
+    </div>
+
+    <!-- OK Button -->
+    <button
+      (click)="close()"
+      class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">
+      OK
+    </button>
+
+  </div>
+</div>

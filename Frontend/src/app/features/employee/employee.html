@@ -1,0 +1,140 @@
+<div class="min-h-screen bg-linear-to-br from-[#0b1f3a] via-[#0f172a] to-[#111827] p-6 text-white">
+
+  <!-- HEADER -->
+  <h1 class="text-3xl font-bold text-center mb-6">
+    My Tasks
+  </h1>
+
+  <!-- FILTER BAR -->
+  <div class="flex justify-center mb-8">
+
+    <div class="flex items-center gap-3 bg-white/5 border border-white/10 p-2 rounded-full backdrop-blur-xl">
+
+      <!-- ALL TASKS -->
+      <button (click)="statusFilter=''; onStatusChange()" class="px-4 py-1 rounded-full text-sm transition"
+        [ngClass]="statusFilter === '' ? 'bg-blue-600 text-white' : 'text-gray-300 hover:bg-white/10'">
+
+        All Tasks
+      </button>
+
+      <!-- TODO -->
+      <button (click)="statusFilter='ToDo'; onStatusChange()" class="px-4 py-1 rounded-full text-sm transition"
+        [ngClass]="statusFilter === 'ToDo' ? 'bg-red-500 text-white' : 'text-gray-300 hover:bg-red-500/20'">
+
+        ToDo
+      </button>
+
+      <!-- IN PROGRESS -->
+      <button (click)="statusFilter='InProgress'; onStatusChange()" class="px-4 py-1 rounded-full text-sm transition"
+        [ngClass]="statusFilter === 'InProgress' ? 'bg-yellow-500 text-black' : 'text-gray-300 hover:bg-yellow-500/20'">
+
+        In Progress
+      </button>
+
+      <!-- DONE -->
+      <button (click)="statusFilter='Done'; onStatusChange()" class="px-4 py-1 rounded-full text-sm transition"
+        [ngClass]="statusFilter === 'Done' ? 'bg-green-500 text-white' : 'text-gray-300 hover:bg-green-500/20'">
+
+        Done
+      </button>
+
+    </div>
+
+  </div>
+  <!-- LOADING -->
+  <div *ngIf="loading" class="flex justify-center py-20">
+    <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+
+  <!-- TASKS -->
+  <div *ngIf="!loading && tasks.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <div *ngFor="let task of tasks" class="bg-white/5 border border-white/10 rounded-xl p-5">
+
+      <!-- PROJECT + MANAGER -->
+      <p class="text-xs text-blue-300">
+        Project: {{ task.projectName }}
+      </p>
+
+      <p class="text-xs text-gray-400 mb-2">
+        Manager: {{ task.managerName }}
+      </p>
+
+      <!-- TITLE -->
+      <h2 class="text-xl font-bold">
+        {{ task.title }}
+      </h2>
+
+      <!-- DESCRIPTION -->
+      <p class="text-sm text-gray-300 mt-2">
+        {{ task.description }}
+      </p>
+
+      <!-- DATES -->
+      <div class="text-xs text-gray-400 mt-3">
+        {{ task.assignedDate }} → {{ task.deadline }}
+      </div>
+
+      <!-- STATUS -->
+      <span class="inline-block mt-3 px-3 py-1 rounded text-xs" [ngClass]="getStatusColor(task.status)">
+        {{ task.status }}
+      </span>
+
+      <!-- BUTTON -->
+      <button (click)="openStatusModal(task)" class="w-full mt-4 bg-blue-600 hover:bg-blue-700 py-2 rounded">
+
+        Change Status
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- EMPTY -->
+  <div *ngIf="!loading && tasks.length === 0" class="text-center text-gray-400 py-20">
+
+    No tasks found
+
+  </div>
+
+  <!-- PAGINATION -->
+  <div *ngIf="!loading && tasks.length > 0" class="flex justify-center mt-6">
+
+    <app-pagination [pageNumber]="pageNumber" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
+    </app-pagination>
+
+  </div>
+
+</div>
+
+<!-- STATUS MODAL -->
+<div *ngIf="showStatusModal" class="fixed inset-0 bg-black/60 flex items-center justify-center">
+
+  <div class="bg-[#0f172a] border border-white/10 p-6 rounded-xl w-96">
+
+    <h2 class="text-lg font-bold mb-4 text-center">
+      Update Status
+    </h2>
+
+    <select [(ngModel)]="selectedTask.status" class="w-full p-3 bg-black/30 rounded mb-4 text-white">
+
+      <option *ngFor="let s of statusOptions" [ngValue]="s.value">
+        {{ s.label }}
+      </option>
+
+    </select>
+    <button (click)="updateStatus()" class="w-full bg-blue-600 py-2 rounded">
+
+      Update
+
+    </button>
+
+    <button (click)="showStatusModal=false" class="w-full mt-2 text-gray-400">
+
+      Cancel
+
+    </button>
+
+  </div>
+</div>
