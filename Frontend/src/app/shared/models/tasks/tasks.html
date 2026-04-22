@@ -37,6 +37,7 @@
     </div>
 
   </div>
+
   <!-- LOADING -->
   <div *ngIf="loading" class="flex justify-center items-center py-20">
     <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
@@ -45,63 +46,109 @@
   <!-- TASKS GRID -->
   <div *ngIf="!loading && tasks.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-    <div *ngFor="let task of tasks" class="relative bg-white/5 border border-white/10 rounded-xl p-5">
+    <div *ngFor="let task of tasks"
+      class="relative bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col h-full">
+      <div class="flex-1">
+        <!-- STATUS BAR -->
 
-      <!-- STATUS BAR -->
-      <div class="absolute left-0 top-0 bottom-0 w-2 rounded-l-xl" [ngClass]="getStatusColor(task.status)">
-      </div>
+        <div class="absolute left-0 top-0 bottom-0 w-2 rounded-l-xl" [ngClass]="getStatusColor(task.status)">
+        </div>
 
-      <!-- MENU -->
-      <div *ngIf="!isAdmin" class="absolute top-2 right-2">
+        <!-- MENU -->
+        <div *ngIf="!isAdmin" class="absolute top-2 right-2">
 
-        <button (click)="toggleMenu(task); $event.stopPropagation()"
-          class="p-2 rounded-full hover:bg-white/10 transition">
-          ⋮
-        </button>
+          <button (click)="toggleMenu(task); $event.stopPropagation()"
+            class="p-2 rounded-full hover:bg-white/10 transition">
+            ⋮
+          </button>
 
-        <div *ngIf="task.showMenu" (click)="$event.stopPropagation()" class="absolute right-0 mt-2 w-40
+          <div *ngIf="task.showMenu" (click)="$event.stopPropagation()" class="absolute right-0 mt-2 w-40
             bg-[#0b1f3a]/95 backdrop-blur-xl
             border border-white/10 rounded-xl shadow-lg
             overflow-hidden z-50">
 
-          <button (click)="openEdit(task)" class="w-full text-left px-4 py-2 text-sm text-gray-200
+            <button (click)="openEdit(task)" class="w-full text-left px-4 py-2 text-sm text-gray-200
                  hover:bg-blue-500/20 hover:text-white transition">
-            Edit Task
-          </button>
+              Edit Task
+            </button>
 
+          </div>
+        </div>
+
+        <!-- TITLE -->
+        <h2 class="text-xl font-bold text-blue-300 text-center" [innerHTML]="highlight(task.title)">
+        </h2>
+
+        <!-- DESCRIPTION -->
+        <p class="text-sm text-gray-300 text-center mt-2" [innerHTML]="highlight(task.description)">
+        </p>
+
+        <!-- DATES -->
+        <div class="mt-3 text-xs text-gray-400 space-y-1">
+
+          <div>
+            Assigned At: {{ task.assignedDate }}
+          </div>
+          <div>
+            Deadline At: {{ task.deadline }}
+          </div>
+          <!-- STARTED AT -->
+          <div *ngIf="task.startedAt">
+            <span class="text-blue-400">Started:</span>
+            {{ task.startedAt | date:'dd/MM/yyyy - HH:mm' }}
+          </div>
+
+          <!-- COMPLETED AT -->
+          <div *ngIf="task.completedAt">
+            <span class="text-green-400">Completed:</span>
+            {{ task.completedAt | date:'dd/MM/yyyy - HH:mm' }}
+          </div>
+
+          <!-- DURATION -->
+          <div *ngIf="task.duration" class="text-purple-300">
+            Duration: {{ task.duration }}
+          </div>
         </div>
       </div>
 
-      <!-- TITLE -->
-      <h2 class="text-xl font-bold text-blue-300 text-center" [innerHTML]="highlight(task.title)">
-      </h2>
+      <!-- BOTTOM SECTION -->
+      <div class="mt-auto pt-4 border-t border-white/10 space-y-3">
 
-      <!-- DESCRIPTION -->
-      <p class="text-sm text-gray-300 text-center mt-2" [innerHTML]="highlight(task.description)">
-      </p>
+        <!-- STATUS -->
+        <div class="flex items-center justify-between">
 
-      <!-- DATES -->
-      <div class="text-xs text-gray-400 mt-3 text-center">
-        Assigned: {{ task.assignedDate }} <br />
-        Deadline: {{ task.deadline }}
-      </div>
+          <span class="text-xs text-gray-400">Status</span>
 
-      <!-- STATUS BADGE -->
-      <div class="mt-3 flex justify-center">
-        <span class="px-3 py-1 rounded-full text-xs font-semibold" [ngClass]="getStatusColor(task.status)">
-          {{ task.status }}
-        </span>
-      </div>
+          <span class="px-3 py-1 rounded-full text-xs font-medium" [ngClass]="getStatusColor(task.status)">
+            {{ task.status }}
+          </span>
 
-      <!-- EMPLOYEE -->
-      <div class="mt-4 text-center">
+        </div>
 
-        <div *ngIf="task.employeeId" class="bg-white/10 p-2 rounded text-xs">
+        <!-- COMPLETION STATUS -->
+        <div class="flex items-center justify-between">
+
+          <span class="text-xs text-gray-400">Timing</span>
+
+          <span class="px-3 py-1 rounded-full text-xs font-medium" [ngClass]="task.completionStatus === 'Late'
+      ? 'bg-red-500/20 text-red-300'
+      : task.completionStatus === 'Early'
+        ? 'bg-blue-500/20 text-blue-300'
+        : 'bg-green-500/20 text-green-300'">
+
+            {{ task.completionStatus }}
+
+          </span>
+
+        </div>
+        <!-- EMPLOYEE -->
+        <div *ngIf="task.employeeId" class="bg-white/10 p-2 rounded text-xs text-center">
           Assigned to: {{ task.employeeName }}
         </div>
 
+        <!-- ASSIGN BUTTON -->
         <button *ngIf="!isAdmin" (click)="openAssign(task)"
-          class="mt-3 w-full bg-blue-600 hover:bg-blue-700 py-2 rounded transition">
+          class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded transition">
 
           {{ task.employeeId ? 'Change Assigned Employee' : 'Assign Employee' }}
 
@@ -110,103 +157,103 @@
       </div>
 
     </div>
-
   </div>
 
-  <!-- EMPTY STATE -->
-  <div *ngIf="!loading && tasks.length === 0" class="text-center py-20 text-gray-400">
+    <!-- EMPTY STATE -->
+    <div *ngIf="!loading && tasks.length === 0" class="text-center py-20 text-gray-400">
 
-    <p class="text-xl font-semibold">No Tasks found</p>
-    <p class="text-sm mt-2">Try a different search keyword</p>
+      <p class="text-xl font-semibold">No Tasks found</p>
+      <p class="text-sm mt-2">Try a different search keyword</p>
 
-  </div>
+    </div>
 
-  <div *ngIf="!loading && tasks.length > 0" class="flex flex-col items-center gap-4 mt-8">
     <!-- PAGINATION -->
-    <app-pagination [pageNumber]="pageNumber" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
-    </app-pagination>
+    <div *ngIf="!loading && tasks.length > 0" class="flex flex-col items-center gap-4 mt-8">
+      <app-pagination [pageNumber]="pageNumber" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
+      </app-pagination>
 
-  </div>
+    </div>
 
-  <!-- CREATE BUTTON -->
-  <button *ngIf="!isAdmin" (click)="openCreate()"
-    class="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full text-2xl shadow-lg">
-    +
-  </button>
+    <!-- CREATE BUTTON -->
+    <button *ngIf="!isAdmin" (click)="openCreate()"
+      class="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full text-2xl shadow-lg">
+      +
+    </button>
 
-</div>
+    <!-- MODAL -->
+  <div *ngIf="showForm" class="fixed inset-0 bg-black/60 flex items-center justify-center">
 
-<!-- MODAL -->
-<div *ngIf="showForm" class="fixed inset-0 bg-black/60 flex items-center justify-center">
+    <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96">
 
-  <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96">
+      <!-- TITLE -->
+      <h2 class="text-xl font-bold mb-4 text-center text-white">
+        {{ isEditMode ? 'Edit Task' : 'Create Task' }}
+      </h2>
 
-    <!-- TITLE -->
-    <h2 class="text-xl font-bold mb-4 text-center text-white">
-      {{ isEditMode ? 'Edit Task' : 'Create Task' }}
-    </h2>
+      <!-- TITLE INPUT -->
+      <input [(ngModel)]="form.title" placeholder="Task Title"
+        class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10 text-white" />
 
-    <!-- TITLE INPUT -->
-    <input [(ngModel)]="form.title" placeholder="Task Title"
-      class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10 text-white" />
-
-    <!-- DESCRIPTION -->
-    <textarea [(ngModel)]="form.description" placeholder="Task Description" rows="3" class="w-full p-3 mb-3 rounded-lg bg-black/30 border border-white/10 text-white
+      <!-- DESCRIPTION -->
+      <textarea [(ngModel)]="form.description" placeholder="Task Description" rows="3" class="w-full p-3 mb-3 rounded-lg bg-black/30 border border-white/10 text-white
              focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"></textarea>
 
-    <!-- DATES -->
-    <div class="grid grid-cols-2 gap-3 mb-4">
+      <!-- DATES -->
+      <div class="grid grid-cols-2 gap-3 mb-4">
 
-      <input type="date" [(ngModel)]="form.assignedDate" class="w-full p-3 rounded-lg bg-black/30 border border-white/10 text-white
+        <input type="date" [(ngModel)]="form.assignedDate" [disabled]="isEditMode" class="w-full p-3 rounded-lg bg-black/30 border border-white/10 text-white
+         focus:outline-none focus:ring-2 focus:ring-blue-500
+         disabled:opacity-50 disabled:cursor-not-allowed" />
+        <input type="date" [(ngModel)]="form.deadline" class="w-full p-3 rounded-lg bg-black/30 border border-white/10 text-white
                focus:outline-none focus:ring-2 focus:ring-blue-500" />
 
-      <input type="date" [(ngModel)]="form.deadline" class="w-full p-3 rounded-lg bg-black/30 border border-white/10 text-white
-               focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
 
-    </div>
+      <!-- ACTIONS -->
+      <div class="flex flex-col gap-2">
 
-    <!-- ACTIONS -->
-    <div class="flex flex-col gap-2">
+        <button (click)="submit()"
+          class="w-full bg-blue-600 hover:bg-blue-700 py-2.5 rounded-lg font-medium transition">
+          {{ isEditMode ? 'Update Task' : 'Create Task' }}
+        </button>
 
-      <button (click)="submit()" class="w-full bg-blue-600 hover:bg-blue-700 py-2.5 rounded-lg font-medium transition">
-        {{ isEditMode ? 'Update Task' : 'Create Task' }}
-      </button>
+        <button (click)="closeForm()" class="w-full py-2 text-gray-300 text-sm hover:text-white transition">
+          Cancel
+        </button>
 
-      <button (click)="closeForm()" class="w-full py-2 text-gray-300 text-sm hover:text-white transition">
-        Cancel
-      </button>
+      </div>
 
     </div>
 
   </div>
+  <!-- ASSIGN EMPLOYEE MODAL -->
+  <div *ngIf="showAssignModal" class="fixed inset-0 bg-black/60 flex items-center justify-center">
 
-</div>
-<!-- ASSIGN EMPLOYEE MODAL -->
-<div *ngIf="showAssignModal" class="fixed inset-0 bg-black/60 flex items-center justify-center">
+    <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96">
 
-  <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96">
+      <h2 class="text-xl font-bold mb-4 text-center text-white">
+        Assign Employee
+      </h2>
 
-    <h2 class="text-xl font-bold mb-4 text-center text-white">
-      Assign Employee
-    </h2>
+      <select [(ngModel)]="employeeId" class="w-full bg-black/30 p-3 rounded mb-4 text-white">
+        <option *ngFor="let e of employees" [ngValue]="e.id">
+          {{ e.email }}
+        </option>
+      </select>
 
-    <select [(ngModel)]="employeeId" class="w-full bg-black/30 p-3 rounded mb-4 text-white">
-      <option *ngFor="let e of employees" [ngValue]="e.id">
-        {{ e.email }}
-      </option>
-    </select>
+      <div class="flex flex-col gap-2">
 
-    <div class="flex flex-col gap-2">
+        <button (click)="assignEmployee()" class="w-full bg-blue-600 hover:bg-blue-700 py-2.5 rounded-lg">
+          Assign
+        </button>
 
-      <button (click)="assignEmployee()" class="w-full bg-blue-600 hover:bg-blue-700 py-2.5 rounded-lg">
-        Assign
-      </button>
+        <button (click)="showAssignModal = false" class="w-full py-2 text-gray-300 text-sm hover:text-white">
+          Cancel
+        </button>
 
-      <button (click)="showAssignModal = false" class="w-full py-2 text-gray-300 text-sm hover:text-white">
-        Cancel
-      </button>
+      </div>
 
     </div>
-
   </div>
+
 </div>

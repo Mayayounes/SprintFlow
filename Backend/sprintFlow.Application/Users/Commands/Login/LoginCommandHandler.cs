@@ -49,12 +49,14 @@ public class LoginCommandHandler(UserManager<User> userManager, IConfiguration c
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.Email, user.Email!)
+            new Claim(ClaimTypes.Email, user.Email!),
+
         };
 
         foreach (var r in roles)
         {
             claims.Add(new Claim(ClaimTypes.Role, r));
+
         }
 
         var key = new SymmetricSecurityKey(

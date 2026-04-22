@@ -17,10 +17,20 @@ public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IUse
 
         var EmployeeId = task.EmployeeId;
         var currentUser = userContext.GetCurrentUser();
-        if (currentUser.Id != EmployeeId)
+        if (currentUser!.Id != EmployeeId)
             return Result<Guid>.Failure(new List<string> { "You are not authorized to update this task." });
 
-        task.Status = (TaskItemStatus)request.Status.Value;
+        if (task.Status == TaskItemStatus.ToDo && request.Status == 1)
+        {
+            task.StartedAt = DateTime.UtcNow;
+        }
+
+        if (task.Status == TaskItemStatus.InProgress && request.Status == 2)
+        {
+            task.CompletedAt = DateTime.UtcNow;
+        }
+
+        task.Status = (TaskItemStatus)request.Status!.Value;
 
         await taskRepository.UpdateAsync(task);
         return Result<Guid>.Success(task.Id, "Task updated successfully");

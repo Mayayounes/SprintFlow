@@ -9,7 +9,7 @@ public class UpdateTaskDetailsCommand : IRequest<Result<Guid>>
     public string Title { get; set; } = default!;
     public string Description { get; set; } = default!;
     public string Status { get; set; } = "ToDo";
-    public DateOnly AssignedDate { get; set; }
+    //public DateOnly AssignedDate { get; set; }
     public DateOnly Deadline { get; set; }
     public Guid ProjectId { get; set; }
 }

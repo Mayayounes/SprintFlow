@@ -22,7 +22,7 @@ public class GetProjectByIdQueryHandler(IProjectRepository projectRepository, IM
         }
         var currentUser = userContext.GetCurrentUser();
 
-        var isAdmin = await userRepository.IsUserInRoleAsync(Guid.Parse(currentUser.Id), UserRole.Admin);
+        var isAdmin = await userRepository.IsUserInRoleAsync(Guid.Parse(currentUser!.Id), UserRole.Admin);
         var isLeader = await userRepository.IsUserInRoleAsync(Guid.Parse(currentUser.Id), UserRole.Leader);
         if (!isAdmin && !(isLeader && project.ManagerId == currentUser.Id))
         {

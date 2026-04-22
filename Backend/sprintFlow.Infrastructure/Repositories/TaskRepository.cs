@@ -9,9 +9,11 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
     public async Task<(IEnumerable<TaskItem>, int)> GetMyTasksAsync(string userId,int pageNumber,int pageSize, string? status)
     {
         var query = dbContext.Tasks
+            .AsNoTracking()
             .Where(t => t.EmployeeId == userId)
             .Include(t => t.Project)
                  .ThenInclude(p => p.Manager)
+             .Include(t => t.Employee)
             .AsQueryable();
         if (!string.IsNullOrWhiteSpace(status))
         {
@@ -31,6 +33,7 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
     public async Task<(IEnumerable<TaskItem>, int)> GetAllMatchingAsync(Guid projectId,string? searchTask,int pageNumber,int pageSize)
     {
         var query = dbContext.Tasks
+             .AsNoTracking()
             .Where(t => t.ProjectId == projectId)
             .Include(t => t.Project)
             .Include(t => t.Employee)

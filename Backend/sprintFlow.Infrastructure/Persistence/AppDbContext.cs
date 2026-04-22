@@ -24,15 +24,20 @@ public class AppDbContext : IdentityDbContext<User>
 
         modelBuilder.Entity<Project>()
             .HasOne(p => p.Manager)
-            .WithMany(u => u.ManagedProjects) 
-            .HasForeignKey(p => p.ManagerId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .WithMany(u => u.ManagedProjects)
+            .HasForeignKey(p => p.ManagerId);
 
         modelBuilder.Entity<TaskItem>()
             .HasOne(t => t.Employee)
             .WithMany(u => u.Tasks)
-            .HasForeignKey(t => t.EmployeeId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .HasForeignKey(t => t.EmployeeId);
+
+
+        modelBuilder.Entity<TaskItem>()
+            .Property(t => t.StartedAt);
+
+        modelBuilder.Entity<TaskItem>()
+            .Property(t => t.CompletedAt);
     }
 
 }

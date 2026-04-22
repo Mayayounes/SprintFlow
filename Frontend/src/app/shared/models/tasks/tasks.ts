@@ -169,7 +169,7 @@ export class Tasks implements OnInit {
     this.api.assignEmployeeToTask(
       this.projectId,
       this.selectedTaskId,
-      { EmployeeId: this.employeeId }
+    { employeeId: this.employeeId }
     ).subscribe({
       next: () => {
         this.toast.show('Employee assigned successfully', 'success');

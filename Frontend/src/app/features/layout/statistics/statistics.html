@@ -45,38 +45,76 @@
       </div>
 
     </div>
+
     <!-- PROJECTS BIG CARD -->
     <div class="bg-white/10 p-8 rounded-2xl backdrop-blur-xl shadow-lg text-center">
-
-      <h2 class="text-2xl text-gray-300 mb-4">
+      <h2 class="text-2xl font-semibold text-gray-300 mb-4">
         Projects
       </h2>
 
-      <p class="text-6xl font-bold text-green-400">
+      <!-- TOTAL -->
+      <p class="text-6xl font-bold text-green-400 mb-6">
         {{ stats.projects }}
       </p>
 
-      <p class="text-gray-400 mt-2">
-        Active projects in system
-      </p>
+      <!-- SUB STATS -->
+      <div class="grid md:grid-cols-2 gap-4 text-center">
+
+        <!-- DONE -->
+        <div class="bg-white/5 p-4 rounded-xl border border-green-500/20">
+          <p class="text-gray-300">Done</p>
+          <p class="text-2xl font-bold text-green-400">
+            {{ stats.doneProjects }}
+          </p>
+        </div>
+
+        <!-- PENDING -->
+        <div class="bg-white/5 p-4 rounded-xl border border-yellow-500/20">
+          <p class="text-gray-300">Pending</p>
+          <p class="text-2xl font-bold text-yellow-400">
+            {{ stats.pendingProjects }}
+          </p>
+        </div>
+
+      </div>
 
     </div>
 
   </div>
-
+  <!-- LEADER VIEW -->
   <!-- LEADER VIEW -->
   <div *ngIf="!loading && role === 'leader'" class="flex justify-center">
 
-    <div class="bg-white/10 p-8 rounded-2xl text-center backdrop-blur-xl shadow-lg w-96">
+    <div class="bg-white/10 p-8 rounded-2xl text-center backdrop-blur-xl shadow-lg w-full max-w-4xl">
 
-      <h2 class="text-xl text-gray-300 mb-3">My Projects</h2>
+      <h2 class="text-xl text-gray-300 mb-6">My Projects</h2>
 
-      <p class="text-5xl font-bold text-blue-400">
+      <!-- TOTAL -->
+      <p class="text-6xl font-bold text-blue-400 mb-8">
         {{ stats.projects }}
       </p>
 
+      <!-- BREAKDOWN -->
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- DONE -->
+        <div class="bg-white/5 p-6 rounded-xl border border-green-500/20">
+          <p class="text-gray-300">Done</p>
+          <p class="text-3xl font-bold text-green-400 mt-2">
+            {{ stats.doneProjects }}
+          </p>
+        </div>
+
+        <!-- PENDING -->
+        <div class="bg-white/5 p-6 rounded-xl border border-yellow-500/20">
+          <p class="text-gray-300">Pending</p>
+          <p class="text-3xl font-bold text-yellow-400 mt-2">
+            {{ stats.pendingProjects }}
+          </p>
+        </div>
+
+      </div>
+
     </div>
-
   </div>
-
 </div>

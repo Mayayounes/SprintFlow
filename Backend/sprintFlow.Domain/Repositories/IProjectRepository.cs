@@ -1,4 +1,5 @@
-﻿using sprintFlow.Domain.Entities;
+﻿using sprintFlow.Domain.Constants;
+using sprintFlow.Domain.Entities;
 
 namespace sprintFlow.Domain.Repositories;
 
@@ -11,5 +12,6 @@ public interface IProjectRepository
     Task<string> GetProjectManagerIdAsync(Guid projectId);
     Task<int> CountAllProjectsAsync();
     Task<int> CountByManagerIdAsync(string managerId);
-
+    Task<List<Project>> GetByManagerIdWithTasksAsync(string managerId);
+    Task<List<Project>> GetAllWithTasksAsync();
 }

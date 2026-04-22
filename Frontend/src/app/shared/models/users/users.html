@@ -69,7 +69,6 @@
             </button>
 
             <!-- dropdown -->
-            <!-- dropdown -->
             <div *ngIf="user.showMenu"
               class="absolute right-2 mt-2 w-32 bg-[#0f172a] border border-white/10 rounded-lg shadow-lg z-50">
 
@@ -96,18 +95,15 @@
   <div *ngIf="!loading && users.length === 0" class="text-center py-10 text-gray-400">
     No users found
   </div>
-
-
+  <!-- PAGINATION -->
   <div class="flex flex-col items-center gap-4 mt-6">
 
-    <!-- PAGINATION -->
     <app-pagination [pageNumber]="pageNumber" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
     </app-pagination>
 
   </div>
   <!-- CREATE USER MODAL -->
   <div *ngIf="showForm" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-
     <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96">
       <h2 class="text-xl font-bold mb-4 text-center">
         {{ isEditMode ? 'Edit User' : 'Create User' }}
@@ -117,23 +113,41 @@
         class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10" />
 
       <!-- Email -->
-      <input [(ngModel)]="form.email" placeholder="Email" type="email"
-        class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10" />
+      <!-- Email -->
+      <div class="mb-3">
 
+        <!-- CREATE MODE -->
+        <input *ngIf="!isEditMode" [(ngModel)]="form.email" placeholder="Email" type="email" class="w-full p-3 rounded bg-black/30 border border-white/10 text-white
+           focus:outline-none focus:ring-2 focus:ring-blue-500" />
+
+        <!-- EDIT MODE -->
+        <div *ngIf="isEditMode" class="p-3 rounded bg-black/20 border border-white/10 text-gray-300">
+
+          {{ form.email }}
+          <span class="text-xs text-gray-500 block">
+            Email cannot be changed
+          </span>
+
+        </div>
+
+      </div>
+      <!-- Password -->
       <input *ngIf="!isEditMode" [(ngModel)]="form.password" placeholder="Password" type="password"
         class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10" />
       <!-- Phone Number -->
       <input [(ngModel)]="form.phoneNumber" placeholder="PhoneNumber" type="tel"
         class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10" />
-
       <!-- Role -->
       <div *ngIf="!isEditMode" class="flex justify-center">
-        <select [(ngModel)]="form.role"
-          class="w-full text-center p-3 mb-3 rounded bg-white/5 border border-white/10 text-white">
+        <select [(ngModel)]="form.role" class="w-full text-center p-3 mb-3 rounded
+           bg-black/50 border border-white/10 text-white
+           focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-          <option value="" disabled>Select Role</option>
+          <option value="" disabled selected class="text-white bg-[#0b1f3a]">
+            Select Role
+          </option>
 
-          <option *ngFor="let role of roles" [value]="role">
+          <option *ngFor="let role of roles" [value]="role" class="text-white bg-[#0b1f3a]">
             {{ role }}
           </option>
 

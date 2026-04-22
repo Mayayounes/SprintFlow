@@ -15,7 +15,7 @@ namespace sprintFlow.api.Controllers;
 public class UsersController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    [Authorize(Policy = Policies.AdminOnly)]
+    [Authorize(Policy = Policies.AdminOrLeader)]
     public async Task<ActionResult<PagedResults<UserDto>>> GetAllUsers([FromQuery] GetAllUsersQuery query)
     {
         var users = await mediator.Send(query);

@@ -13,7 +13,7 @@ public class GetMyTasksQueryHandler(ITaskRepository taskRepository, IUserContext
     {
         var currentUser = userContext.GetCurrentUser();
 
-        var (tasks, totalCount) = await taskRepository.GetMyTasksAsync(currentUser.Id,request.PageNumber,request.PageSize, request.Status);
+        var (tasks, totalCount) = await taskRepository.GetMyTasksAsync(currentUser!.Id,request.PageNumber,request.PageSize, request.Status);
 
         var items = tasks.Select(t => new EmployeeTaskDto
         {
@@ -25,7 +25,10 @@ public class GetMyTasksQueryHandler(ITaskRepository taskRepository, IUserContext
             Deadline = t.Deadline,
             ProjectId = t.ProjectId,
             ProjectName = t.Project.Name,
-            ManagerName = t.Project.Manager != null ? t.Project.Manager.UserName : null
+            ManagerName = t.Project.Manager != null ? t.Project.Manager.UserName : null,
+            StartedAt = t.StartedAt,
+            CompletedAt = t.CompletedAt,
+            Duration = (t.StartedAt != null && t.CompletedAt != null)? (t.CompletedAt - t.StartedAt)?.ToString(@"hh\:mm\:ss"): null
         }).ToList();
 
         var result = new PagedResults<EmployeeTaskDto>(

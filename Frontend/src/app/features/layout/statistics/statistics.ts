@@ -19,7 +19,9 @@ export class Statistics {
     admins: 0,
     leaders: 0,
     employees: 0,
-    projects: 0
+    projects: 0,
+    doneProjects: 0,
+    pendingProjects: 0
   };
 
   loading = false;

@@ -48,48 +48,81 @@
 
   <!-- TASKS -->
   <div *ngIf="!loading && tasks.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let task of tasks" class="bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col h-full">
 
-    <div *ngFor="let task of tasks" class="bg-white/5 border border-white/10 rounded-xl p-5">
+      <!-- TOP CONTENT -->
+      <div class="flex-1">
 
-      <!-- PROJECT + MANAGER -->
-      <p class="text-xs text-blue-300">
-        Project: {{ task.projectName }}
-      </p>
+        <!-- PROJECT + MANAGER -->
+        <p class="text-xs text-blue-300">
+          Project: {{ task.projectName }}
+        </p>
 
-      <p class="text-xs text-gray-400 mb-2">
-        Manager: {{ task.managerName }}
-      </p>
+        <p class="text-xs text-gray-400 mb-2">
+          Manager: {{ task.managerName }}
+        </p>
 
-      <!-- TITLE -->
-      <h2 class="text-xl font-bold">
-        {{ task.title }}
-      </h2>
+        <!-- TITLE -->
+        <h2 class="text-xl font-bold">
+          {{ task.title }}
+        </h2>
 
-      <!-- DESCRIPTION -->
-      <p class="text-sm text-gray-300 mt-2">
-        {{ task.description }}
-      </p>
+        <!-- DESCRIPTION -->
+        <p class="text-sm text-gray-300 mt-2">
+          {{ task.description }}
+        </p>
 
-      <!-- DATES -->
-      <div class="text-xs text-gray-400 mt-3">
-        {{ task.assignedDate }} → {{ task.deadline }}
+        <!-- DATES -->
+        <div class="mt-3 text-xs text-gray-400 space-y-1">
+
+          <div>
+            {{ task.assignedDate }} → {{ task.deadline }}
+          </div>
+
+          <div *ngIf="task.startedAt">
+            <span class="text-blue-400">Started:</span>
+            {{ task.startedAt | date:'dd/MM/yyyy - HH:mm' }}
+          </div>
+
+          <div *ngIf="task.completedAt">
+            <span class="text-green-400">Completed:</span>
+            {{ task.completedAt | date:'dd/MM/yyyy - HH:mm' }}
+          </div>
+
+          <div *ngIf="task.duration" class="text-purple-300">
+            Duration: {{ task.duration }}
+          </div>
+
+        </div>
+
       </div>
 
-      <!-- STATUS -->
-      <span class="inline-block mt-3 px-3 py-1 rounded text-xs" [ngClass]="getStatusColor(task.status)">
-        {{ task.status }}
-      </span>
+      <!-- BOTTOM SECTION (ALWAYS AT BOTTOM) -->
+      <div class="mt-auto pt-4 border-t border-white/10 space-y-3">
 
-      <!-- BUTTON -->
-      <button (click)="openStatusModal(task)" class="w-full mt-4 bg-blue-600 hover:bg-blue-700 py-2 rounded">
+        <!-- SINGLE STATUS ROW (cleaner instead of multiple badges) -->
+        <div class="flex items-center justify-between">
 
-        Change Status
+          <span class="text-xs text-gray-400">Status</span>
 
-      </button>
+          <span class="px-3 py-1 rounded-full text-xs font-medium" [ngClass]="getStatusColor(task.status)">
+            {{ task.status }}
+          </span>
+
+        </div>
+
+        <!-- BUTTON -->
+        <button (click)="openStatusModal(task)" class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg text-sm">
+
+          Change Status
+
+        </button>
+
+      </div>
 
     </div>
-
   </div>
+
 
   <!-- EMPTY -->
   <div *ngIf="!loading && tasks.length === 0" class="text-center text-gray-400 py-20">
@@ -106,35 +139,35 @@
 
   </div>
 
-</div>
+  <!-- STATUS MODAL -->
+  <div *ngIf="showStatusModal" class="fixed inset-0 bg-black/60 flex items-center justify-center">
 
-<!-- STATUS MODAL -->
-<div *ngIf="showStatusModal" class="fixed inset-0 bg-black/60 flex items-center justify-center">
+    <div class="bg-[#0f172a] border border-white/10 p-6 rounded-xl w-96">
 
-  <div class="bg-[#0f172a] border border-white/10 p-6 rounded-xl w-96">
+      <h2 class="text-lg font-bold mb-4 text-center text-white">
+        Update Status
+      </h2>
 
-    <h2 class="text-lg font-bold mb-4 text-center">
-      Update Status
-    </h2>
+      <select [(ngModel)]="selectedTask.status" class="w-full p-3 bg-black/30 rounded mb-4 text-white">
 
-    <select [(ngModel)]="selectedTask.status" class="w-full p-3 bg-black/30 rounded mb-4 text-white">
+        <option *ngFor="let s of statusOptions" [ngValue]="s.value">
+          {{ s.label }}
+        </option>
 
-      <option *ngFor="let s of statusOptions" [ngValue]="s.value">
-        {{ s.label }}
-      </option>
+      </select>
+      <button (click)="updateStatus()" class="w-full bg-blue-600 py-2 rounded">
 
-    </select>
-    <button (click)="updateStatus()" class="w-full bg-blue-600 py-2 rounded">
+        Update
 
-      Update
+      </button>
 
-    </button>
+      <button (click)="showStatusModal=false" class="w-full mt-2 text-gray-400">
 
-    <button (click)="showStatusModal=false" class="w-full mt-2 text-gray-400">
+        Cancel
 
-      Cancel
+      </button>
 
-    </button>
-
+    </div>
   </div>
+
 </div>

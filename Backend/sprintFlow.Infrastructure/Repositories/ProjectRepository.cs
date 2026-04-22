@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
 using sprintFlow.Infrastructure.Persistence;
@@ -19,7 +20,7 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
     }
     public async Task<(IEnumerable<Project> Projects, int TotalCount)> GetAllMatchingAsync(string searchPhrase, int pageNumber, int pageSize, string? managerId = null)
     {
-        var query = dbContext.Projects.Include(p => p.Manager).AsQueryable();
+        var query = dbContext.Projects.Include(p => p.Manager).Include(p => p.Tasks).AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(searchPhrase))
             query = query.Where(p => p.Name.Contains(searchPhrase));
@@ -56,5 +57,17 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
     }
     public Task SaveChanges()
         => dbContext.SaveChangesAsync();
-
+    public async Task<List<Project>> GetByManagerIdWithTasksAsync(string managerId)
+    {
+        return await dbContext.Projects
+            .Include(p => p.Tasks)
+            .Where(p => p.ManagerId == managerId)
+            .ToListAsync();
+    }
+    public async Task<List<Project>> GetAllWithTasksAsync()
+    {
+        return await dbContext.Projects
+            .Include(p => p.Tasks)
+            .ToListAsync();
+    }
 }

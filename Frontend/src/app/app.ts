@@ -11,5 +11,5 @@ import { ErrorModalComponent } from './shared/components/error-modal/error-modal
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('sprintFlow-Fontend');
+  protected readonly title = signal('sprintFlow');
 }

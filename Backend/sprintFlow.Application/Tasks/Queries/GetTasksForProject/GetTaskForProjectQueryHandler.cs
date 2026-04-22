@@ -37,18 +37,29 @@ public class GetTaskForProjectQueryHandler(IUserContext userContext , ITaskRepos
         var tasksDto = tasks
                 .Where(t => t.ProjectId == request.ProjectId)
                 .Select(task => new TaskItemDto
-        {
-            Id = task.Id,
-            Title = task.Title,
-            Description = task.Description,
-            EmployeeId = task.EmployeeId,
-            AssignedDate = task.AssignedDate,
-            Deadline = task.Deadline,
-            ProjectName = task.Project.Name,
-            ProjectId = task.ProjectId,
-            EmployeeName = task.Employee != null ? task.Employee.UserName : null,
-            Status = task.Status.ToString()
-        }).ToList();
+                {
+                    Id = task.Id,
+                    Title = task.Title,
+                    Description = task.Description,
+                    EmployeeId = task.EmployeeId,
+                    AssignedDate = task.AssignedDate,
+                    Deadline = task.Deadline,
+                    ProjectName = task.Project.Name,
+                    ProjectId = task.ProjectId,
+                    EmployeeName = task.Employee != null ? task.Employee.UserName : null,
+                    Status = task.Status.ToString(),
+                    StartedAt = task.StartedAt,
+                    CompletedAt = task.CompletedAt,
+                    CompletionStatus =
+    task.CompletedAt == null
+        ? "NotCompleted"
+        : task.CompletedAt.Value < task.Deadline.ToDateTime(TimeOnly.MinValue)
+            ? "Early"
+            : task.CompletedAt.Value <= task.Deadline.ToDateTime(TimeOnly.MinValue)
+                ? "OnTime"
+                : "Late",
+                    Duration = (task.StartedAt != null && task.CompletedAt != null) ? (task.CompletedAt - task.StartedAt)?.ToString(@"hh\:mm\:ss") : null
+                }).ToList();
 
         var result = new PagedResults<TaskItemDto>(
             tasksDto,

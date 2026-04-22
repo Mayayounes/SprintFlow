@@ -14,4 +14,8 @@ public class TaskItemDto
     public Guid ProjectId { get; set; }
     public string ProjectName { get; set; } = default!;
     public string? EmployeeName { get; set; }
+    public DateTime? StartedAt { get; set; }
+    public DateTime? CompletedAt { get; set; }
+    public string? Duration { get; set; }
+    public string? CompletionStatus { get; set; }
 }

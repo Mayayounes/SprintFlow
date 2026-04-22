@@ -17,27 +17,24 @@
     +
   </button>
 
-<div *ngIf="!loading && projects.length > 0"
-     class="flex justify-end mt-4 mb-2">
+  <div *ngIf="!loading && projects.length > 0" class="flex justify-end mt-4 mb-2">
 
-  <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2">
 
-    <span class="text-sm text-gray-400">Per page:</span>
+      <span class="text-sm text-gray-400">Per page:</span>
 
-    <select [(ngModel)]="pageSize"
-            (change)="onPageSizeChange(pageSize)"
-            class="bg-black/30 text-white px-4 py-2 rounded-lg border border-white/10
+      <select [(ngModel)]="pageSize" (change)="onPageSizeChange(pageSize)" class="bg-black/30 text-white px-4 py-2 rounded-lg border border-white/10
                    focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-      <option *ngFor="let size of pageSizes" [value]="size">
-        {{ size }}
-      </option>
+        <option *ngFor="let size of pageSizes" [value]="size">
+          {{ size }}
+        </option>
 
-    </select>
+      </select>
+
+    </div>
 
   </div>
-
-</div>
 
   <!-- LOADING -->
   <div *ngIf="loading" class="flex justify-center items-center py-20">
@@ -68,9 +65,21 @@
         </div>
       </div>
 
-      <!-- NAME -->
-      <h2 class="text-xl font-bold text-center text-blue-300" [innerHTML]="highlight(project.name)">
-      </h2>
+      <div class="flex items-start justify-between mb-2">
+
+        <!-- TITLE -->
+        <h2 class="text-lg font-bold text-blue-300 text-left wrap-break-words flex-1 pr-2"
+          [innerHTML]="highlight(project.name)">
+        </h2>
+
+      </div>
+      <div class="mb-3 flex justify-start">
+        <span class="px-3 py-1 text-xs font-semibold rounded-full border whitespace-nowrap" [ngClass]="project.projectStatus === 'done'
+      ? 'bg-green-600 text-white border-green-700'
+      : 'bg-yellow-500 text-black border-yellow-600'">
+          {{ project.projectStatus === 'done' ? 'Done' : 'Pending' }}
+        </span>
+      </div>
 
       <!-- DESCRIPTION -->
       <p class="text-sm text-gray-300 text-center mt-3" [innerHTML]="highlight(project.description)">

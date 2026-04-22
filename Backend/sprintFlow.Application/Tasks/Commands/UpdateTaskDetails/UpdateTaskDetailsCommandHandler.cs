@@ -28,6 +28,13 @@ public class UpdateTaskDetailsCommandHandler(IUserContext userContext, IMapper m
         {
             return Result<Guid>.Failure(new List<string> { "Task not found." });
         }
+        if (request.Deadline <= task.AssignedDate)
+        {
+            return Result<Guid>.Failure(new List<string>
+    {
+        "Deadline must be after the assigned date."
+    });
+        }
         mapper.Map(request, task);
 
         await taskRepository.UpdateAsync(task);

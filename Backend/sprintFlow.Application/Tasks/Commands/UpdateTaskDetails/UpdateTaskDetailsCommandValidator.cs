@@ -14,13 +14,8 @@ public class UpdateTaskDetailsCommandValidator : AbstractValidator<UpdateTaskDet
             .NotEmpty().WithMessage("Description is required.")
             .Length(3, 300).WithMessage("Description must be between 3 and 300 characters.");
 
-        RuleFor(x => x.AssignedDate)
-            .GreaterThanOrEqualTo(DateOnly.FromDateTime(DateTime.Today))
-            .WithMessage("Assigned date cannot be in the past.");
-
-        RuleFor(x => x.AssignedDate)
-            .LessThan(x => x.Deadline)
-            .WithMessage("Assigned date must be before deadline.");
-
+        RuleFor(x => x.Deadline)
+            .GreaterThan(DateOnly.FromDateTime(DateTime.Today))
+            .WithMessage("Deadline must be in the future.");
     }
 }

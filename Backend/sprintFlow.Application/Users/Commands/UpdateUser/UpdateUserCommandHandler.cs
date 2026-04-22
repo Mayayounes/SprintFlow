@@ -15,9 +15,7 @@ public class UpdateUserCommandHandler(UserManager<User> userManager) : IRequestH
         if (user == null)
             return Result<string>.Failure(new List<string> { "User not found" });
 
-        // update fields
         user.UserName = request.UserName;
-        user.Email = request.Email;
         user.PhoneNumber = request.PhoneNumber;
 
         var result = await userManager.UpdateAsync(user);

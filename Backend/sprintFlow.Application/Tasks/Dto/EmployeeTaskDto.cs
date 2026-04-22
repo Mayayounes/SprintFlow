@@ -11,4 +11,7 @@ public class EmployeeTaskDto
     public Guid ProjectId { get; set; }
     public string ProjectName { get; set; } = default!;
     public string? ManagerName { get; set; } = default!;
+    public DateTime? StartedAt { get; set; }
+    public DateTime? CompletedAt { get; set; }
+    public string? Duration { get; set; }
 }

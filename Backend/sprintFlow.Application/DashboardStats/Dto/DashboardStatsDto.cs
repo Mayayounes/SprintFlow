@@ -7,4 +7,6 @@ public class DashboardStatsDto
     public int Leaders { get; set; }
     public int Employees { get; set; }
     public int Projects { get; set; }
+    public int PendingProjects { get; set; }
+    public int DoneProjects { get; set; }
 }
