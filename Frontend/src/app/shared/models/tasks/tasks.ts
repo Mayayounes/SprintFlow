@@ -169,7 +169,7 @@ export class Tasks implements OnInit {
     this.api.assignEmployeeToTask(
       this.projectId,
       this.selectedTaskId,
-    { employeeId: this.employeeId }
+      { employeeId: this.employeeId }
     ).subscribe({
       next: () => {
         this.toast.show('Employee assigned successfully', 'success');
@@ -193,13 +193,26 @@ export class Tasks implements OnInit {
     });
     task.showMenu = !task.showMenu;
   }
+getStatusColor(status: any) {
 
-  getStatusColor(status: string) {
-    if (status === 'ToDo') return 'bg-red-500';
-    if (status === 'InProgress') return 'bg-yellow-500';
-    return 'bg-green-500';
+  switch (status) {
+
+    case 'toDo':
+    case 0:
+      return 'bg-rose-500/15 text-rose-300 border border-rose-400/30';
+
+    case 'inProgress':
+    case 1:
+      return 'bg-amber-500/15 text-amber-300 border border-amber-400/30';
+
+    case 'done':
+    case 2:
+      return 'bg-emerald-500/15 text-emerald-300 border border-emerald-400/30';
+
+    default:
+      return 'bg-slate-500/15 text-slate-300 border border-slate-400/20';
   }
-
+}
   goBack() {
     const role = this.auth.getRole()?.toLowerCase();
     this.router.navigate([`/${role}/projects`]);

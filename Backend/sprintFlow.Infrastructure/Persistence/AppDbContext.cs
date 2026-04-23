@@ -10,34 +10,13 @@ public class AppDbContext : IdentityDbContext<User>
     : base(options)
     {
     }
-    internal DbSet<Project> Projects { get; set; }
-    internal DbSet<TaskItem> Tasks { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public DbSet<Project> Projects { get; set; }
+    public DbSet<TaskItem> Tasks { get; set; }
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(builder);
 
-        modelBuilder.Entity<Project>()
-            .HasMany(p => p.Tasks)
-            .WithOne(t => t.Project)
-            .HasForeignKey(t => t.ProjectId);
-
-        modelBuilder.Entity<Project>()
-            .HasOne(p => p.Manager)
-            .WithMany(u => u.ManagedProjects)
-            .HasForeignKey(p => p.ManagerId);
-
-        modelBuilder.Entity<TaskItem>()
-            .HasOne(t => t.Employee)
-            .WithMany(u => u.Tasks)
-            .HasForeignKey(t => t.EmployeeId);
-
-
-        modelBuilder.Entity<TaskItem>()
-            .Property(t => t.StartedAt);
-
-        modelBuilder.Entity<TaskItem>()
-            .Property(t => t.CompletedAt);
+        builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 
 }

@@ -18,8 +18,8 @@ public class GetMyTasksQueryHandler(ITaskRepository taskRepository, IUserContext
         var items = tasks.Select(t => new EmployeeTaskDto
         {
             Id = t.Id,
-            Title = t.Title,
-            Description = t.Description,
+            Title = t.Title!,
+            Description = t.Description!,
             Status = t.Status.ToString(),
             AssignedDate = t.AssignedDate,
             Deadline = t.Deadline,

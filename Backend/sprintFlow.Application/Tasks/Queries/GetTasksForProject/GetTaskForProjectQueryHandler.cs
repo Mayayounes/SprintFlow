@@ -39,15 +39,15 @@ public class GetTaskForProjectQueryHandler(IUserContext userContext , ITaskRepos
                 .Select(task => new TaskItemDto
                 {
                     Id = task.Id,
-                    Title = task.Title,
-                    Description = task.Description,
+                    Title = task.Title!,
+                    Description = task.Description!,
                     EmployeeId = task.EmployeeId,
                     AssignedDate = task.AssignedDate,
                     Deadline = task.Deadline,
                     ProjectName = task.Project.Name,
                     ProjectId = task.ProjectId,
                     EmployeeName = task.Employee != null ? task.Employee.UserName : null,
-                    Status = task.Status.ToString(),
+                    Status = task.Status,
                     StartedAt = task.StartedAt,
                     CompletedAt = task.CompletedAt,
                     CompletionStatus =

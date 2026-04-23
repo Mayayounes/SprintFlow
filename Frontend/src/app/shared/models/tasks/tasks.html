@@ -120,6 +120,7 @@
           <span class="text-xs text-gray-400">Status</span>
 
           <span class="px-3 py-1 rounded-full text-xs font-medium" [ngClass]="getStatusColor(task.status)">
+
             {{ task.status }}
           </span>
 
@@ -147,7 +148,7 @@
         </div>
 
         <!-- ASSIGN BUTTON -->
-        <button *ngIf="!isAdmin" (click)="openAssign(task)"
+        <button *ngIf="!isAdmin && task.status !== 'done'" (click)="openAssign(task)"
           class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded transition">
 
           {{ task.employeeId ? 'Change Assigned Employee' : 'Assign Employee' }}
@@ -159,28 +160,28 @@
     </div>
   </div>
 
-    <!-- EMPTY STATE -->
-    <div *ngIf="!loading && tasks.length === 0" class="text-center py-20 text-gray-400">
+  <!-- EMPTY STATE -->
+  <div *ngIf="!loading && tasks.length === 0" class="text-center py-20 text-gray-400">
 
-      <p class="text-xl font-semibold">No Tasks found</p>
-      <p class="text-sm mt-2">Try a different search keyword</p>
+    <p class="text-xl font-semibold">No Tasks found</p>
+    <p class="text-sm mt-2">Try a different search keyword</p>
 
-    </div>
+  </div>
 
-    <!-- PAGINATION -->
-    <div *ngIf="!loading && tasks.length > 0" class="flex flex-col items-center gap-4 mt-8">
-      <app-pagination [pageNumber]="pageNumber" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
-      </app-pagination>
+  <!-- PAGINATION -->
+  <div *ngIf="!loading && tasks.length > 0" class="flex flex-col items-center gap-4 mt-8">
+    <app-pagination [pageNumber]="pageNumber" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
+    </app-pagination>
 
-    </div>
+  </div>
 
-    <!-- CREATE BUTTON -->
-    <button *ngIf="!isAdmin" (click)="openCreate()"
-      class="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full text-2xl shadow-lg">
-      +
-    </button>
+  <!-- CREATE BUTTON -->
+  <button *ngIf="!isAdmin" (click)="openCreate()"
+    class="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full text-2xl shadow-lg">
+    +
+  </button>
 
-    <!-- MODAL -->
+  <!-- MODAL -->
   <div *ngIf="showForm" class="fixed inset-0 bg-black/60 flex items-center justify-center">
 
     <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96">
