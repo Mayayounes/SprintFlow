@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Entities\TaskItem.cs~RF129f21b.TMP" />
+    <None Remove="Entities\TaskItem.cs~RF181b5fc3.TMP" />
   </ItemGroup>
 
   <ItemGroup>

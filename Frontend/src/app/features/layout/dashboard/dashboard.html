@@ -6,20 +6,26 @@
   <title>SprintFlow - Home</title>
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    body {
-      background: linear-gradient(135deg, #0b1f3a, #111827);
-    }
+<style>
+  html, body {
+    height: 100%;
+  }
 
-    .floating {
-      animation: float 6s ease-in-out infinite;
-    }
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0b1f3a, #111827);
+  }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-  </style>
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+</style>
+
 </head>
 
 <body class="text-white font-sans">
@@ -62,25 +68,47 @@
   </section>
 
   <!-- FEATURES -->
-  <section class="grid md:grid-cols-3 gap-6 px-10 py-16">
+<section class="px-10 py-16">
 
-    <div class="bg-white/10 p-6 rounded-xl">
-      <h3 class="text-xl font-semibold">Smart Task Tracking</h3>
-      <p class="text-gray-300 mt-2">Organize and monitor your tasks in real time.</p>
+  <div class="grid md:grid-cols-3 gap-6">
+
+    <div class="bg-white/10 p-6 rounded-xl hover:bg-white/15 transition">
+      <h3 class="text-xl font-semibold">Project Management</h3>
+      <p class="text-gray-300 mt-2">
+        Create, organize, and track projects with clear status (Pending / Done).
+      </p>
     </div>
 
-    <div class="bg-white/10 p-6 rounded-xl">
-      <h3 class="text-xl font-semibold">Team Collaboration</h3>
-      <p class="text-gray-300 mt-2">Work seamlessly with your team anywhere.</p>
+    <div class="bg-white/10 p-6 rounded-xl hover:bg-white/15 transition">
+      <h3 class="text-xl font-semibold">Task Assignment</h3>
+      <p class="text-gray-300 mt-2">
+        Assign employees to tasks and manage workload efficiently across teams.
+      </p>
     </div>
 
-    <div class="bg-white/10 p-6 rounded-xl">
-      <h3 class="text-xl font-semibold">Progress Analytics</h3>
-      <p class="text-gray-300 mt-2">Visualize your productivity growth.</p>
+    <div class="bg-white/10 p-6 rounded-xl hover:bg-white/15 transition">
+      <h3 class="text-xl font-semibold">Smart Completion Tracking</h3>
+      <p class="text-gray-300 mt-2">
+        Detect if tasks are Early, OnTime, or Late based on deadlines.
+      </p>
     </div>
 
-  </section>
+    <div class="bg-white/10 p-6 rounded-xl hover:bg-white/15 transition">
+      <h3 class="text-xl font-semibold">Real-Time Dashboard</h3>
+      <p class="text-gray-300 mt-2">
+        View live progress of projects, tasks, and team performance.
+      </p>
+    </div>
 
+    <div class="bg-white/10 p-6 rounded-xl hover:bg-white/15 transition">
+      <h3 class="text-xl font-semibold">Productivity Insights</h3>
+      <p class="text-gray-300 mt-2">
+        Analyze team productivity and task completion trends over time.
+      </p>
+    </div>
+
+  </div>
+</section>
   <!-- FOOTER -->
   <footer class="text-center py-6 text-gray-400 text-sm">
     © 2026 SprintFlow. All rights reserved.
