@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using sprintFlow.Application.Common;
 using sprintFlow.Application.Users.Dto;
 using sprintFlow.Domain.Entities;
@@ -23,6 +24,7 @@ public class AddUserCommandHandler(UserManager<User> userManager) : IRequestHand
         {
             return Result<string>.Failure(new List<string> { "User already exists with this email" });
         }
+
         var user = new User
         {
             UserName = request.UserName,
@@ -31,7 +33,13 @@ public class AddUserCommandHandler(UserManager<User> userManager) : IRequestHand
             EmailConfirmed = true
         };
         var result = await userManager.CreateAsync(user, request.Password);
-        await userManager.AddToRoleAsync(user, request.Role.ToString());
+
+        if (!result.Succeeded)
+        {
+            return Result<string>.Failure(result.Errors.Select(e => e.Description).ToList());
+        }
+
+        await userManager.AddToRoleAsync(user, request.Role.ToString()!);
         return Result<string>.Success(user.Id);
     }
 }

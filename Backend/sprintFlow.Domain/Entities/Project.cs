@@ -6,6 +6,6 @@ public class Project
     public string Name { get; set; } = default!;
     public string? Description { get; set; }
     public ICollection<TaskItem> Tasks { get; set; } = new List<TaskItem>();
-    public User Manager { get; set; } = default!;
-    public string ManagerId { get; set; } = default!;
+    public string ManagerId { get; set; } = null!;
+    public User Manager { get; set; } = null!;
 }
