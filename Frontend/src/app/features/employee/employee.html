@@ -79,18 +79,18 @@
             {{ task.assignedDate }} → {{ task.deadline }}
           </div>
 
-          <div *ngIf="task.startedAt">
+          <div *ngIf="task.startedAtLocal">
             <span class="text-blue-400">Started:</span>
-            {{ task.startedAt | date:'dd/MM/yyyy - HH:mm' }}
+            {{ task.startedAtLocal | date:'dd/MM/yyyy - HH:mm' }}
           </div>
 
-          <div *ngIf="task.completedAt">
+          <div *ngIf="task.completedAtLocal">
             <span class="text-green-400">Completed:</span>
-            {{ task.completedAt | date:'dd/MM/yyyy - HH:mm' }}
+            {{ task.completedAtLocal | date:'dd/MM/yyyy - HH:mm' }}
           </div>
 
           <div *ngIf="task.duration" class="text-purple-300">
-            Duration: {{ task.duration }}
+            Duration: {{ formatDuration(task.duration) }}
           </div>
 
         </div>
@@ -110,14 +110,10 @@
           </span>
 
         </div>
-
-        <!-- BUTTON -->
-        <button (click)="openStatusModal(task)" class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg text-sm">
-
+        <button *ngIf="task.status !== 'Done'" (click)="openStatusModal(task)"
+          class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg text-sm">
           Change Status
-
         </button>
-
       </div>
 
     </div>

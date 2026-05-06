@@ -8,7 +8,7 @@ using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Queries.GetMyTasks;
 
-public class GetMyTasksQueryHandler(IMapper mapper ,ITaskRepository taskRepository, IUserContext userContext) : IRequestHandler<GetMyTasksQuery, Result<PagedResults<EmployeeTaskDto>>>
+public class GetMyTasksQueryHandler(ITaskRepository taskRepository, IUserContext userContext) : IRequestHandler<GetMyTasksQuery, Result<PagedResults<EmployeeTaskDto>>>
 {
     public async Task<Result<PagedResults<EmployeeTaskDto>>> Handle(GetMyTasksQuery request, CancellationToken cancellationToken)
     {
@@ -16,7 +16,28 @@ public class GetMyTasksQueryHandler(IMapper mapper ,ITaskRepository taskReposito
 
         var (tasks, totalCount) = await taskRepository.GetMyTasksAsync(currentUser!.Id,request.PageNumber,request.PageSize, request.Status);
 
-        var items = mapper.Map<List<EmployeeTaskDto>>(tasks);
+        var userTimeZone = currentUser.TimeZoneId;
+
+        var items = tasks.Select(task => new EmployeeTaskDto
+        {
+            Id = task.Id,
+            Title = task.Title,
+            Description = task.Description,
+            Status = task.Status.ToString(),
+            AssignedDate = task.AssignedDate,
+            Deadline = task.Deadline,
+            ProjectId = task.ProjectId,
+            ProjectName = task.Project?.Name,
+            StartedAt = task.StartedAt,
+            CompletedAt = task.CompletedAt,
+            StartedAtLocal = task.StartedAt == null
+                ? null
+                : TimeZoneHelper.ToUserTime(task.StartedAt.Value, userTimeZone),
+            CompletedAtLocal = task.CompletedAt == null
+                ? null
+                : TimeZoneHelper.ToUserTime(task.CompletedAt.Value, userTimeZone),
+            Duration = task.Duration,
+        }).ToList();
 
         var result = new PagedResults<EmployeeTaskDto>(
             items,
@@ -24,6 +45,7 @@ public class GetMyTasksQueryHandler(IMapper mapper ,ITaskRepository taskReposito
             request.PageNumber,
             request.PageSize
         );
+
 
         return Result<PagedResults<EmployeeTaskDto>>.Success(
             result,

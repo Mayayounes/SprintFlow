@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using sprintFlow.Domain.Entities;
+using sprintFlow.Application.Tasks.Commands.CreateTask;
+using sprintFlow.Application.Tasks.Commands.UpdateTaskDetails;
 using sprintFlow.Application.Tasks.Dto;
+using sprintFlow.Domain.Entities;
 
 public class TaskItemProfile : Profile
 {
@@ -20,5 +22,8 @@ public class TaskItemProfile : Profile
                 opt => opt.MapFrom(src => src.Project.Manager != null ? src.Project.Manager.UserName : null))
             .ForMember(dest => dest.Status,
                 opt => opt.MapFrom(src => src.Status.ToString()));
+
+        CreateMap<CreateTaskCommand, TaskItem>();
+        CreateMap<UpdateTaskDetailsCommand, TaskItem>();
     }
 }

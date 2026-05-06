@@ -49,6 +49,32 @@ export class Employee implements OnInit {
   ngOnInit() {
     this.loadMyTasks();
   }
+  formatDuration(duration: string): string {
+    if (!duration) return '';
+
+    const parts = duration.split(':').map(Number);
+    let hours = parts[0];
+    const minutes = parts[1];
+    const seconds = parts[2];
+
+    let days = Math.floor(hours / 24);
+    hours = hours % 24;
+
+    let weeks = Math.floor(days / 7);
+    days = days % 7;
+
+    const result: string[] = [];
+
+    if (weeks > 0) result.push(`${weeks} week${weeks > 1 ? 's' : ''}`);
+    if (days > 0) result.push(`${days} day${days > 1 ? 's' : ''}`);
+    if (hours > 0) result.push(`${hours} hour${hours > 1 ? 's' : ''}`);
+    if (minutes > 0) result.push(`${minutes} minute${minutes > 1 ? 's' : ''}`);
+    if (seconds > 0 && result.length === 0) {
+      result.push(`${seconds} second${seconds > 1 ? 's' : ''}`);
+    }
+
+    return result.join(' ');
+  }
 
   loadMyTasks() {
     this.loading = true;
@@ -114,15 +140,21 @@ export class Employee implements OnInit {
 
         if (task) {
           task.status = this.selectedTask.status;
+          const now = new Date().toISOString();
+          if (this.selectedTask.status === 'InProgress') {
+            task.startedAtLocal = now;
+            task.startedAt = now;
+          }
+          if (this.selectedTask.status === 'Done') {
+            task.completedAtLocal = now;
+            task.completedAt = now;
+          }
         }
-
         this.showStatusModal = false;
         this.selectedTask = null;
-
         this.cdr.detectChanges();
-      },
-      error: (err) => this.handleError(err)
-    });
+      }
+    })
   }
 
   getStatusColor(status: string) {
