@@ -1,21 +1,24 @@
-﻿using sprintFlow.Application.Tasks.Commands.CreateTask;
+﻿using AutoMapper;
 using sprintFlow.Domain.Entities;
-using AutoMapper;
-using sprintFlow.Application.Tasks.Commands.UpdateTaskDetails;
-
-namespace sprintFlow.Application.Tasks.Dto;
+using sprintFlow.Application.Tasks.Dto;
 
 public class TaskItemProfile : Profile
 {
     public TaskItemProfile()
     {
-        CreateMap<CreateTaskCommand, TaskItem>();
-        CreateMap<UpdateTaskDetailsCommand, TaskItem>();
-
         CreateMap<TaskItem, TaskItemDto>()
-            .ForMember(dest => dest.ProjectName,
-        opt => opt.MapFrom(src => src.Project.Name))
-            .ForMember(dest => dest.EmployeeName,
-        opt => opt.MapFrom(src => src.Employee != null ? src.Employee.UserName : null));
+                .ForMember(dest => dest.EmployeeName,
+                opt => opt.MapFrom(src =>
+                    src.Employee != null ? src.Employee.UserName : null))
+    .ForMember(dest => dest.Status,
+        opt => opt.MapFrom(src => src.Status.ToString()))
+    .ForMember(dest => dest.CompletionStatus,
+        opt => opt.MapFrom(src => src.CompletionStatus.ToString()));
+
+        CreateMap<TaskItem, EmployeeTaskDto>()
+            .ForMember(dest => dest.ManagerName,
+                opt => opt.MapFrom(src => src.Project.Manager != null ? src.Project.Manager.UserName : null))
+            .ForMember(dest => dest.Status,
+                opt => opt.MapFrom(src => src.Status.ToString()));
     }
 }

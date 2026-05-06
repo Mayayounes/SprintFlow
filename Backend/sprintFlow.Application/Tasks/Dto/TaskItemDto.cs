@@ -18,5 +18,5 @@ public class TaskItemDto
     public DateTime? StartedAt { get; set; }
     public DateTime? CompletedAt { get; set; }
     public string? Duration { get; set; }
-    public string? CompletionStatus { get; set; }
+    public TaskCompletionStatus CompletionStatus { get; set; } = TaskCompletionStatus.NotCompleted;
 }

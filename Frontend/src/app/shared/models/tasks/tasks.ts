@@ -193,7 +193,8 @@ export class Tasks implements OnInit {
     });
     task.showMenu = !task.showMenu;
   }
-getStatusColor(status: any) {
+
+  getStatusColor(status: any) {
 
   switch (status) {
 
@@ -233,6 +234,33 @@ getStatusColor(status: any) {
 
     this.cdr.detectChanges();
   }
+
+formatDuration(duration: string): string {
+  if (!duration) return '';
+
+  const parts = duration.split(':').map(Number);
+  let hours = parts[0];
+  const minutes = parts[1];
+  const seconds = parts[2];
+
+  let days = Math.floor(hours / 24);
+  hours = hours % 24;
+
+  let weeks = Math.floor(days / 7);
+  days = days % 7;
+
+  const result: string[] = [];
+
+  if (weeks > 0) result.push(`${weeks} week${weeks > 1 ? 's' : ''}`);
+  if (days > 0) result.push(`${days} day${days > 1 ? 's' : ''}`);
+  if (hours > 0) result.push(`${hours} hour${hours > 1 ? 's' : ''}`);
+  if (minutes > 0) result.push(`${minutes} minute${minutes > 1 ? 's' : ''}`);
+  if (seconds > 0 && result.length === 0) {
+    result.push(`${seconds} second${seconds > 1 ? 's' : ''}`);
+  }
+
+  return result.join(' ');
+}
 
   onPageChange(page: number) {
     this.pageNumber = page;

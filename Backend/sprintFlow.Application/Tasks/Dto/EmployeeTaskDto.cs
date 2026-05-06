@@ -14,4 +14,5 @@ public class EmployeeTaskDto
     public DateTime? StartedAt { get; set; }
     public DateTime? CompletedAt { get; set; }
     public string? Duration { get; set; }
+
 }

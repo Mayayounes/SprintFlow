@@ -1,7 +1,7 @@
 @host = https://localhost
 @port = 7000
 @sprintFlow.api_HostAddress = {{host}}:{{port}} 
-@token =CfDJ8EKpNWjzxx5NkmgcT6qQodTS3skALyQ5Ac3_EYMCiAaPdXoeOlFFx3-3DGjUlk1my3LThtVVaG6fbCLoonIRPXiLd4dn76QyZLdgLG_sqAXT7tPjXhLKYjcS_uRCDLijqb0fduaEUMAuM4P1c-lV8r59A-SXVhAPyPERucun1wAqAPZxgC7Db5PZHT2dmNiuPA7Tkjl2DLo2G1oP-qhrRfvKalVVytc6T7IGZ-1K5K3ohyeBepEEh7D6p48WBY_qVhQ6SkENEkR34dMmlcRRhbZW3Hu-5P28mop_YPkH30O1mExI1TRvLvgxmHGiMscn55fN_dmv_BC-Tbg4Q_XOLdah79mlM1YsliKT0ilvGxydHEkOP7DvgDVqj0cNn87SVwIrBiWSJgUQIAoc8-mwnCWyA4uKbBhmvGq6lcgZWFZhtxDg5ok0F2gjYot7FS_2z2TG0MbVXEg15ltZiwH_Flf-LgPB0XI9YB3MiaOOnxBg10RbXFtcEJ0YFZV2fTiU4JHDSbn6LqwjULbF43ZrJbvXSik-qxpJCec2EZX8yNYdAXQRBenybmux7dlcdVvEUNwaBe_oCRnMi4jXfrvhYvqKHPozy8gk6FAhS332gI8XE0wsxw1AzpsFCa_bVTUS8c-b6bPnoHpk4BVRA14qyTpD_27dRi73DZFn2I1yu5FegezrSH__FrbJDLy8p1s31gLzIeCXMnaPuN4FQnEqJj01ZGlPpZJ80YzN6H3aNoiQh3MEr8okhKTZCQaipxLFq9x1cu4t65Kfdq6zA1m2Tsm7ARalSfevtEH4fZCBsQTC
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImNkNTJiMjU3LWI0MTUtNGZhZi04MTZlLWNhYTg3NDFiOWY5MyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Im5vdW5vdUB0ZXN0LmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkxlYWRlciIsImV4cCI6MTc3ODA3NTU5MSwiaXNzIjoiU3ByaW50RmxvdyIsImF1ZCI6IlNwcmludEZsb3dVc2VycyJ9.O38JUJJgHjtQPGjcMIuTR-4Ln3SJQ0cSrGIECqd0IiQ
 ###
 # GET all users
 GET {{sprintFlow.api_HostAddress}}/api/users?role=employee&pageNumber=1&pageSize=10
@@ -9,11 +9,11 @@ GET {{sprintFlow.api_HostAddress}}/api/users?role=employee&pageNumber=1&pageSize
 
 ###
 # login
-POST {{sprintFlow.api_HostAddress}}/api/identity/login
+POST {{sprintFlow.api_HostAddress}}/api/login
 Content-Type : application/json
 {
-    "email": "ola@test.com",
-    "password": "Ola123."
+    "email": "Nounou@test.com",
+    "password": "Nounou123."
 }
 ###
 
@@ -80,3 +80,7 @@ Authorization : Bearer {{token}}
   "Name" : "project",
   "Description" : "project description"
 }
+###
+GET {{sprintFlow.api_HostAddress}}/api/projects/ea2ef45c-980c-414e-e6e9-08de9b31162a/tasks?pageNumber=1&pageSize=10
+content-Type : application/json
+Authorization : Bearer {{token}}

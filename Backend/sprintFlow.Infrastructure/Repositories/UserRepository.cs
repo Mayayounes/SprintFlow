@@ -68,7 +68,7 @@ public class UserRepository(UserManager<User> userManager , AppDbContext dbConte
     public async Task<int> CountEmployeeTasksAsync(Guid userId)
     {
         return await dbContext.Tasks
-            .CountAsync(t => t.EmployeeId == userId.ToString());
+            .CountAsync(t => t.EmployeeId.ToString() == userId.ToString());
     }
     public async Task<int> CountLeaderProjectsAsync(Guid userId)
     {

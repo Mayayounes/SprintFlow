@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using sprintFlow.Application.Common;
 using sprintFlow.Application.Projects.Dto;
 using sprintFlow.Application.Tasks.Dto;
@@ -10,7 +11,7 @@ using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Queries.GetTasksForProject;
 
-public class GetTaskForProjectQueryHandler(IUserContext userContext , ITaskRepository taskRepository ,IUserRepository userRepository) : IRequestHandler<GetTaskForProjectQuery, Result<PagedResults<TaskItemDto>>>
+public class GetTaskForProjectQueryHandler(IMapper mapper ,IUserContext userContext , ITaskRepository taskRepository ,IUserRepository userRepository) : IRequestHandler<GetTaskForProjectQuery, Result<PagedResults<TaskItemDto>>>
 {
     public async Task<Result<PagedResults<TaskItemDto>>> Handle(GetTaskForProjectQuery request, CancellationToken cancellationToken)
     {
@@ -34,32 +35,7 @@ public class GetTaskForProjectQueryHandler(IUserContext userContext , ITaskRepos
             request.PageSize
         );
 
-        var tasksDto = tasks
-                .Where(t => t.ProjectId == request.ProjectId)
-                .Select(task => new TaskItemDto
-                {
-                    Id = task.Id,
-                    Title = task.Title!,
-                    Description = task.Description!,
-                    EmployeeId = task.EmployeeId,
-                    AssignedDate = task.AssignedDate,
-                    Deadline = task.Deadline,
-                    ProjectName = task.Project.Name,
-                    ProjectId = task.ProjectId,
-                    EmployeeName = task.Employee != null ? task.Employee.UserName : null,
-                    Status = task.Status,
-                    StartedAt = task.StartedAt,
-                    CompletedAt = task.CompletedAt,
-                    CompletionStatus =
-    task.CompletedAt == null
-        ? "NotCompleted"
-        : task.CompletedAt.Value < task.Deadline.ToDateTime(TimeOnly.MinValue)
-            ? "Early"
-            : task.CompletedAt.Value <= task.Deadline.ToDateTime(TimeOnly.MinValue)
-                ? "OnTime"
-                : "Late",
-                    Duration = (task.StartedAt != null && task.CompletedAt != null) ? (task.CompletedAt - task.StartedAt)?.ToString(@"hh\:mm\:ss") : null
-                }).ToList();
+        var tasksDto = mapper.Map<List<TaskItemDto>>(tasks);
 
         var result = new PagedResults<TaskItemDto>(
             tasksDto,

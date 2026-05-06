@@ -17,7 +17,7 @@ public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IUse
 
         var EmployeeId = task.EmployeeId;
         var currentUser = userContext.GetCurrentUser();
-        if (currentUser!.Id != EmployeeId)
+        if (currentUser!.Id != EmployeeId.ToString())
             return Result<Guid>.Failure(new List<string> { "You are not authorized to update this task." });
 
         if (task.Status == TaskItemStatus.ToDo && request.Status == 1)
