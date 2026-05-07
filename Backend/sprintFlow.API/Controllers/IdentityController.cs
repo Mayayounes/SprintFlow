@@ -26,7 +26,8 @@ public class IdentityController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
     [HttpDelete("deleteUser/{userId}")]
-    [Authorize(Policy = Policies.AdminOnly)]    public async Task<IActionResult> DeleteUser([FromRoute] string userId)
+    [Authorize(Policy = Policies.AdminOnly)]    
+    public async Task<IActionResult> DeleteUser([FromRoute] string userId)
     {
         var command = new DeleteUserCommand { UserId = userId };
 

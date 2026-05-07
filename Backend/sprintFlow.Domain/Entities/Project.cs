@@ -1,4 +1,6 @@
-﻿namespace sprintFlow.Domain.Entities;
+﻿using sprintFlow.Domain.Constants;
+
+namespace sprintFlow.Domain.Entities;
 
 public class Project
 {
@@ -8,4 +10,5 @@ public class Project
     public ICollection<TaskItem> Tasks { get; set; } = new List<TaskItem>();
     public string ManagerId { get; set; } = null!;
     public User Manager { get; set; } = null!;
+    public ProjectStatus ProjectStatus { get; set; }
 }

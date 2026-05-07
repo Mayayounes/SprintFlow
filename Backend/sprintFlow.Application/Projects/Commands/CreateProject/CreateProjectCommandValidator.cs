@@ -8,7 +8,7 @@ public class CreateProjectCommandValidator : AbstractValidator<CreateProjectComm
     {
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Project name is required")
-            .Length(3, 200).WithMessage("Project name must be between 3 and 200 characters");
+            .Length(3, 200).    WithMessage("Project name must be between 3 and 200 characters");
 
         RuleFor(x => x.Description)
             .NotEmpty().WithMessage("Description is required")
