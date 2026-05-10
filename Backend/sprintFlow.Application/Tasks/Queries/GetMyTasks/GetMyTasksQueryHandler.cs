@@ -28,6 +28,7 @@ public class GetMyTasksQueryHandler(ITaskRepository taskRepository, IUserContext
             Deadline = task.Deadline,
             ProjectId = task.ProjectId,
             ProjectName = task.Project?.Name,
+            ManagerName = task.Project?.Manager?.UserName,
             StartedAt = task.StartedAt,
             CompletedAt = task.CompletedAt,
             StartedAtLocal = task.StartedAt == null

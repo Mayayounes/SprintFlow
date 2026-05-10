@@ -10,18 +10,20 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
     {
         var query = dbContext.Tasks
             .AsNoTracking()
-            .Where(t => t.EmployeeId == userId)
-            .Include(t => t.Project)
-                 .ThenInclude(p => p.Manager)
-             .Include(t => t.Employee)
-            .AsQueryable();
+    .AsSplitQuery()
+    .Where(t => t.EmployeeId == userId);
+
         if (!string.IsNullOrWhiteSpace(status))
         {
             query = query.Where(t => t.Status.ToString() == status);
         }
 
-        var totalCount = await query.CountAsync();
+        query = query
+    .Include(t => t.Project)
+        .ThenInclude(p => p.Manager)
+    .Include(t => t.Employee);
 
+        var totalCount = await query.CountAsync();
         var items = await query
             .OrderByDescending(t => t.AssignedDate)
             .Skip((pageNumber - 1) * pageSize)

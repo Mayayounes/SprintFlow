@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using sprintFlow.API.Middleware;
 using sprintFlow.Application.Extensions;
 using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Infrastructure.Extensions;
+using sprintFlow.Infrastructure.Persistence;
 using sprintFlow.Infrastructure.Repositories;
 using System.Security.Claims;
 using System.Text;
@@ -103,11 +105,16 @@ app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
-    await DatabaseSeeder.SeedAsync(services);
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
 }
 
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await DatabaseSeeder.SeedAsync(services);
+}
 app.Run();
 
 public partial class Program { }

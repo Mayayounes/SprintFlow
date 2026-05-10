@@ -1,0 +1,12 @@
+D:\SprintFlow Project\Backend\sprintFlow.Domain\bin\Release\net10.0\sprintFlow.Domain.deps.json
+D:\SprintFlow Project\Backend\sprintFlow.Domain\bin\Release\net10.0\sprintFlow.Domain.dll
+D:\SprintFlow Project\Backend\sprintFlow.Domain\bin\Release\net10.0\sprintFlow.Domain.pdb
+D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Release\net10.0\sprintFlow.Domain.csproj.AssemblyReference.cache
+D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Release\net10.0\sprintFlow.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Release\net10.0\sprintFlow.Domain.AssemblyInfoInputs.cache
+D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Release\net10.0\sprintFlow.Domain.AssemblyInfo.cs
+D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Release\net10.0\sprintFlow.Domain.csproj.CoreCompileInputs.cache
+D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Release\net10.0\sprintFlow.Domain.dll
+D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Release\net10.0\refint\sprintFlow.Domain.dll
+D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Release\net10.0\sprintFlow.Domain.pdb
+D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Release\net10.0\ref\sprintFlow.Domain.dll
