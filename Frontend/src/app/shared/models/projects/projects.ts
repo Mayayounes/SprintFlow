@@ -7,6 +7,7 @@ import { ErrorModalService } from '../../../core/services/error-modal/error-moda
 import { ToastService } from '../../../core/services/toast/toast';
 import { Pagination } from '../../components/pagination/pagination';
 import { Auth } from '../../../core/services/Auth/auth';
+import { signal, effect } from '@angular/core';
 
 @Component({
   selector: 'app-projects',
@@ -21,7 +22,8 @@ export class Projects implements OnInit {
 
   projects: any[] = [];
 
-  searchPhrase: string = '';
+  // searchPhrase: string = '';
+  searchTask = signal('');
   pageNumber = 1;
   totalPages = 1;
   pageSize = 5;
@@ -45,8 +47,14 @@ export class Projects implements OnInit {
     private errorModal: ErrorModalService,
     private toast: ToastService,
     private cdr: ChangeDetectorRef,
-    private auth : Auth
-  ) { }
+    private auth: Auth
+  ) {
+    effect(() => {
+      this.searchTask();
+      this.pageNumber = 1;
+      this.loadProjects();
+    });
+  }
 
   ngOnInit() {
     console.log('ROLE FROM SERVICE:', this.auth.getRole());
@@ -60,7 +68,7 @@ export class Projects implements OnInit {
   loadProjects() {
     this.loading = true;
 
-    this.api.getProjects(this.searchPhrase, this.pageNumber, this.pageSize)
+    this.api.getProjects(this.searchTask(), this.pageNumber, this.pageSize)
       .subscribe({
         next: (res: any) => {
           const data = res?.data;
@@ -79,18 +87,22 @@ export class Projects implements OnInit {
       });
   }
 
-  onSearchChange() {
-    this.pageNumber = 1;
-    this.loadProjects();
-  }
+  // onSearchChange() {
+  //   this.pageNumber = 1;
+  //   this.loadProjects();
+  // }
 
   highlight(text: string): string {
-    if (!this.searchPhrase) return text;
+    const search = this.searchTask();
 
-    const regex = new RegExp(`(${this.searchPhrase})`, 'gi');
+    if (!search) return text;
+
+    const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escaped})`, 'gi');
+
     return text.replace(
       regex,
-      `<mark class="bg-yellow-300 text-white px-1 rounded">$1</mark>`
+      `<mark class="bg-yellow-200 text-white px-1 rounded">$1</mark>`
     );
   }
 
@@ -146,7 +158,7 @@ export class Projects implements OnInit {
   }
 
   goToTasks(project: any) {
-    this.router.navigate([`/${this.auth.getRole()}/projects`, project.id, 'tasks'],{  state: { projectName: project.name }});
+    this.router.navigate([`/${this.auth.getRole()}/projects`, project.id, 'tasks'], { state: { projectName: project.name } });
   }
 
   toggleMenu(project: any) {

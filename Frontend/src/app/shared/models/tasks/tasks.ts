@@ -7,6 +7,7 @@ import { ErrorModalService } from '../../../core/services/error-modal/error-moda
 import { ToastService } from '../../../core/services/toast/toast';
 import { Pagination } from '../../components/pagination/pagination';
 import { Auth } from '../../../core/services/Auth/auth';
+import { signal, effect } from '@angular/core';
 
 @Component({
   selector: 'app-tasks',
@@ -32,7 +33,8 @@ export class Tasks implements OnInit {
   totalPages = 1;
   pageSize = 5;
   tasksCount = 0;
-  SearchTask: string = '';
+  // SearchTask: string = '';
+  searchTask = signal('');
   pageSizes = [5, 10, 15, 30];
 
   showForm = false;
@@ -54,7 +56,14 @@ export class Tasks implements OnInit {
     private cdr: ChangeDetectorRef,
     private router: Router,
     private auth: Auth
-  ) { }
+  ) {
+    effect(() => {
+      this.searchTask();
+      if (!this.projectId) return;
+      this.pageNumber = 1;
+      this.loadTasks();
+    });
+  }
 
   ngOnInit() {
     console.log('ROLE FROM SERVICE:', this.auth.getRole());
@@ -70,7 +79,7 @@ export class Tasks implements OnInit {
   loadTasks() {
     this.loading = true;
 
-    this.api.getAllTasksForProject(this.projectId, this.SearchTask, this.pageNumber, this.pageSize).subscribe({
+    this.api.getAllTasksForProject(this.projectId, this.searchTask(), this.pageNumber, this.pageSize).subscribe({
       next: (res: any) => {
         const data = res?.data;
 
@@ -196,24 +205,24 @@ export class Tasks implements OnInit {
 
   getStatusColor(status: any) {
 
-  switch (status) {
+    switch (status) {
 
-    case 'toDo':
-    case 0:
-      return 'bg-rose-500/15 text-rose-300 border border-rose-400/30';
+      case 'toDo':
+      case 0:
+        return 'bg-rose-500/15 text-rose-300 border border-rose-400/30';
 
-    case 'inProgress':
-    case 1:
-      return 'bg-amber-500/15 text-amber-300 border border-amber-400/30';
+      case 'inProgress':
+      case 1:
+        return 'bg-amber-500/15 text-amber-300 border border-amber-400/30';
 
-    case 'done':
-    case 2:
-      return 'bg-emerald-500/15 text-emerald-300 border border-emerald-400/30';
+      case 'done':
+      case 2:
+        return 'bg-emerald-500/15 text-emerald-300 border border-emerald-400/30';
 
-    default:
-      return 'bg-slate-500/15 text-slate-300 border border-slate-400/20';
+      default:
+        return 'bg-slate-500/15 text-slate-300 border border-slate-400/20';
+    }
   }
-}
   goBack() {
     const role = this.auth.getRole()?.toLowerCase();
     this.router.navigate([`/${role}/projects`]);
@@ -235,32 +244,32 @@ export class Tasks implements OnInit {
     this.cdr.detectChanges();
   }
 
-formatDuration(duration: string): string {
-  if (!duration) return '';
+  formatDuration(duration: string): string {
+    if (!duration) return '';
 
-  const parts = duration.split(':').map(Number);
-  let hours = parts[0];
-  const minutes = parts[1];
-  const seconds = parts[2];
+    const parts = duration.split(':').map(Number);
+    let hours = parts[0];
+    const minutes = parts[1];
+    const seconds = parts[2];
 
-  let days = Math.floor(hours / 24);
-  hours = hours % 24;
+    let days = Math.floor(hours / 24);
+    hours = hours % 24;
 
-  let weeks = Math.floor(days / 7);
-  days = days % 7;
+    let weeks = Math.floor(days / 7);
+    days = days % 7;
 
-  const result: string[] = [];
+    const result: string[] = [];
 
-  if (weeks > 0) result.push(`${weeks} week${weeks > 1 ? 's' : ''}`);
-  if (days > 0) result.push(`${days} day${days > 1 ? 's' : ''}`);
-  if (hours > 0) result.push(`${hours} hour${hours > 1 ? 's' : ''}`);
-  if (minutes > 0) result.push(`${minutes} minute${minutes > 1 ? 's' : ''}`);
-  if (seconds > 0 && result.length === 0) {
-    result.push(`${seconds} second${seconds > 1 ? 's' : ''}`);
+    if (weeks > 0) result.push(`${weeks} week${weeks > 1 ? 's' : ''}`);
+    if (days > 0) result.push(`${days} day${days > 1 ? 's' : ''}`);
+    if (hours > 0) result.push(`${hours} hour${hours > 1 ? 's' : ''}`);
+    if (minutes > 0) result.push(`${minutes} minute${minutes > 1 ? 's' : ''}`);
+    if (seconds > 0 && result.length === 0) {
+      result.push(`${seconds} second${seconds > 1 ? 's' : ''}`);
+    }
+
+    return result.join(' ');
   }
-
-  return result.join(' ');
-}
 
   onPageChange(page: number) {
     this.pageNumber = page;
@@ -273,15 +282,19 @@ formatDuration(duration: string): string {
     this.loadTasks();
   }
 
-  onSearchChange() {
-    this.pageNumber = 1;
-    this.loadTasks();
-  }
+  // onSearchChange() {
+  //   this.pageNumber = 1;
+  //   this.loadTasks();
+  // }
 
   highlight(text: string): string {
-    if (!this.SearchTask) return text;
+    const search = this.searchTask();
 
-    const regex = new RegExp(`(${this.SearchTask})`, 'gi');
+    if (!search) return text;
+
+    const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escaped})`, 'gi');
+
     return text.replace(
       regex,
       `<mark class="bg-yellow-200 text-white px-1 rounded">$1</mark>`
