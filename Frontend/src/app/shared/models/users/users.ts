@@ -5,7 +5,7 @@ import { Api } from '../../../core/services/api/api';
 import { ErrorModalService } from '../../../core/services/error-modal/error-modal';
 import { Pagination } from '../../components/pagination/pagination';
 import { ToastService } from '../../../core/services/toast/toast';
-
+import { signal } from '@angular/core';
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -15,7 +15,8 @@ import { ToastService } from '../../../core/services/toast/toast';
 })
 export class Users implements OnInit {
 
-  users: any[] = [];
+  // users: any[] = [];
+  users = signal<any[]>([]);
 
   searchRole = '';
   pageNumber = 1;
@@ -53,7 +54,7 @@ export class Users implements OnInit {
   onClickOutside(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (target.closest('button')) return;
-    this.users.forEach(u => u.showMenu = false);
+    this.users().forEach(u => u.showMenu = false);
   }
   loadUsers() {
     this.loading = true;
@@ -62,10 +63,11 @@ export class Users implements OnInit {
       .subscribe({
         next: (res: any) => {
           const data = res?.data;
-          this.users = data?.items ?? [];
-          this.usersCount = data?.totalItemsCount ?? this.users.length;
-          this.employeesCount = this.users.filter((u: any) => u.role === 'Employee').length;
-          this.leadersCount = this.users.filter((u: any) => u.role === 'Leader').length;
+          // this.users = data?.items ?? [];
+          this.users.set(data?.items ?? []);
+          this.usersCount = data?.totalItemsCount ?? this.users().length;
+          this.employeesCount = this.users().filter((u: any) => u.role === 'Employee').length;
+          this.leadersCount = this.users().filter((u: any) => u.role === 'Leader').length;
           this.totalPages = data?.totalPages ?? 1;
           this.loading = false;
           this.cdr.detectChanges();
@@ -178,8 +180,20 @@ export class Users implements OnInit {
       this.api.updateUser(this.currentUserId, payload)
         .subscribe({
           next: () => {
+
+            this.users.update(users =>
+              users.map(user =>
+                user.id === this.currentUserId
+                  ? {
+                    ...user,
+                    userName: this.form.userName,
+                    phoneNumber: this.form.phoneNumber
+                  }
+                  : user
+              )
+            );
+
             this.toast.show('User updated successfully', 'success');
-            this.loadUsers();
             this.closeForm();
           },
           error: (err) => this.handleError(err)
@@ -205,12 +219,15 @@ export class Users implements OnInit {
   }
 
   toggleMenu(user: any) {
-    this.users.forEach(u => {
+    this.users().forEach(u => {
       if (u !== user) u.showMenu = false;
     });
     user.showMenu = !user.showMenu;
   }
 
+  trackByUserId(index: number, user: any) {
+    return user.id;
+  }
   openEditForm(user: any) {
     this.showForm = true;
     this.isEditMode = true;

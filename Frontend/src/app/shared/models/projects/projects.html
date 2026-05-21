@@ -7,9 +7,8 @@
 
   <!-- 🔍 SEARCH BAR -->
   <div class="flex justify-center mb-6">
-    <input [value]="searchTask()" (input)="searchTask.set($any($event.target).value)" placeholder="Search Projects..."
-      class="w-full max-w-md p-3 rounded-xl bg-white/5 border border-white/10
-         backdrop-blur-xl text-white outline-none focus:border-blue-400" />
+        <input [(ngModel)]="searchPhrase" (keyup)="onSearchChange()" placeholder="Search projects..." class="w-full max-w-md p-3 rounded-xl bg-white/5 border border-white/10
+             backdrop-blur-xl text-white outline-none focus:border-blue-400" />
   </div>
 
   <!-- ➕ CREATE BUTTON -->
@@ -18,7 +17,7 @@
     +
   </button>
 
-  <div *ngIf="!loading && projects.length > 0" class="flex justify-end mt-4 mb-2">
+  <div *ngIf="!loading && projects().length > 0" class="flex justify-end mt-4 mb-2">
 
     <div class="flex items-center gap-2">
 
@@ -43,9 +42,9 @@
   </div>
 
   <!-- PROJECT GRID -->
-  <div *ngIf="!loading && projects.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div *ngIf="!loading && projects().length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-    <div *ngFor="let project of projects" class="relative bg-white/5 border border-white/10 backdrop-blur-xl
+    <div *ngFor="let project of projects(); trackBy: trackByProjectId" class="relative bg-white/5 border border-white/10 backdrop-blur-xl
             rounded-2xl p-5 shadow-lg flex flex-col h-full">
       <!-- ⋮ MENU -->
       <div *ngIf="!isAdmin" class="absolute top-3 right-3">
@@ -107,14 +106,12 @@
   </div>
 
   <!-- EMPTY STATE -->
-  <div *ngIf="!loading && projects.length === 0" class="text-center py-20 text-gray-400">
-
+  <div *ngIf="!loading && projects().length === 0" class="text-center py-20 text-gray-400">
     <p class="text-xl font-semibold">No projects found</p>
     <p class="text-sm mt-2">Try a different search keyword</p>
-
   </div>
 
-  <div *ngIf="!loading && projects.length > 0" class="flex flex-col items-center gap-4 mt-8">
+  <div *ngIf="!loading && projects().length > 0" class="flex flex-col items-center gap-4 mt-8">
     <!-- PAGINATION -->
     <app-pagination [pageNumber]="pageNumber" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
     </app-pagination>

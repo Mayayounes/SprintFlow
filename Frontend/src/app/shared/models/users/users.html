@@ -40,7 +40,7 @@
   </div>
 
   <!-- TABLE -->
-  <div *ngIf="!loading && users.length > 0" class="overflow-x-auto bg-white/5 rounded-xl border border-white/10">
+  <div *ngIf="!loading && users().length > 0" class="overflow-x-auto bg-white/5 rounded-xl border border-white/10">
 
     <table class="w-full text-left">
 
@@ -55,7 +55,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let user of users" class="border-t border-white/10 hover:bg-white/5">
+        <tr *ngFor="let user of users(); trackBy: trackByUserId" class="border-t border-white/10 hover:bg-white/5">
 
           <td class="p-3">{{ user.userName }}</td>
           <td class="p-3">{{ user.email }}</td>
@@ -92,7 +92,7 @@
   </div>
 
   <!-- EMPTY -->
-  <div *ngIf="!loading && users.length === 0" class="text-center py-10 text-gray-400">
+  <div *ngIf="!loading && users().length === 0" class="text-center py-10 text-gray-400">
     No users found
   </div>
   <!-- PAGINATION -->
@@ -102,6 +102,7 @@
     </app-pagination>
 
   </div>
+
   <!-- CREATE USER MODAL -->
   <div *ngIf="showForm" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
     <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96">
@@ -112,7 +113,6 @@
       <input [(ngModel)]="form.userName" placeholder="Username"
         class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10" />
 
-      <!-- Email -->
       <!-- Email -->
       <div class="mb-3">
 

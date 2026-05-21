@@ -7,8 +7,7 @@ import { ErrorModalService } from '../../../core/services/error-modal/error-moda
 import { ToastService } from '../../../core/services/toast/toast';
 import { Pagination } from '../../components/pagination/pagination';
 import { Auth } from '../../../core/services/Auth/auth';
-import { signal, effect } from '@angular/core';
-
+import { signal } from '@angular/core';
 @Component({
   selector: 'app-projects',
   imports: [CommonModule, FormsModule, Pagination],
@@ -20,10 +19,10 @@ export class Projects implements OnInit {
 
   isAdminRoute = false;
 
-  projects: any[] = [];
+  // projects: any[] = [];
+  projects = signal<any[]>([]);
 
-  // searchPhrase: string = '';
-  searchTask = signal('');
+  searchPhrase: string = '';
   pageNumber = 1;
   totalPages = 1;
   pageSize = 5;
@@ -48,13 +47,7 @@ export class Projects implements OnInit {
     private toast: ToastService,
     private cdr: ChangeDetectorRef,
     private auth: Auth
-  ) {
-    effect(() => {
-      this.searchTask();
-      this.pageNumber = 1;
-      this.loadProjects();
-    });
-  }
+  ) { }
 
   ngOnInit() {
     console.log('ROLE FROM SERVICE:', this.auth.getRole());
@@ -68,13 +61,14 @@ export class Projects implements OnInit {
   loadProjects() {
     this.loading = true;
 
-    this.api.getProjects(this.searchTask(), this.pageNumber, this.pageSize)
+    this.api.getProjects(this.searchPhrase, this.pageNumber, this.pageSize)
       .subscribe({
         next: (res: any) => {
           const data = res?.data;
 
-          this.projects = data?.items ?? [];
-          this.projectsCount = data?.totalItemsCount ?? this.projects.length;
+          // this.projects = data?.items ?? [];
+          this.projects.set(data?.items ?? []);
+          this.projectsCount = data?.totalItemsCount ?? this.projects().length;
           this.totalPages = data?.totalPages ?? 1;
 
           this.loading = false;
@@ -87,22 +81,17 @@ export class Projects implements OnInit {
       });
   }
 
-  // onSearchChange() {
-  //   this.pageNumber = 1;
-  //   this.loadProjects();
-  // }
+  onSearchChange() {
+    this.pageNumber = 1;
+    this.loadProjects();
+  }
 
   highlight(text: string): string {
-    const search = this.searchTask();
-
-    if (!search) return text;
-
-    const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`(${escaped})`, 'gi');
-
+    if (!this.searchPhrase) return text;
+    const regex = new RegExp(`(${this.searchPhrase})`, 'gi');
     return text.replace(
       regex,
-      `<mark class="bg-yellow-200 text-white px-1 rounded">$1</mark>`
+      `<mark class="bg-yellow-300 text-white px-1 rounded">$1</mark>`
     );
   }
 
@@ -135,8 +124,20 @@ export class Projects implements OnInit {
       this.api.editProject(this.currentProjectId, this.form)
         .subscribe({
           next: () => {
+
+            this.projects.update(projects =>
+              projects.map(project =>
+                project.id === this.currentProjectId
+                  ? {
+                    ...project,
+                    name: this.form.name,
+                    description: this.form.description
+                  }
+                  : project
+              )
+            );
+
             this.toast.show('Project updated successfully', 'success');
-            this.loadProjects();
             this.closeForm();
           },
           error: (err) => this.handleError(err)
@@ -161,8 +162,12 @@ export class Projects implements OnInit {
     this.router.navigate([`/${this.auth.getRole()}/projects`, project.id, 'tasks'], { state: { projectName: project.name } });
   }
 
+  trackByProjectId(index: number, project: any) {
+  return project.id;
+}
+
   toggleMenu(project: any) {
-    this.projects.forEach(p => {
+    this.projects().forEach(p => {
       if (p !== project) p.showMenu = false;
     });
     project.showMenu = !project.showMenu;

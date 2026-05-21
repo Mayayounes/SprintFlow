@@ -13,13 +13,13 @@
   </header>
 
   <!-- SEARCH BAR -->
-  <div class="flex justify-center mb-6"><input [value]="searchTask()"
-      (input)="searchTask.set($any($event.target).value)" placeholder="Search Tasks..." class="w-full max-w-md p-3 rounded-xl bg-white/5 border border-white/10
-         backdrop-blur-xl text-white outline-none focus:border-blue-400" />
+  <div class="flex justify-center mb-6">
+    <input [(ngModel)]="SearchTask" (keyup)="onSearchChange()" placeholder="Search Tasks..." class="w-full max-w-md p-3 rounded-xl bg-white/5 border border-white/10
+             backdrop-blur-xl text-white outline-none focus:border-blue-400" />
   </div>
 
   <!-- PAGE SIZE -->
-  <div *ngIf="!loading && tasks.length > 0" class="flex justify-end mt-4 mb-2">
+  <div *ngIf="!loading && tasks().length > 0" class="flex justify-end mt-4 mb-2">
 
     <div class="flex items-center gap-2">
 
@@ -44,9 +44,9 @@
   </div>
 
   <!-- TASKS GRID -->
-  <div *ngIf="!loading && tasks.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div *ngIf="!loading && tasks().length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-    <div *ngFor="let task of tasks"
+    <div *ngFor="let task of tasks(); trackBy: trackByTaskId"
       class="relative bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col h-full">
       <div class="flex-1">
         <!-- STATUS BAR -->
@@ -86,11 +86,16 @@
         <!-- DATES -->
         <div class="mt-3 text-xs text-gray-400 space-y-1">
 
-          <div>
-            Assigned At: {{ task.assignedDate }}
-          </div>
-          <div>
-            Deadline At: {{ task.deadline }}
+          <div class="flex flex-col text-sm text-gray-300 gap-1">
+            <div>
+              <span class="font-medium text-green-400">Assigned:</span>
+              {{ task.assignedDate }}
+            </div>
+
+            <div>
+              <span class="font-medium text-red-700">Deadline:</span>
+              {{ task.deadline }}
+            </div>
           </div>
           <!-- STARTED AT -->
           <div *ngIf="task.startedAtLocal">
@@ -160,7 +165,7 @@
   </div>
 
   <!-- EMPTY STATE -->
-  <div *ngIf="!loading && tasks.length === 0" class="text-center py-20 text-gray-400">
+  <div *ngIf="!loading && tasks().length === 0" class="text-center py-20 text-gray-400">
 
     <p class="text-xl font-semibold">No Tasks found</p>
     <p class="text-sm mt-2">Try a different search keyword</p>
@@ -168,7 +173,7 @@
   </div>
 
   <!-- PAGINATION -->
-  <div *ngIf="!loading && tasks.length > 0" class="flex flex-col items-center gap-4 mt-8">
+  <div *ngIf="!loading && tasks().length > 0" class="flex flex-col items-center gap-4 mt-8">
     <app-pagination [pageNumber]="pageNumber" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
     </app-pagination>
 

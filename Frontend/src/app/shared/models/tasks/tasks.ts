@@ -20,7 +20,8 @@ export class Tasks implements OnInit {
   projectId!: string;
   projectName: string = '';
 
-  tasks: any[] = [];
+  // tasks: any[] = [];
+  tasks = signal<any[]>([]);
   employees: any[] = [];
 
   selectedTaskId: string | null = null;
@@ -33,8 +34,7 @@ export class Tasks implements OnInit {
   totalPages = 1;
   pageSize = 5;
   tasksCount = 0;
-  // SearchTask: string = '';
-  searchTask = signal('');
+  SearchTask: string = '';
   pageSizes = [5, 10, 15, 30];
 
   showForm = false;
@@ -56,14 +56,7 @@ export class Tasks implements OnInit {
     private cdr: ChangeDetectorRef,
     private router: Router,
     private auth: Auth
-  ) {
-    effect(() => {
-      this.searchTask();
-      if (!this.projectId) return;
-      this.pageNumber = 1;
-      this.loadTasks();
-    });
-  }
+  ) { }
 
   ngOnInit() {
     console.log('ROLE FROM SERVICE:', this.auth.getRole());
@@ -79,12 +72,13 @@ export class Tasks implements OnInit {
   loadTasks() {
     this.loading = true;
 
-    this.api.getAllTasksForProject(this.projectId, this.searchTask(), this.pageNumber, this.pageSize).subscribe({
+    this.api.getAllTasksForProject(this.projectId, this.SearchTask, this.pageNumber, this.pageSize).subscribe({
       next: (res: any) => {
         const data = res?.data;
 
-        this.tasks = data?.items ?? [];
-        this.tasksCount = data?.totalItemsCount ?? this.tasks.length;
+        // this.tasks = data?.items ?? [];
+        this.tasks.set(data?.items ?? []);
+        this.tasksCount = data?.totalItemsCount ?? this.tasks().length;
         this.totalPages = data?.totalPages ?? 1;
 
         this.loading = false;
@@ -147,8 +141,22 @@ export class Tasks implements OnInit {
       this.api.updateTaskDetails(this.projectId, this.currentTaskId, payload)
         .subscribe({
           next: () => {
+
+            this.tasks.update(tasks =>
+              tasks.map(task =>
+                task.id === this.currentTaskId
+                  ? {
+                    ...task,
+                    title: this.form.title,
+                    description: this.form.description,
+                    assignedDate: this.form.assignedDate,
+                    deadline: this.form.deadline
+                  }
+                  : task
+              )
+            );
+
             this.toast.show('Task updated successfully', 'success');
-            this.loadTasks();
             this.showForm = false;
           },
           error: (err) => this.handleError(err)
@@ -181,13 +189,33 @@ export class Tasks implements OnInit {
       { employeeId: this.employeeId }
     ).subscribe({
       next: () => {
+
+        const selectedEmployee = this.employees.find(
+          e => e.id === this.employeeId
+        );
+
+        this.tasks.update(tasks =>
+          tasks.map(task =>
+            task.id === this.selectedTaskId
+              ? {
+                ...task,
+                employeeName: selectedEmployee?.userName,
+                employeeId: this.employeeId
+              }
+              : task
+          )
+        );
+
         this.toast.show('Employee assigned successfully', 'success');
         this.showAssignModal = false;
-        this.loadTasks();
       },
       error: (err) => this.handleError(err)
     });
   }
+
+  trackByTaskId(index: number, task: any) {
+  return task.id;
+}
 
   openAssign(task: any) {
     this.selectedTaskId = task.id;
@@ -197,7 +225,7 @@ export class Tasks implements OnInit {
   }
 
   toggleMenu(task: any) {
-    this.tasks.forEach(p => {
+    this.tasks().forEach(p => {
       if (p !== task) p.showMenu = false;
     });
     task.showMenu = !task.showMenu;
@@ -223,6 +251,7 @@ export class Tasks implements OnInit {
         return 'bg-slate-500/15 text-slate-300 border border-slate-400/20';
     }
   }
+
   goBack() {
     const role = this.auth.getRole()?.toLowerCase();
     this.router.navigate([`/${role}/projects`]);
@@ -282,22 +311,16 @@ export class Tasks implements OnInit {
     this.loadTasks();
   }
 
-  // onSearchChange() {
-  //   this.pageNumber = 1;
-  //   this.loadTasks();
-  // }
-
+  onSearchChange() {
+    this.pageNumber = 1;
+    this.loadTasks();
+  }
   highlight(text: string): string {
-    const search = this.searchTask();
-
-    if (!search) return text;
-
-    const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`(${escaped})`, 'gi');
-
+    if (!this.SearchTask) return text;
+    const regex = new RegExp(`(${this.SearchTask})`, 'gi');
     return text.replace(
       regex,
-      `<mark class="bg-yellow-200 text-white px-1 rounded">$1</mark>`
+      `<mark class="bg-yellow-300 text-white px-1 rounded">$1</mark>`
     );
   }
 }
