@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Api } from '../../core/services/api/api';
 import { ToastService } from '../../core/services/toast/toast';
 import { ErrorModalService } from '../../core/services/error-modal/error-modal';
@@ -43,7 +43,8 @@ export class Employee implements OnInit {
     private api: Api,
     private toast: ToastService,
     private errorModal: ErrorModalService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private zone: NgZone
   ) { }
 
   ngOnInit() {
@@ -51,7 +52,6 @@ export class Employee implements OnInit {
   }
   formatDuration(duration: string): string {
     if (!duration) return '';
-
     const parts = duration.split(':').map(Number);
     let hours = parts[0];
     const minutes = parts[1];
@@ -72,7 +72,6 @@ export class Employee implements OnInit {
     if (seconds > 0 && result.length === 0) {
       result.push(`${seconds} second${seconds > 1 ? 's' : ''}`);
     }
-
     return result.join(' ');
   }
 
@@ -133,30 +132,30 @@ export class Employee implements OnInit {
       this.selectedTask.id,
       payload
     ).subscribe({
-      next: () => {
+      next: (res: any) => {
+
         this.toast.show('Status updated successfully', 'success');
 
-        const task = this.tasks.find(t => t.id === this.selectedTask.id);
+        const taskId = res.data;
 
-        if (task) {
-          task.status = this.selectedTask.status;
-          const now = new Date().toISOString();
-          if (this.selectedTask.status === 'InProgress') {
-            task.startedAtLocal = now;
-            task.startedAt = now;
-          }
-          if (this.selectedTask.status === 'Done') {
-            task.completedAtLocal = now;
-            task.completedAt = now;
-          }
-        }
-        this.showStatusModal = false;
-        this.selectedTask = null;
-        this.cdr.detectChanges();
+        this.api.getMyTasks(this.pageNumber, this.pageSize, this.statusFilter)
+          .subscribe({
+            next: (r: any) => {
+
+              const data = r.data;
+              this.tasks = data.items ?? [];
+
+              this.tasks = [...this.tasks]; // force refresh
+
+              this.showStatusModal = false;
+              this.selectedTask = null;
+
+              this.cdr.detectChanges();
+            }
+          });
       }
-    })
+    });
   }
-
   getStatusColor(status: string) {
     if (status === 'ToDo') return 'bg-red-500';
     if (status === 'InProgress') return 'bg-yellow-500';
