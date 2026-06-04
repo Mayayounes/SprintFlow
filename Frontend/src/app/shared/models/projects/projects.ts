@@ -81,20 +81,6 @@ export class Projects implements OnInit {
       });
   }
 
-  onSearchChange() {
-    this.pageNumber = 1;
-    this.loadProjects();
-  }
-
-  highlight(text: string): string {
-    if (!this.searchPhrase) return text;
-    const regex = new RegExp(`(${this.searchPhrase})`, 'gi');
-    return text.replace(
-      regex,
-      `<mark class="bg-yellow-300 text-white px-1 rounded">$1</mark>`
-    );
-  }
-
   openCreateForm() {
     this.showForm = true;
     this.isEditMode = false;
@@ -171,6 +157,20 @@ export class Projects implements OnInit {
       if (p !== project) p.showMenu = false;
     });
     project.showMenu = !project.showMenu;
+  }
+
+  onSearchChange() {
+    this.pageNumber = 1;
+    this.loadProjects();
+  }
+
+  highlight(text: string): string {
+    if (!this.searchPhrase) return text;
+    const regex = new RegExp(`(${this.searchPhrase})`, 'gi');
+    return text.replace(
+      regex,
+      `<mark class="bg-yellow-300 text-white px-1 rounded">$1</mark>`
+    );
   }
 
   onPageChange(page: number) {

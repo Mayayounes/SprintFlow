@@ -97,8 +97,8 @@
             {{ task.completedAtLocal | date:'dd/MM/yyyy - HH:mm' }}
           </div>
 
-          <div *ngIf="task.duration" class="text-purple-300">
-            Duration: {{ formatDuration(task.duration) }}
+          <div *ngIf="task.durationInSeconds" class="text-purple-300">
+            Duration: {{ formatDuration(task.durationInSeconds) }}
           </div>
 
         </div>

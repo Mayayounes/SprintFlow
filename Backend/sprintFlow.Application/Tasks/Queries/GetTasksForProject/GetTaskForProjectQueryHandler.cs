@@ -59,7 +59,7 @@ public class GetTaskForProjectQueryHandler(IMapper mapper ,IUserContext userCont
             Deadline = task.Deadline,
             EmployeeId = task.EmployeeId,
             ProjectId = task.ProjectId,
-            ProjectName = task.Project?.Name,
+            ProjectName = task.Project.Name,
             EmployeeName = task.Employee?.UserName,
 
             StartedAt = task.StartedAt,
@@ -73,7 +73,7 @@ public class GetTaskForProjectQueryHandler(IMapper mapper ,IUserContext userCont
                 ? null
                 : TimeZoneHelper.ToUserTime(task.CompletedAt.Value, userTimeZone),
 
-            Duration = task.Duration,
+            DurationInSeconds = task.DurationInSeconds,
             CompletionStatus = task.CompletionStatus
         }).ToList();
 

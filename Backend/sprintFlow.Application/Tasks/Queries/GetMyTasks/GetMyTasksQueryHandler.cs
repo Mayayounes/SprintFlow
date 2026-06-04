@@ -37,7 +37,7 @@ public class GetMyTasksQueryHandler(ITaskRepository taskRepository, IUserContext
             CompletedAtLocal = task.CompletedAt == null
                 ? null
                 : TimeZoneHelper.ToUserTime(task.CompletedAt.Value, userTimeZone),
-            Duration = task.Duration,
+            DurationInSeconds = task.DurationInSeconds,
         }).ToList();
 
         var result = new PagedResults<EmployeeTaskDto>(

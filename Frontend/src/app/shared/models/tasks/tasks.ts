@@ -7,7 +7,8 @@ import { ErrorModalService } from '../../../core/services/error-modal/error-moda
 import { ToastService } from '../../../core/services/toast/toast';
 import { Pagination } from '../../components/pagination/pagination';
 import { Auth } from '../../../core/services/Auth/auth';
-import { signal, effect } from '@angular/core';
+import { signal } from '@angular/core';
+import { UiHelperService } from '../../../core/services/ui-helper/ui-helper';
 
 @Component({
   selector: 'app-tasks',
@@ -22,6 +23,7 @@ export class Tasks implements OnInit {
 
   // tasks: any[] = [];
   tasks = signal<any[]>([]);
+
   employees: any[] = [];
 
   selectedTaskId: string | null = null;
@@ -55,7 +57,8 @@ export class Tasks implements OnInit {
     private toast: ToastService,
     private cdr: ChangeDetectorRef,
     private router: Router,
-    private auth: Auth
+    private auth: Auth,
+    private uiHelper: UiHelperService,
   ) { }
 
   ngOnInit() {
@@ -214,8 +217,8 @@ export class Tasks implements OnInit {
   }
 
   trackByTaskId(index: number, task: any) {
-  return task.id;
-}
+    return task.id;
+  }
 
   openAssign(task: any) {
     this.selectedTaskId = task.id;
@@ -273,32 +276,6 @@ export class Tasks implements OnInit {
     this.cdr.detectChanges();
   }
 
-  formatDuration(duration: string): string {
-    if (!duration) return '';
-
-    const parts = duration.split(':').map(Number);
-    let hours = parts[0];
-    const minutes = parts[1];
-    const seconds = parts[2];
-
-    let days = Math.floor(hours / 24);
-    hours = hours % 24;
-
-    let weeks = Math.floor(days / 7);
-    days = days % 7;
-
-    const result: string[] = [];
-
-    if (weeks > 0) result.push(`${weeks} week${weeks > 1 ? 's' : ''}`);
-    if (days > 0) result.push(`${days} day${days > 1 ? 's' : ''}`);
-    if (hours > 0) result.push(`${hours} hour${hours > 1 ? 's' : ''}`);
-    if (minutes > 0) result.push(`${minutes} minute${minutes > 1 ? 's' : ''}`);
-    if (seconds > 0 && result.length === 0) {
-      result.push(`${seconds} second${seconds > 1 ? 's' : ''}`);
-    }
-
-    return result.join(' ');
-  }
 
   onPageChange(page: number) {
     this.pageNumber = page;
@@ -315,12 +292,13 @@ export class Tasks implements OnInit {
     this.pageNumber = 1;
     this.loadTasks();
   }
-  highlight(text: string): string {
-    if (!this.SearchTask) return text;
-    const regex = new RegExp(`(${this.SearchTask})`, 'gi');
-    return text.replace(
-      regex,
-      `<mark class="bg-yellow-300 text-white px-1 rounded">$1</mark>`
-    );
-  }
+
+
+  formatDuration(seconds: number | null) {
+  return this.uiHelper.formatDuration(seconds);
+}
+
+highlight(text: string) {
+  return this.uiHelper.highlight(text, this.SearchTask);
+}
 }

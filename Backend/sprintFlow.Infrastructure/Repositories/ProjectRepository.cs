@@ -70,4 +70,22 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
             .Include(p => p.Tasks)
             .ToListAsync();
     }
+    public async Task UpdateStatusAsync(Guid projectId)
+    {
+        var allDone = await dbContext.Tasks
+            .Where(t => t.ProjectId == projectId)
+            .AllAsync(t => t.Status == TaskItemStatus.Done);
+
+        var project = new Project { Id = projectId };
+
+        dbContext.Projects.Attach(project);
+
+        project.ProjectStatus = allDone
+            ? ProjectStatus.Done
+            : ProjectStatus.Pending;
+
+        dbContext.Entry(project).Property(p => p.ProjectStatus).IsModified = true;
+
+        await dbContext.SaveChangesAsync();
+    }
 }

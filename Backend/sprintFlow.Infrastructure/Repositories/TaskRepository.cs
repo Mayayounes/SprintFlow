@@ -77,4 +77,12 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
         dbContext.Tasks.Update(task);
         await dbContext.SaveChangesAsync();
     }
+    public async Task<List<TaskItem>> GetAssignedTasksWithEmployeesAsync()
+    {
+        return await dbContext.Tasks
+            .AsNoTracking()
+            .Include(t => t.Employee)
+            .Where(t => t.EmployeeId != null)
+            .ToListAsync();
+    }
 }

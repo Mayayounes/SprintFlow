@@ -7,7 +7,7 @@ using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Commands.UpdateTaskStatus;
 
-public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IUserContext userContext) : IRequestHandler<UpdateTaskStatusCommand, Result<Guid>>
+public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IProjectRepository projectRepository ,IUserContext userContext) : IRequestHandler<UpdateTaskStatusCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(UpdateTaskStatusCommand request, CancellationToken cancellationToken)
     {
@@ -17,7 +17,7 @@ public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IUse
 
         var EmployeeId = task.EmployeeId;
         var currentUser = userContext.GetCurrentUser();
-        if (currentUser!.Id != EmployeeId.ToString())
+        if (currentUser!.Id != EmployeeId?.ToString())
             return Result<Guid>.Failure(new List<string> { "You are not authorized to update this task." });
 
         if (task.Status == TaskItemStatus.ToDo && request.Status == 1)
@@ -33,6 +33,7 @@ public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IUse
         task.Status = (TaskItemStatus)request.Status!.Value;
 
         await taskRepository.UpdateAsync(task);
+        await projectRepository.UpdateStatusAsync(task.ProjectId);
         return Result<Guid>.Success(task.Id, "Task updated successfully");
 
     }

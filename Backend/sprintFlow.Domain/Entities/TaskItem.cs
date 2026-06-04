@@ -16,8 +16,13 @@ public class TaskItem
     public Guid ProjectId { get; set; }
     public DateTime? StartedAt { get; set; }
     public DateTime? CompletedAt { get; set; }
+
     [NotMapped]
-    public string? Duration => (StartedAt != null && CompletedAt != null) ? (CompletedAt - StartedAt)?.ToString(@"hh\:mm\:ss"): null;
+    public long? DurationInSeconds =>
+    StartedAt != null && CompletedAt != null
+        ? (long?)(CompletedAt - StartedAt)?.TotalSeconds
+        : null;
+
     [NotMapped]
     public TaskCompletionStatus CompletionStatus
     {
@@ -26,12 +31,12 @@ public class TaskItem
             if (CompletedAt == null)
                 return TaskCompletionStatus.NotCompleted;
 
-            var deadlineDateTime = Deadline.ToDateTime(TimeOnly.MinValue);
+            var completedDate = DateOnly.FromDateTime(CompletedAt.Value);
 
-            if (CompletedAt.Value < deadlineDateTime)
+            if (completedDate < Deadline)
                 return TaskCompletionStatus.Early;
 
-            if (CompletedAt.Value <= deadlineDateTime)
+            if (completedDate == Deadline)
                 return TaskCompletionStatus.OnTime;
 
             return TaskCompletionStatus.Late;

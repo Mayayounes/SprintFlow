@@ -5,6 +5,7 @@ import { ErrorModalService } from '../../core/services/error-modal/error-modal';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Pagination } from '../../shared/components/pagination/pagination';
+import { UiHelperService } from '../../core/services/ui-helper/ui-helper';
 
 @Component({
   selector: 'app-employee',
@@ -44,36 +45,17 @@ export class Employee implements OnInit {
     private toast: ToastService,
     private errorModal: ErrorModalService,
     private cdr: ChangeDetectorRef,
-    private zone: NgZone
+    private uiHelper: UiHelperService,
+
   ) { }
 
   ngOnInit() {
     this.loadMyTasks();
   }
-  formatDuration(duration: string): string {
-    if (!duration) return '';
-    const parts = duration.split(':').map(Number);
-    let hours = parts[0];
-    const minutes = parts[1];
-    const seconds = parts[2];
 
-    let days = Math.floor(hours / 24);
-    hours = hours % 24;
-
-    let weeks = Math.floor(days / 7);
-    days = days % 7;
-
-    const result: string[] = [];
-
-    if (weeks > 0) result.push(`${weeks} week${weeks > 1 ? 's' : ''}`);
-    if (days > 0) result.push(`${days} day${days > 1 ? 's' : ''}`);
-    if (hours > 0) result.push(`${hours} hour${hours > 1 ? 's' : ''}`);
-    if (minutes > 0) result.push(`${minutes} minute${minutes > 1 ? 's' : ''}`);
-    if (seconds > 0 && result.length === 0) {
-      result.push(`${seconds} second${seconds > 1 ? 's' : ''}`);
-    }
-    return result.join(' ');
-  }
+  formatDuration(seconds: number | null) {
+  return this.uiHelper.formatDuration(seconds);
+}
 
   loadMyTasks() {
     this.loading = true;
@@ -95,31 +77,23 @@ export class Employee implements OnInit {
         }
       });
   }
-
-  // FILTER STATUS
   onStatusChange() {
     this.pageNumber = 1;
     this.loadMyTasks();
   }
-
-  // PAGINATION
   onPageChange(page: number) {
     this.pageNumber = page;
     this.loadMyTasks();
   }
-
   onPageSizeChange(size: number) {
     this.pageSize = size;
     this.pageNumber = 1;
     this.loadMyTasks();
   }
-
-  // STATUS MODAL
   openStatusModal(task: any) {
     this.selectedTask = { ...task };
     this.showStatusModal = true;
   }
-
   updateStatus() {
     if (!this.selectedTask) return;
 
@@ -161,7 +135,6 @@ export class Employee implements OnInit {
     if (status === 'InProgress') return 'bg-yellow-500';
     return 'bg-green-500';
   }
-
   private handleError(err: any) {
     const errors = err?.error?.errors;
     this.errorModal.show(errors || 'Unexpected error occurred');
