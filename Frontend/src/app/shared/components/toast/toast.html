@@ -5,7 +5,8 @@
     class="relative overflow-hidden rounded-lg shadow-lg p-4 text-white"
     [ngClass]="{
       'bg-green-600': toast.type === 'success',
-      'bg-red-600': toast.type === 'error'
+      'bg-red-600': toast.type === 'error',
+      'bg-yellow-400': toast.type === 'warning'
     }">
 
     <p class="font-semibold">{{ toast.message }}</p>

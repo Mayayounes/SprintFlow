@@ -136,11 +136,15 @@
 
           <span class="text-xs text-gray-400">Timing</span>
 
-          <span class="px-3 py-1 rounded-full text-xs font-medium" [ngClass]="task.completionStatus === 'Late'
-      ? 'bg-red-500/20 text-red-300'
-      : task.completionStatus === 'Early'
-        ? 'bg-blue-500/20 text-blue-300'
-        : 'bg-green-500/20 text-green-300'">
+          <span class="px-3 py-1 rounded-full text-xs font-medium" [ngClass]="
+          task.completionStatus == 'notCompleted'
+          ? 'bg-blue-500/20 text-gray-400'
+          : task.completionStatus === 'Early'
+          ? 'bg-blue-500/20 text-blue-300'
+          :  task.completionStatus === 'Late'
+          ? 'bg-red-500/20 text-red-300'
+        : 'bg-green-500/20 text-green-300'
+        ">
 
             {{ task.completionStatus }}
 

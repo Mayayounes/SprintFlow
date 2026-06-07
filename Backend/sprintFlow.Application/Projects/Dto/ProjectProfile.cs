@@ -19,11 +19,9 @@ public class ProjectProfile : Profile
                 opt => opt.MapFrom(src => ProjectStatus.Pending));
 
         CreateMap<Project, SingleProjectDto>();
-        //CreateMap<SingleProjectDto, GetProjectByIdQuery>();
-        
         CreateMap<CreateProjectCommand, Project>();
         CreateMap<UpdateProjectCommand, Project>();
-        
+
     }
 
 }

@@ -17,5 +17,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .WithOne(t => t.Employee)
             .HasForeignKey(t => t.EmployeeId)
             .OnDelete(DeleteBehavior.SetNull);
+
+        builder.Property(x => x.RowVersion)
+            .IsRowVersion();
     }
 }

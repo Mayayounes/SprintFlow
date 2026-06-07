@@ -37,7 +37,8 @@ export class Projects implements OnInit {
 
   form = {
     name: '',
-    description: ''
+    description: '',
+    rowVersion: ''
   };
 
   constructor(
@@ -86,7 +87,7 @@ export class Projects implements OnInit {
     this.isEditMode = false;
     this.currentProjectId = null;
 
-    this.form = { name: '', description: '' };
+    this.form = { name: '', description: '', rowVersion: '' };
   }
 
   openEditForm(project: any) {
@@ -96,7 +97,8 @@ export class Projects implements OnInit {
 
     this.form = {
       name: project.name,
-      description: project.description
+      description: project.description,
+      rowVersion: project.rowVersion
     };
   }
 
@@ -109,24 +111,44 @@ export class Projects implements OnInit {
 
       this.api.editProject(this.currentProjectId, this.form)
         .subscribe({
-          next: () => {
+          next: (res: any) => {
+
+            const updated = res.data;
 
             this.projects.update(projects =>
-              projects.map(project =>
-                project.id === this.currentProjectId
+              projects.map(p =>
+                p.id === this.currentProjectId
                   ? {
-                    ...project,
-                    name: this.form.name,
-                    description: this.form.description
+                    ...p,
+                    name: updated.name,
+                    description: updated.description,
+                    rowVersion: updated.rowVersion
                   }
-                  : project
+                  : p
               )
             );
-
             this.toast.show('Project updated successfully', 'success');
             this.closeForm();
           },
-          error: (err) => this.handleError(err)
+          error: (err) => {
+
+            if (err.error?.message === 'ConcurrencyConflict') {
+              const latest = err.error.data;
+              this.form = {
+                name: latest.name,
+                description: latest.description,
+                rowVersion: latest.rowVersion
+              };
+              this.toast.show(
+                'Project was modified by another user. Latest version loaded.',
+                'warning'
+              );
+
+              return;
+            }
+
+            this.handleError(err);
+          }
         });
 
     } else {
@@ -149,8 +171,8 @@ export class Projects implements OnInit {
   }
 
   trackByProjectId(index: number, project: any) {
-  return project.id;
-}
+    return project.id;
+  }
 
   toggleMenu(project: any) {
     this.projects().forEach(p => {

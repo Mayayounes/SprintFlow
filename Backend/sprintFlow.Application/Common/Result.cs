@@ -12,4 +12,14 @@ public class Result<T>
 
     public static Result<T> Failure(List<string> errors, string? message = null)
         => new Result<T> { IsSuccess = false, Errors = errors, Message = message };
+    public static Result<T> Failure(List<string> errors,string? message,T? data)
+    {
+        return new Result<T>
+        {
+            IsSuccess = false,
+            Errors = errors,
+            Message = message,
+            Data = data
+        };
+    }
 }

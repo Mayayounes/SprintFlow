@@ -76,7 +76,12 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
             .Where(t => t.ProjectId == projectId)
             .AllAsync(t => t.Status == TaskItemStatus.Done);
 
-        var project = new Project { Id = projectId };
+        var project = await dbContext.Projects
+            .AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Id == projectId);
+
+        if (project == null)
+            return;
 
         dbContext.Projects.Attach(project);
 
@@ -87,5 +92,23 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
         dbContext.Entry(project).Property(p => p.ProjectStatus).IsModified = true;
 
         await dbContext.SaveChangesAsync();
+    }
+
+    public Task SetOriginalRowVersion(
+    Project project,
+    byte[] rowVersion)
+    {
+        dbContext.Entry(project)
+            .Property(p => p.RowVersion)
+            .OriginalValue = rowVersion;
+
+        return Task.CompletedTask;
+    }
+    public async Task<Project?> GetDatabaseValues(Project project)
+    {
+        var values = await dbContext.Entry(project)
+            .GetDatabaseValuesAsync();
+
+        return values?.ToObject() as Project;
     }
 }

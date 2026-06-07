@@ -21,4 +21,6 @@ public class TaskItemDto
     public TaskCompletionStatus CompletionStatus { get; set; } = TaskCompletionStatus.NotCompleted;
     public DateTime? StartedAtLocal { get; set; }
     public DateTime? CompletedAtLocal { get; set; }
+    public string RowVersion { get; set; } = default!;
+
 }

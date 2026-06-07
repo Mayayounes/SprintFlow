@@ -35,18 +35,27 @@ public class GetAllProjectsQueryHandler(IUserContext userContext, IProjectReposi
             managerIdFilter
         );
 
+        foreach (var p in projects)
+        {
+            Console.WriteLine(
+                p.RowVersion == null
+                    ? "NULL"
+                    : Convert.ToBase64String(p.RowVersion)
+            );
+        }
         var projectsDto = projects.Select(p => new ProjectDto
         {
             Id = p.Id,
             Name = p.Name,
-            Description = p.Description,
+            Description = p.Description!,
             ManagerId = p.ManagerId,
             ManagerName = p.Manager.UserName!,
 
+            RowVersion = Convert.ToBase64String(p.RowVersion),
             ProjectStatus = p.Tasks.Any() &&
-                     p.Tasks.All(t => t.Status == TaskItemStatus.Done)
-                ? ProjectStatus.Done
-                : ProjectStatus.Pending
+             p.Tasks.All(t => t.Status == TaskItemStatus.Done)
+        ? ProjectStatus.Done
+        : ProjectStatus.Pending
         }).ToList();
 
         var pagedResults = new PagedResults<ProjectDto>(projectsDto, totalCount, request.PageNumber, request.PageSize);

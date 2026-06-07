@@ -45,5 +45,8 @@ internal class TaskItemConfiguration : IEntityTypeConfiguration<TaskItem>
 
         builder.Property(t => t.CompletedAt)
             .IsRequired(false);
+
+        builder.Property(x => x.RowVersion)
+       .IsRowVersion();
     }
 }

@@ -12,6 +12,6 @@ public class SingleProjectDto
     public string ManagerId { get; set; } = default!;
     public ICollection<TaskItemDto> Tasks { get; set; } = new List<TaskItemDto>();
     public ProjectStatus ProjectStatus { get; set; }
-
+    public string RowVersion { get; set; } = default!;
 
 }

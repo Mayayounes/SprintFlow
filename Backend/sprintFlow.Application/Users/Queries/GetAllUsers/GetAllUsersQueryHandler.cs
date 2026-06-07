@@ -37,6 +37,7 @@ public class GetAllUsersQueryHandler(IUserRepository userRepository, IRoleReposi
                 Email = user.Email!,
                 Role = parsedRole,
                 PhoneNumber = user.PhoneNumber!,
+                RowVersion = Convert.ToBase64String(user.RowVersion),
                 Id = Guid.Parse(user.Id),
             };
         }).ToList();

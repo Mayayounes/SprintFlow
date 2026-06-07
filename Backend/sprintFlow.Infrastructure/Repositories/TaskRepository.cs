@@ -85,4 +85,19 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
             .Where(t => t.EmployeeId != null)
             .ToListAsync();
     }
+    public Task SetOriginalRowVersion(TaskItem task,byte[] rowVersion)
+    {
+        dbContext.Entry(task)
+            .Property(p => p.RowVersion)
+            .OriginalValue = rowVersion;
+
+        return Task.CompletedTask;
+    }
+    public async Task<TaskItem?> GetDatabaseValues(TaskItem task)
+    {
+        var values = await dbContext.Entry(task)
+            .GetDatabaseValuesAsync();
+
+        return values?.ToObject() as TaskItem;
+    }
 }

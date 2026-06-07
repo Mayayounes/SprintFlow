@@ -1,4 +1,5 @@
 ﻿using sprintFlow.Domain.Constants;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace sprintFlow.Domain.Entities;
@@ -42,4 +43,7 @@ public class TaskItem
             return TaskCompletionStatus.Late;
         }
     }
+
+    [Timestamp]
+    public byte[] RowVersion { get; set; } = default!;
 }

@@ -26,5 +26,8 @@ public class ProjectConfiguration : IEntityTypeConfiguration<Project>
             .WithOne(t => t.Project)
             .HasForeignKey(t => t.ProjectId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Property(x => x.RowVersion)
+       .IsRowVersion();
     }
 }

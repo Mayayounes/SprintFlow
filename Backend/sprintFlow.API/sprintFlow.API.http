@@ -1,7 +1,7 @@
 @host = https://localhost
 @port = 7000
 @sprintFlow.api_HostAddress = {{host}}:{{port}} 
-@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImNkNTJiMjU3LWI0MTUtNGZhZi04MTZlLWNhYTg3NDFiOWY5MyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Im5vdW5vdUB0ZXN0LmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkxlYWRlciIsImV4cCI6MTc3ODA3NTU5MSwiaXNzIjoiU3ByaW50RmxvdyIsImF1ZCI6IlNwcmludEZsb3dVc2VycyJ9.O38JUJJgHjtQPGjcMIuTR-4Ln3SJQ0cSrGIECqd0IiQ
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE1NDkyNzE2LTAxNTUtNDhmNS05YTNkLTliMmY1NTJiMmJjYSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Im9sYUBzcHJpbnRmbG93LmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkxlYWRlciIsImV4cCI6MTc4MDgzNDk4NiwiaXNzIjoiU3ByaW50RmxvdyIsImF1ZCI6IlNwcmludEZsb3dVc2VycyJ9.QSwd8XYRMXocHHJ6J28guKJMYbBovZ4P79g25do9cDc
 ###
 # GET all users
 GET {{sprintFlow.api_HostAddress}}/api/users?role=employee&pageNumber=1&pageSize=10
@@ -12,8 +12,8 @@ GET {{sprintFlow.api_HostAddress}}/api/users?role=employee&pageNumber=1&pageSize
 POST {{sprintFlow.api_HostAddress}}/api/login
 Content-Type : application/json
 {
-    "email": "Nounou@test.com",
-    "password": "Nounou123."
+    "email": "ola@sprintflow.com",
+    "password": "P@ssw0rd!"
 }
 ###
 
@@ -63,7 +63,7 @@ Authorization : Bearer {{token}}
 }
 ###
 # show all projects
-GET {{sprintFlow.api_HostAddress}}/api/projects/searchPhrase=task?pageNumber=1&pageSize=10
+GET {{sprintFlow.api_HostAddress}}/api/projects?pageNumber=1&pageSize=10
 content-Type : application/json
 Authorization : Bearer {{token}}
 ###

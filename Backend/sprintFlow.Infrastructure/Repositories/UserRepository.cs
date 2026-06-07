@@ -81,4 +81,33 @@ public class UserRepository(UserManager<User> userManager , AppDbContext dbConte
         return result.Succeeded;
     }
 
+    public async Task<User?> GetByIdAsync(string userId)
+    {
+        return await dbContext.Users
+            .FirstOrDefaultAsync(u => u.Id == userId);
+    }
+    public async Task<(bool success, User? user, string? error)>
+    UpdateUserAsync(User user, byte[] submittedRowVersion)
+    {
+        dbContext.Entry(user)
+            .Property(u => u.RowVersion)
+            .OriginalValue = submittedRowVersion;
+
+        try
+        {
+            await dbContext.SaveChangesAsync();
+
+            return (true, user, null);
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            dbContext.Entry(user).State = EntityState.Detached;
+
+            var latest = await dbContext.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Id == user.Id);
+
+            return (false, latest, "ConcurrencyConflict");
+        }
+    }
 }

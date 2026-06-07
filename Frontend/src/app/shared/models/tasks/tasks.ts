@@ -48,6 +48,7 @@ export class Tasks implements OnInit {
     description: '',
     assignedDate: '',
     deadline: '',
+    rowVersion: ''
   };
 
   constructor(
@@ -114,6 +115,7 @@ export class Tasks implements OnInit {
       description: '',
       assignedDate: '',
       deadline: '',
+      rowVersion: ''
     };
   }
 
@@ -127,33 +129,37 @@ export class Tasks implements OnInit {
       description: task.description,
       assignedDate: task.assignedDate,
       deadline: task.deadline,
+      rowVersion: task.rowVersion
     };
   }
-
   submit() {
 
     const payload = {
       title: this.form.title,
       description: this.form.description,
       assignedDate: this.form.assignedDate || null,
-      deadline: this.form.deadline || null
+      deadline: this.form.deadline || null,
+      rowVersion: this.form.rowVersion
     };
 
     if (this.isEditMode && this.currentTaskId) {
 
       this.api.updateTaskDetails(this.projectId, this.currentTaskId, payload)
         .subscribe({
-          next: () => {
+          next: (res: any) => {
+
+            const updated = res.data;
 
             this.tasks.update(tasks =>
               tasks.map(task =>
                 task.id === this.currentTaskId
                   ? {
                     ...task,
-                    title: this.form.title,
-                    description: this.form.description,
-                    assignedDate: this.form.assignedDate,
-                    deadline: this.form.deadline
+                    title: updated.title,
+                    description: updated.description,
+                    assignedDate: updated.assignedDate,
+                    deadline: updated.deadline,
+                    rowVersion: updated.rowVersion
                   }
                   : task
               )
@@ -162,7 +168,31 @@ export class Tasks implements OnInit {
             this.toast.show('Task updated successfully', 'success');
             this.showForm = false;
           },
-          error: (err) => this.handleError(err)
+
+          error: (err) => {
+
+            if (err.error?.message === 'ConcurrencyConflict') {
+
+              const latest = err.error.data;
+
+              this.form = {
+                title: latest.title,
+                description: latest.description,
+                assignedDate: latest.assignedDate,
+                deadline: latest.deadline,
+                rowVersion: latest.rowVersion
+              };
+
+              this.toast.show(
+                'Task was modified by another user. Latest version loaded.',
+                'warning'
+              );
+
+              return;
+            }
+
+            this.handleError(err);
+          }
         });
 
     } else {
@@ -179,7 +209,6 @@ export class Tasks implements OnInit {
 
     }
   }
-
   assignEmployee() {
     if (!this.employeeId || !this.selectedTaskId) {
       this.errorModal.show("Please select an employee");
@@ -295,10 +324,10 @@ export class Tasks implements OnInit {
 
 
   formatDuration(seconds: number | null) {
-  return this.uiHelper.formatDuration(seconds);
-}
+    return this.uiHelper.formatDuration(seconds);
+  }
 
-highlight(text: string) {
-  return this.uiHelper.highlight(text, this.SearchTask);
-}
+  highlight(text: string) {
+    return this.uiHelper.highlight(text, this.SearchTask);
+  }
 }

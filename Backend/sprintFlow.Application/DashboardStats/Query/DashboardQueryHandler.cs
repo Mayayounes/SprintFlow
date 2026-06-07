@@ -13,6 +13,7 @@ public class DashboardQueryHandler(IUserRepository userRepository,IProjectReposi
     {
         var currentUser = userContext.GetCurrentUser();
 
+        
         var userId = Guid.Parse(currentUser!.Id);
 
         var isLeader = await userRepository.IsUserInRoleAsync(userId, UserRole.Leader);

@@ -16,4 +16,6 @@ public interface IProjectRepository
     Task<List<Project>> GetByManagerIdWithTasksAsync(string managerId);
     Task<List<Project>> GetAllWithTasksAsync();
     Task UpdateStatusAsync(Guid projectId);
+    Task SetOriginalRowVersion(Project project, byte[] rowVersion);
+    Task<Project?> GetDatabaseValues(Project project);
 }

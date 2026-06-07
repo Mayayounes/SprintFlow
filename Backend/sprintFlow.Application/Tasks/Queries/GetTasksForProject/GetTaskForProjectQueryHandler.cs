@@ -35,18 +35,6 @@ public class GetTaskForProjectQueryHandler(IMapper mapper ,IUserContext userCont
             request.PageSize
         );
 
-        //var tasksDto = mapper.Map<List<TaskItemDto>>(tasks);
-
-        //var userTimeZone = currentUser!.TimeZoneId;
-        //foreach (var task in tasksDto)
-        //{
-        //    if (task.StartedAt != null)
-        //        task.StartedAtLocal = TimeZoneHelper.ToUserTime(task.StartedAt.Value, userTimeZone);
-
-        //    if (task.CompletedAt != null)
-        //        task.CompletedAtLocal = TimeZoneHelper.ToUserTime(task.CompletedAt.Value, userTimeZone);
-        //}
-
         var userTimeZone = currentUser!.TimeZoneId;
 
         var tasksDto = tasks.Select(task => new TaskItemDto
@@ -61,7 +49,7 @@ public class GetTaskForProjectQueryHandler(IMapper mapper ,IUserContext userCont
             ProjectId = task.ProjectId,
             ProjectName = task.Project.Name,
             EmployeeName = task.Employee?.UserName,
-
+            RowVersion = Convert.ToBase64String(task.RowVersion),
             StartedAt = task.StartedAt,
             CompletedAt = task.CompletedAt,
 

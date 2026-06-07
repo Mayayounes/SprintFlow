@@ -39,7 +39,8 @@ export class Users implements OnInit {
     email: '',
     password: '',
     phoneNumber: '',
-    role: ''
+    role: '',
+    rowVersion: ''
   };
 
   constructor(private api: Api, private cdr: ChangeDetectorRef, private errorModal: ErrorModalService, private toast: ToastService) { }
@@ -152,7 +153,8 @@ export class Users implements OnInit {
       email: '',
       password: '',
       phoneNumber: '',
-      role: ''
+      role: '',
+      rowVersion: ''
     };
   }
 
@@ -174,20 +176,24 @@ export class Users implements OnInit {
       const payload = {
         email: this.form.email,
         userName: this.form.userName,
-        phoneNumber: this.form.phoneNumber
+        phoneNumber: this.form.phoneNumber,
+        rowVersion: this.form.rowVersion
       };
 
       this.api.updateUser(this.currentUserId, payload)
         .subscribe({
-          next: () => {
+          next: (res: any) => {
+
+            const updated = res.data;
 
             this.users.update(users =>
               users.map(user =>
                 user.id === this.currentUserId
                   ? {
                     ...user,
-                    userName: this.form.userName,
-                    phoneNumber: this.form.phoneNumber
+                    userName: updated.userName,
+                    phoneNumber: updated.phoneNumber,
+                    rowVersion: updated.rowVersion
                   }
                   : user
               )
@@ -196,7 +202,31 @@ export class Users implements OnInit {
             this.toast.show('User updated successfully', 'success');
             this.closeForm();
           },
-          error: (err) => this.handleError(err)
+          error: (err) => {
+            if (
+              err.error?.code === 'ConcurrencyConflict' ||
+              err.error?.message === 'ConcurrencyConflict'
+            ) {
+
+              const latest = err.error.data;
+console.log('CONFLICT DATA FROM SERVER:', latest);
+              this.form = {
+                userName: latest.userName ?? '',
+                email: latest.email ?? '',
+                phoneNumber: latest.phoneNumber ?? '',
+                role: latest.role ?? '',
+                password: '',
+                rowVersion: latest.rowVersion ?? ''
+              };
+
+              this.toast.show(
+                'User was modified by another process. Latest version loaded.',
+                'warning'
+              );
+
+              return;
+            }
+          }
         });
 
     } else {
@@ -217,7 +247,6 @@ export class Users implements OnInit {
         });
     }
   }
-
   toggleMenu(user: any) {
     this.users().forEach(u => {
       if (u !== user) u.showMenu = false;
@@ -238,7 +267,8 @@ export class Users implements OnInit {
       email: user.email,
       password: '',
       phoneNumber: user.phoneNumber,
-      role: user.role
+      role: user.role,
+      rowVersion: user.rowVersion
     };
   }
 

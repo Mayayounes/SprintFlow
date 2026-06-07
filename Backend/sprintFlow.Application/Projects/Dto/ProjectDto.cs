@@ -11,5 +11,6 @@ public class ProjectDto
     public string ManagerId { get; set; } = default!;
     public string ManagerName { get; set; } = default!;
     public ProjectStatus ProjectStatus { get; set; }
+    public string RowVersion { get; set; } = default!;
 
 }

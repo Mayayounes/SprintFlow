@@ -1,4 +1,5 @@
 ﻿using sprintFlow.Domain.Constants;
+using System.ComponentModel.DataAnnotations;
 
 namespace sprintFlow.Domain.Entities;
 
@@ -11,4 +12,7 @@ public class Project
     public string ManagerId { get; set; } = null!;
     public User Manager { get; set; } = null!;
     public ProjectStatus ProjectStatus { get; set; }
+
+    [Timestamp]
+    public byte[] RowVersion { get; set; } = default!;
 }

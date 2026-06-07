@@ -11,4 +11,8 @@ public interface IUserRepository
     Task<int> CountEmployeeTasksAsync(Guid userId);
     Task<int> CountLeaderProjectsAsync(Guid userId);
     Task<bool> DeleteUserAsync(User user);
+    Task<User?> GetByIdAsync(string userId);
+    Task<(bool success, User? user, string? error)> UpdateUserAsync(
+        User user,
+        byte[] submittedRowVersion);
 }
