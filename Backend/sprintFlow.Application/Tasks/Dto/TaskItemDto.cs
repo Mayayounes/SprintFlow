@@ -22,5 +22,8 @@ public class TaskItemDto
     public DateTime? StartedAtLocal { get; set; }
     public DateTime? CompletedAtLocal { get; set; }
     public string RowVersion { get; set; } = default!;
+    public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
+
 
 }

@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NotificationDto } from '../../../core/services/notification/notification.model';
 import { Api } from '../../../core/services/api/api';
 import { NotificationSignalRService } from '../../../core/services/notification/notification-signal-rservice';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-notifications',
@@ -12,11 +13,16 @@ import { NotificationSignalRService } from '../../../core/services/notification/
   styleUrls: ['./notifications.css']
 })
 export class Notifications implements OnInit {
-  constructor(
-    private api: Api,
-    private signalR: NotificationSignalRService,
-    private cdr: ChangeDetectorRef
-) { }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.notification-wrapper')) {
+      this.showDropdown = false;
+    }
+  }
+
+  constructor(private api: Api, private signalR: NotificationSignalRService, private cdr: ChangeDetectorRef) { }
 
   notifications: NotificationDto[] = [];
   showDropdown = false;
@@ -34,15 +40,16 @@ export class Notifications implements OnInit {
 
     this.signalR.hasNewNotification$
       .subscribe(flag => {
-            console.log('DOT FLAG:', flag);
+        console.log('DOT FLAG:', flag);
         this.hasNewNotification = flag;
-            this.cdr.detectChanges();
+        this.cdr.detectChanges();
 
       });
 
     this.signalR.notificationReceived$
       .subscribe((data: NotificationDto) => {
         this.notifications.unshift(data);
+        this.cdr.detectChanges();
       });
   }
 
@@ -54,10 +61,6 @@ export class Notifications implements OnInit {
     }
   }
 
-  onNotificationViewed(notification: NotificationDto) {
-    this.signalR.loadInitialCount();
-  }
-
   loadNotifications() {
 
     this.api.getNotifications()
@@ -66,6 +69,7 @@ export class Notifications implements OnInit {
         this.notifications = res;
       });
   }
+
   markAsRead(notification: NotificationDto) {
 
     if (notification.isRead) return;

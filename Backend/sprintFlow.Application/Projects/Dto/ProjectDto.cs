@@ -12,5 +12,7 @@ public class ProjectDto
     public string ManagerName { get; set; } = default!;
     public ProjectStatus ProjectStatus { get; set; }
     public string RowVersion { get; set; } = default!;
+    public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
 }

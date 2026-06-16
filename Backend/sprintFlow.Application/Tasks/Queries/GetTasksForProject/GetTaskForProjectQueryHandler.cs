@@ -50,9 +50,10 @@ public class GetTaskForProjectQueryHandler(IMapper mapper ,IUserContext userCont
             ProjectName = task.Project.Name,
             EmployeeName = task.Employee?.UserName,
             RowVersion = Convert.ToBase64String(task.RowVersion),
+            CreatedAt=task.CreatedAt,
+            UpdatedAt=task.UpdatedAt,
             StartedAt = task.StartedAt,
             CompletedAt = task.CompletedAt,
-
             StartedAtLocal = task.StartedAt == null
                 ? null
                 : TimeZoneHelper.ToUserTime(task.StartedAt.Value, userTimeZone),

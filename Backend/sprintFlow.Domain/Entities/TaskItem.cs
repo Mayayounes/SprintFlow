@@ -1,11 +1,11 @@
-﻿using sprintFlow.Domain.Constants;
+﻿using sprintFlow.Domain.Common;
+using sprintFlow.Domain.Constants;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace sprintFlow.Domain.Entities;
-public class TaskItem
+public class TaskItem : BaseEntity
 {
-    public Guid Id { get; set; }
     public string Title { get; set; } = default!;
     public string? Description { get; set; }
     public TaskItemStatus Status { get; set; } = TaskItemStatus.ToDo;
@@ -44,6 +44,4 @@ public class TaskItem
         }
     }
 
-    [Timestamp]
-    public byte[] RowVersion { get; set; } = default!;
 }

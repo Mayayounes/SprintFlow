@@ -16,5 +16,8 @@ public class EmployeeTaskDto
     public long? DurationInSeconds { get; set; }
     public DateTime? StartedAtLocal { get; set; }
     public DateTime? CompletedAtLocal { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
+
 
 }

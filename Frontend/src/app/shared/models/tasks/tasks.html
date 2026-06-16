@@ -190,80 +190,73 @@
     +
   </button>
 
-  <!-- MODAL -->
-  <div *ngIf="showForm" class="fixed inset-0 bg-black/60 flex items-center justify-center">
+  <!-- TASK CREATE / EDIT MODAL -->
+  <div *ngIf="showForm" class="fixed inset-0 bg-black/60 flex items-center justify-center z-9999" (click)="closeForm()">
 
-    <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96">
+    <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96" (click)="$event.stopPropagation()">
 
-      <!-- TITLE -->
       <h2 class="text-xl font-bold mb-4 text-center text-white">
         {{ isEditMode ? 'Edit Task' : 'Create Task' }}
       </h2>
 
-      <!-- TITLE INPUT -->
       <input [(ngModel)]="form.title" placeholder="Task Title"
         class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10 text-white" />
 
-      <!-- DESCRIPTION -->
-      <textarea [(ngModel)]="form.description" placeholder="Task Description" rows="3" class="w-full p-3 mb-3 rounded-lg bg-black/30 border border-white/10 text-white
-             focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"></textarea>
+      <textarea [(ngModel)]="form.description" placeholder="Task Description"
+        class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10 text-white"></textarea>
 
-      <!-- DATES -->
       <div class="grid grid-cols-2 gap-3 mb-4">
 
-        <input type="date" [(ngModel)]="form.assignedDate" [disabled]="isEditMode" class="w-full p-3 rounded-lg bg-black/30 border border-white/10 text-white
-         focus:outline-none focus:ring-2 focus:ring-blue-500
-         disabled:opacity-50 disabled:cursor-not-allowed" />
-        <input type="date" [(ngModel)]="form.deadline" class="w-full p-3 rounded-lg bg-black/30 border border-white/10 text-white
-               focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <input type="date" [(ngModel)]="form.assignedDate" [disabled]="isEditMode"
+          class="p-3 rounded bg-black/30 border border-white/10 text-white" />
+
+        <input type="date" [(ngModel)]="form.deadline"
+          class="p-3 rounded bg-black/30 border border-white/10 text-white" />
 
       </div>
 
-      <!-- ACTIONS -->
-      <div class="flex flex-col gap-2">
+      <button (click)="submit()" class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg">
+        {{ isEditMode ? 'Update Task' : 'Create Task' }}
+      </button>
 
-        <button (click)="submit()"
-          class="w-full bg-blue-600 hover:bg-blue-700 py-2.5 rounded-lg font-medium transition">
-          {{ isEditMode ? 'Update Task' : 'Create Task' }}
-        </button>
-
-        <button (click)="closeForm()" class="w-full py-2 text-gray-300 text-sm hover:text-white transition">
-          Cancel
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-  <!-- ASSIGN EMPLOYEE MODAL -->
-  <div *ngIf="showAssignModal" class="fixed inset-0 bg-black/60 flex items-center justify-center">
-
-    <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96">
-
-      <h2 class="text-xl font-bold mb-4 text-center text-white">
-        Assign Employee
-      </h2>
-
-      <select [(ngModel)]="employeeId" class="w-full bg-black/30 p-3 rounded mb-4 text-white">
-        <option *ngFor="let e of employees" [ngValue]="e.id">
-          {{ e.email }}
-        </option>
-      </select>
-
-      <div class="flex flex-col gap-2">
-
-        <button (click)="assignEmployee()" class="w-full bg-blue-600 hover:bg-blue-700 py-2.5 rounded-lg">
-          Assign
-        </button>
-
-        <button (click)="showAssignModal = false" class="w-full py-2 text-gray-300 text-sm hover:text-white">
-          Cancel
-        </button>
-
-      </div>
+      <button (click)="closeForm()" class="w-full mt-2 text-gray-300 text-sm">
+        Cancel
+      </button>
 
     </div>
   </div>
+</div>
 
+<!-- ASSIGN EMPLOYEE MODAL -->
+<div *ngIf="showAssignModal"
+     class="fixed inset-0 bg-black/60 flex items-center justify-center z-9999"
+     (click)="closeAssignModal()">
+
+  <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96"
+       (click)="$event.stopPropagation()">
+
+    <h2 class="text-xl font-bold mb-4 text-center text-white">
+      Assign Employee
+    </h2>
+
+    <select [(ngModel)]="employeeId"
+            class="w-full bg-black/30 p-3 rounded mb-4 text-white">
+
+      <option *ngFor="let e of employees" [ngValue]="e.id">
+        {{ e.email }}
+      </option>
+
+    </select>
+
+    <button (click)="assignEmployee()"
+            class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg">
+      Assign
+    </button>
+
+    <button (click)="closeAssignModal()"
+            class="w-full mt-2 text-gray-300 text-sm">
+      Cancel
+    </button>
+
+  </div>
 </div>

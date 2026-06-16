@@ -7,7 +7,7 @@
 
   <!-- 🔍 SEARCH BAR -->
   <div class="flex justify-center mb-6">
-        <input [(ngModel)]="searchPhrase" (keyup)="onSearchChange()" placeholder="Search projects..." class="w-full max-w-md p-3 rounded-xl bg-white/5 border border-white/10
+    <input [(ngModel)]="searchPhrase" (keyup)="onSearchChange()" placeholder="Search projects..." class="w-full max-w-md p-3 rounded-xl bg-white/5 border border-white/10
              backdrop-blur-xl text-white outline-none focus:border-blue-400" />
   </div>
 
@@ -85,65 +85,90 @@
       <!-- DESCRIPTION -->
       <p class="text-sm text-gray-300 text-center mt-3" [innerHTML]="highlight(project.description)">
       </p>
+      <!-- META INFO (clean inline style) -->
+      <div class="mt-4 text-xs text-gray-400 space-y-1">
 
-      <!-- MANAGER -->
-      <div class="mt-4 text-xs text-gray-400 text-center break-all">
-        Manager: {{ project.managerName }}
+        <!-- Manager -->
+        <div class="flex justify-between">
+          <span>Manager</span>
+          <span class="text-gray-200">{{ project.managerName }}</span>
+        </div>
+
+        <!-- Created -->
+        <div class="flex justify-between">
+          <span>Created</span>
+          <span class="text-gray-300">
+            {{ project.createdAt | date:'mediumDate' }}
+            At {{ project.createdAt | date:'shortTime' }}
+          </span>
+        </div>
+
+        <!-- Updated -->
+        <div *ngIf="project.updatedAt" class="flex justify-between">
+          <span>Updated</span>
+          <span class="text-gray-300">
+            {{ project.updatedAt | date:'mediumDate' }}
+            At {{ project.updatedAt | date:'shortTime' }}
+          </span>
+        </div>
       </div>
-
-      <!-- VIEW TASKS -->
+      <!-- ACTION -->
       <div class="mt-auto pt-4 border-t border-white/10">
-
         <button (click)="goToTasks(project)"
           class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg transition font-medium">
           View Tasks
         </button>
-
       </div>
-
     </div>
 
   </div>
 
-  <!-- EMPTY STATE -->
-  <div *ngIf="!loading && projects().length === 0" class="text-center py-20 text-gray-400">
-    <p class="text-xl font-semibold">No projects found</p>
-    <p class="text-sm mt-2">Try a different search keyword</p>
+</div>
+
+<!-- EMPTY STATE -->
+<div *ngIf="!loading && projects().length === 0" class="text-center py-20 text-gray-400">
+  <p class="text-xl font-semibold">No projects found</p>
+  <p class="text-sm mt-2">Try a different search keyword</p>
+</div>
+
+<div *ngIf="!loading && projects().length > 0" class="flex flex-col items-center gap-4 mt-8">
+  <!-- PAGINATION -->
+  <app-pagination [pageNumber]="pageNumber" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
+  </app-pagination>
+
+</div>
+
+
+<!-- CREATE / EDIT MODAL -->
+<div *ngIf="showForm"
+     class="fixed inset-0 bg-black/60 flex items-center justify-center z-9999"
+     (click)="closeForm()">
+
+  <!-- FORM BOX -->
+  <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96"
+       (click)="$event.stopPropagation()">
+
+    <h2 class="text-xl font-bold mb-4 text-center">
+      {{ isEditMode ? 'Edit Project' : 'Create Project' }}
+    </h2>
+
+    <input [(ngModel)]="form.name"
+           placeholder="Project Name"
+           class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10" />
+
+    <textarea [(ngModel)]="form.description"
+              placeholder="Project Description"
+              class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10"></textarea>
+
+    <button (click)="submitForm()"
+            class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg">
+      Submit
+    </button>
+
+    <button (click)="closeForm()"
+            class="w-full mt-2 text-gray-300 text-sm">
+      Cancel
+    </button>
+
   </div>
-
-  <div *ngIf="!loading && projects().length > 0" class="flex flex-col items-center gap-4 mt-8">
-    <!-- PAGINATION -->
-    <app-pagination [pageNumber]="pageNumber" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
-    </app-pagination>
-
-  </div>
-
-
-  <!-- CREATE / EDIT MODAL -->
-  <div *ngIf="showForm" class="fixed inset-0 bg-black/60 flex items-center justify-center">
-
-    <div class="bg-[#0f172a] border border-white/10 p-6 rounded-2xl w-96">
-
-      <h2 class="text-xl font-bold mb-4 text-center">
-        {{ isEditMode ? 'Edit Project' : 'Create Project' }}
-      </h2>
-
-      <input [(ngModel)]="form.name" placeholder="Project Name"
-        class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10" />
-
-      <textarea [(ngModel)]="form.description" placeholder="Project Description"
-        class="w-full p-3 mb-3 rounded bg-black/30 border border-white/10"></textarea>
-
-      <button (click)="submitForm()" class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg">
-        Submit
-      </button>
-
-      <button (click)="closeForm()" class="w-full mt-2 text-gray-300 text-sm">
-        Cancel
-      </button>
-
-    </div>
-
-  </div>
-
 </div>

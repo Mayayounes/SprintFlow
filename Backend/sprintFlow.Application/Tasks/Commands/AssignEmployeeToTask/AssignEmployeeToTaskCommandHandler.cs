@@ -72,7 +72,7 @@ public class AssignEmployeeToTaskCommandHandler(IUserContext userContext, IProje
         }
         task.EmployeeId = request.EmployeeId.ToString();
 
-        await taskRepository.UpdateAsync(task);
+        await taskRepository.SaveChanges();
         var manager = await userRepository.GetByIdAsync(currentUser.Id);
         await notificationService.SendAsync(
             Guid.Parse(task.EmployeeId),

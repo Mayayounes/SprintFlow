@@ -13,5 +13,7 @@ public class SingleProjectDto
     public ICollection<TaskItemDto> Tasks { get; set; } = new List<TaskItemDto>();
     public ProjectStatus ProjectStatus { get; set; }
     public string RowVersion { get; set; } = default!;
+    public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
 }

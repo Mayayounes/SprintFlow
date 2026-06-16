@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using sprintFlow.Application.Common.Exceptions;
 using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
@@ -11,7 +12,7 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
     public async Task<Guid> Create(Project entity)
     {
         dbContext.Projects.Add(entity);
-        await dbContext.SaveChangesAsync();
+        await SaveChanges();
         return entity.Id;
     }
     public async Task<int> CountAllProjectsAsync()
@@ -55,8 +56,27 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
             .FirstOrDefaultAsync(x => x.Id == id);
         return projects;
     }
-    public Task SaveChanges()
-        => dbContext.SaveChangesAsync();
+    public async Task SaveChanges()
+    {
+       await dbContext.SaveChangesAsync();
+    }
+    public async Task<(bool Success, Project? Latest)> SaveChangesSafe()
+    {
+        try
+        {
+            await dbContext.SaveChangesAsync();
+            return (true, null);
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            var entry = ex.Entries.First();
+
+            var dbValues = await entry.GetDatabaseValuesAsync();
+            var latest = dbValues?.ToObject() as Project;
+
+            return (false, latest);
+        }
+    }
     public async Task<List<Project>> GetByManagerIdWithTasksAsync(string managerId)
     {
         return await dbContext.Projects
@@ -93,22 +113,12 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
 
         await dbContext.SaveChangesAsync();
     }
-
-    public Task SetOriginalRowVersion(
-    Project project,
-    byte[] rowVersion)
+    public Task SetOriginalRowVersion(Project project,byte[] rowVersion)
     {
         dbContext.Entry(project)
             .Property(p => p.RowVersion)
             .OriginalValue = rowVersion;
 
         return Task.CompletedTask;
-    }
-    public async Task<Project?> GetDatabaseValues(Project project)
-    {
-        var values = await dbContext.Entry(project)
-            .GetDatabaseValuesAsync();
-
-        return values?.ToObject() as Project;
     }
 }

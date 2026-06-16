@@ -1,4 +1,5 @@
 ﻿using sprintFlow.Application.Common;
+using sprintFlow.Application.Common.Exceptions;
 
 namespace sprintFlow.API.Middleware;
 
@@ -16,6 +17,22 @@ public class ExceptionMiddleware
         try
         {
             await _next(context);
+        }
+        catch (ConcurrencyException ex)
+        {
+            if (!context.Response.HasStarted)
+            {
+                context.Response.StatusCode = 409;
+                context.Response.ContentType = "application/json";
+
+                var response = Result<object>.Failure(
+                    new List<string> { ex.Message },
+                    "ConcurrencyConflict",
+                    ex.LatestState
+                );
+
+                await context.Response.WriteAsJsonAsync(response);
+            }
         }
         catch (Exception ex)
         {

@@ -50,7 +50,8 @@ public class GetAllProjectsQueryHandler(IUserContext userContext, IProjectReposi
             Description = p.Description!,
             ManagerId = p.ManagerId,
             ManagerName = p.Manager.UserName!,
-
+            CreatedAt = p.CreatedAt,
+            UpdatedAt = p.UpdatedAt,
             RowVersion = Convert.ToBase64String(p.RowVersion),
             ProjectStatus = p.Tasks.Any() &&
              p.Tasks.All(t => t.Status == TaskItemStatus.Done)

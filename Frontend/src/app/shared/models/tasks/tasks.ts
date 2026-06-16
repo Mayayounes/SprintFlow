@@ -120,6 +120,8 @@ export class Tasks implements OnInit {
   }
 
   openEdit(task: any) {
+    task.showMenu = false;
+
     this.showForm = true;
     this.isEditMode = true;
     this.currentTaskId = task.id;
@@ -291,8 +293,17 @@ export class Tasks implements OnInit {
 
   closeForm() {
     this.showForm = false;
-  }
+    this.isEditMode = false;
+    this.currentTaskId = null;
 
+    this.form = {
+      title: '',
+      description: '',
+      assignedDate: '',
+      deadline: '',
+      rowVersion: ''
+    };
+  }
   private handleError(err: any) {
     const backendErrors = err?.error?.errors;
 
@@ -322,7 +333,11 @@ export class Tasks implements OnInit {
     this.loadTasks();
   }
 
-
+  closeAssignModal() {
+    this.showAssignModal = false;
+    this.selectedTaskId = null;
+    this.employeeId = '';
+  }
   formatDuration(seconds: number | null) {
     return this.uiHelper.formatDuration(seconds);
   }

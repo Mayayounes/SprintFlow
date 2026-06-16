@@ -64,18 +64,13 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
     public async Task<Guid> Create(TaskItem entity)
     {
         dbContext.Tasks.Add(entity);
-        await dbContext.SaveChangesAsync();
+        await SaveChanges();
         return entity.Id;
     }
     public async Task<TaskItem?> GetByIdAsync(Guid id)
     {
         return await dbContext.Tasks
             .FirstOrDefaultAsync(t => t.Id == id);
-    }
-    public async Task UpdateAsync(TaskItem task)
-    {
-        dbContext.Tasks.Update(task);
-        await dbContext.SaveChangesAsync();
     }
     public async Task<List<TaskItem>> GetAssignedTasksWithEmployeesAsync()
     {
@@ -85,20 +80,27 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
             .Where(t => t.EmployeeId != null)
             .ToListAsync();
     }
-    public Task SetOriginalRowVersion(TaskItem task,byte[] rowVersion)
+    public async Task SaveChanges()
     {
-        dbContext.Entry(task)
-            .Property(p => p.RowVersion)
-            .OriginalValue = rowVersion;
 
-        return Task.CompletedTask;
+            await dbContext.SaveChangesAsync();
     }
-    public async Task<TaskItem?> GetDatabaseValues(TaskItem task)
+    public async Task<(bool Success, TaskItem? Latest)> SaveChangesSafe()
     {
-        var values = await dbContext.Entry(task)
-            .GetDatabaseValuesAsync();
+        try
+        {
+            await dbContext.SaveChangesAsync();
+            return (true, null);
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            var entry = ex.Entries.First();
 
-        return values?.ToObject() as TaskItem;
+            var dbValues = await entry.GetDatabaseValuesAsync();
+            var latest = dbValues?.ToObject() as TaskItem;
+
+            return (false, latest);
+        }
     }
     public async Task<List<TaskItem>> GetActiveAssignedTasksAsync()
     {
@@ -108,5 +110,13 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
                 //t.Deadline <= now.AddDays(1)
             )
             .ToListAsync();
+    }
+    public Task SetOriginalRowVersion(TaskItem task, byte[] rowVersion)
+    {
+        dbContext.Entry(task)
+            .Property(p => p.RowVersion)
+            .OriginalValue = rowVersion;
+
+        return Task.CompletedTask;
     }
 }

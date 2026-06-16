@@ -89,7 +89,6 @@ export class Projects implements OnInit {
 
     this.form = { name: '', description: '', rowVersion: '' };
   }
-
   openEditForm(project: any) {
     this.showForm = true;
     this.isEditMode = true;
@@ -100,12 +99,19 @@ export class Projects implements OnInit {
       description: project.description,
       rowVersion: project.rowVersion
     };
+    project.showMenu = false;
   }
-
   closeForm() {
     this.showForm = false;
-  }
+    this.isEditMode = false;
+    this.currentProjectId = null;
 
+    this.form = {
+      name: '',
+      description: '',
+      rowVersion: ''
+    };
+  }
   submitForm() {
     if (this.isEditMode && this.currentProjectId) {
 

@@ -29,5 +29,6 @@ public class ProjectConfiguration : IEntityTypeConfiguration<Project>
 
         builder.Property(x => x.RowVersion)
        .IsRowVersion();
+
     }
 }

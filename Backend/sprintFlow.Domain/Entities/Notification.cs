@@ -1,8 +1,8 @@
-﻿public class Notification
+﻿using sprintFlow.Domain.Common;
+
+public class Notification : BaseEntity
 {
-    public Guid Id { get; set; }
     public Guid UserId { get; set; }
-    public string Message { get; set; }
-    public DateTime CreatedAt { get; set; }
+    public string Message { get; set; } = default!;
     public bool IsRead { get; set; }
 }
