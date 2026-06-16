@@ -8,7 +8,6 @@ public interface IProjectRepository
 {
     Task<Project?> GetByIdAsync(Guid id);
     Task<Guid> Create(Project entity);
-    Task SaveChanges();
     Task<(IEnumerable<Project> Projects, int TotalCount)> GetAllMatchingAsync(string searchPhrase, int pageNumber, int pageSize, string? managerId = null);
     Task<string> GetProjectManagerIdAsync(Guid projectId);
     Task<int> CountAllProjectsAsync();
@@ -18,4 +17,5 @@ public interface IProjectRepository
     Task UpdateStatusAsync(Guid projectId);
     Task SetOriginalRowVersion(Project project, byte[] rowVersion);
     Task<(bool Success, Project? Latest)> SaveChangesSafe();
+
 }

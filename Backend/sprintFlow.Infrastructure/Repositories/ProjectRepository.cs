@@ -12,7 +12,7 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
     public async Task<Guid> Create(Project entity)
     {
         dbContext.Projects.Add(entity);
-        await SaveChanges();
+        await SaveChangesSafe();
         return entity.Id;
     }
     public async Task<int> CountAllProjectsAsync()
@@ -55,27 +55,6 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
             .Include(r => r.Tasks)
             .FirstOrDefaultAsync(x => x.Id == id);
         return projects;
-    }
-    public async Task SaveChanges()
-    {
-       await dbContext.SaveChangesAsync();
-    }
-    public async Task<(bool Success, Project? Latest)> SaveChangesSafe()
-    {
-        try
-        {
-            await dbContext.SaveChangesAsync();
-            return (true, null);
-        }
-        catch (DbUpdateConcurrencyException ex)
-        {
-            var entry = ex.Entries.First();
-
-            var dbValues = await entry.GetDatabaseValuesAsync();
-            var latest = dbValues?.ToObject() as Project;
-
-            return (false, latest);
-        }
     }
     public async Task<List<Project>> GetByManagerIdWithTasksAsync(string managerId)
     {
@@ -120,5 +99,20 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
             .OriginalValue = rowVersion;
 
         return Task.CompletedTask;
+    }
+    public async Task<(bool Success, Project? Latest)> SaveChangesSafe()
+    {
+        try
+        {
+            await dbContext.SaveChangesAsync();
+            return (true, null);
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            var entry = ex.Entries.First();
+            var dbValues = await entry.GetDatabaseValuesAsync();
+
+            return (false, dbValues?.ToObject() as Project);
+        }
     }
 }

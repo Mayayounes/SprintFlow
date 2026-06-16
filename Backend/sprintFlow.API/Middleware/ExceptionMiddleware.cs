@@ -20,19 +20,19 @@ public class ExceptionMiddleware
         }
         catch (ConcurrencyException ex)
         {
-            if (!context.Response.HasStarted)
-            {
-                context.Response.StatusCode = 409;
-                context.Response.ContentType = "application/json";
+            context.Response.StatusCode = StatusCodes.Status409Conflict;
+            context.Response.ContentType = "application/json";
 
-                var response = Result<object>.Failure(
-                    new List<string> { ex.Message },
-                    "ConcurrencyConflict",
-                    ex.LatestState
-                );
+            var response = Result<object>.Failure(
+                new List<string>
+                {
+                "This record was modified by another user. Refresh and try again."
+                },
+                "ConcurrencyConflict",
+                ex.LatestState
+            );
 
-                await context.Response.WriteAsJsonAsync(response);
-            }
+            await context.Response.WriteAsJsonAsync(response);
         }
         catch (Exception ex)
         {

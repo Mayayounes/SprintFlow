@@ -70,7 +70,7 @@ public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IPro
         }
 
         task.Status = (TaskItemStatus)request.Status!.Value;
-        await taskRepository.SaveChanges(); ;
+        await taskRepository.SaveChangesSafe(); ;
         await projectRepository.UpdateStatusAsync(task.ProjectId);
 
         // Notify manager after successful save

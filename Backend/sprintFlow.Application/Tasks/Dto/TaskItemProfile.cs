@@ -15,7 +15,10 @@ public class TaskItemProfile : Profile
     .ForMember(dest => dest.Status,
         opt => opt.MapFrom(src => src.Status.ToString()))
     .ForMember(dest => dest.CompletionStatus,
-        opt => opt.MapFrom(src => src.CompletionStatus.ToString()));
+        opt => opt.MapFrom(src => src.CompletionStatus.ToString()))
+        .ForMember(dest => dest.RowVersion,
+                opt => opt.MapFrom(src => Convert.ToBase64String(src.RowVersion)));
+
 
         CreateMap<TaskItem, EmployeeTaskDto>()
             .ForMember(dest => dest.ManagerName,

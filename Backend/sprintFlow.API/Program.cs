@@ -118,6 +118,7 @@ var app = builder.Build();
 
 app.UseHangfireDashboard("/hangfire");
 app.MapHub<NotificationHub>("/hubs/notifications");
+
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors("AllowAngular");

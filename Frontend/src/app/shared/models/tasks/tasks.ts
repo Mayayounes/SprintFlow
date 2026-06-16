@@ -174,7 +174,6 @@ export class Tasks implements OnInit {
           error: (err) => {
 
             if (err.error?.message === 'ConcurrencyConflict') {
-
               const latest = err.error.data;
 
               this.form = {
@@ -186,13 +185,11 @@ export class Tasks implements OnInit {
               };
 
               this.toast.show(
-                'Task was modified by another user. Latest version loaded.',
+                'Task was modified by another user , Refresh to load the new version.',
                 'warning'
               );
-
               return;
             }
-
             this.handleError(err);
           }
         });

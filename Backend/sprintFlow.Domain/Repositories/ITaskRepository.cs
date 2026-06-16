@@ -10,7 +10,6 @@ public interface ITaskRepository
     Task<(IEnumerable<TaskItem>, int)> GetMyTasksAsync(string userId, int pageNumber, int pageSize , string? status);
     Task<List<TaskItem>> GetAssignedTasksWithEmployeesAsync();
     Task<List<TaskItem>> GetActiveAssignedTasksAsync();
-    Task SaveChanges();
-    Task SetOriginalRowVersion(TaskItem task, byte[] rowVersion);
     Task<(bool Success, TaskItem? Latest)> SaveChangesSafe();
+    Task SetOriginalRowVersion(TaskItem task, byte[] rowVersion);
 }

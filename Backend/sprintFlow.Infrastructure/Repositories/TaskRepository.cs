@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using sprintFlow.Application.Common.Exceptions;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
 using sprintFlow.Infrastructure.Persistence;
@@ -64,7 +65,7 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
     public async Task<Guid> Create(TaskItem entity)
     {
         dbContext.Tasks.Add(entity);
-        await SaveChanges();
+        await SaveChangesSafe();
         return entity.Id;
     }
     public async Task<TaskItem?> GetByIdAsync(Guid id)
@@ -80,11 +81,6 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
             .Where(t => t.EmployeeId != null)
             .ToListAsync();
     }
-    public async Task SaveChanges()
-    {
-
-            await dbContext.SaveChangesAsync();
-    }
     public async Task<(bool Success, TaskItem? Latest)> SaveChangesSafe()
     {
         try
@@ -95,11 +91,9 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
         catch (DbUpdateConcurrencyException ex)
         {
             var entry = ex.Entries.First();
-
             var dbValues = await entry.GetDatabaseValuesAsync();
-            var latest = dbValues?.ToObject() as TaskItem;
 
-            return (false, latest);
+            return (false, dbValues?.ToObject() as TaskItem);
         }
     }
     public async Task<List<TaskItem>> GetActiveAssignedTasksAsync()

@@ -11,7 +11,7 @@ public class ProjectDto
     public string ManagerId { get; set; } = default!;
     public string ManagerName { get; set; } = default!;
     public ProjectStatus ProjectStatus { get; set; }
-    public string RowVersion { get; set; } = default!;
+    public string RowVersion { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 

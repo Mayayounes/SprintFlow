@@ -4,7 +4,7 @@ using sprintFlow.Application.Tasks.Dto;
 
 namespace sprintFlow.Application.Tasks.Commands.UpdateTaskDetails;
 
-public class UpdateTaskDetailsCommand : IRequest<Result<TaskConcurrencyDto>>
+public class UpdateTaskDetailsCommand : IRequest<Result<TaskItemDto>>
 {
     public Guid TaskId { get; set; }
     public string Title { get; set; } = default!;

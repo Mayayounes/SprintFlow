@@ -16,12 +16,12 @@ public class ProjectProfile : Profile
             .ForMember(dest => dest.ManagerName,
                 opt => opt.MapFrom(src => src.Manager.UserName))
             .ForMember(dest => dest.ProjectStatus,
-                opt => opt.MapFrom(src => ProjectStatus.Pending));
+                opt => opt.MapFrom(src => ProjectStatus.Pending))
+            .ForMember(dest => dest.RowVersion,
+                opt => opt.MapFrom(src => Convert.ToBase64String(src.RowVersion)));
 
         CreateMap<Project, SingleProjectDto>();
         CreateMap<CreateProjectCommand, Project>();
-        CreateMap<UpdateProjectCommand, Project>();
-
     }
 
 }
