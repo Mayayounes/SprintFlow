@@ -12,4 +12,6 @@ public interface ITaskRepository
     Task<List<TaskItem>> GetAssignedTasksWithEmployeesAsync();
     Task SetOriginalRowVersion(TaskItem task, byte[] rowVersion);
     Task<TaskItem?> GetDatabaseValues(TaskItem task);
+    Task<List<TaskItem>> GetActiveAssignedTasksAsync();
+
 }

@@ -2,30 +2,40 @@
 
   <!-- SIDEBAR -->
   <div class="w-64 bg-black/30 backdrop-blur-xl border-r border-white/10 p-5">
-
-    <h2 class="text-xl font-bold mb-6 text-center">Leader Panel</h2>
+    <h2 class="text-xl font-bold mb-6 text-center">
+      Leader Panel
+    </h2>
 
     <div class="space-y-3">
-
-      <button routerLink="/leader/statistics"
+      <button
+        routerLink="/leader/statistics"
         routerLinkActive="bg-white/10"
         class="w-full text-left px-4 py-2 rounded hover:bg-white/10 font-semibold">
-        statistics
+        Statistics
       </button>
 
-      <button routerLink="/leader/projects"
+      <button
+        routerLink="/leader/projects"
         routerLinkActive="bg-white/10"
         class="w-full text-left px-4 py-2 rounded hover:bg-white/10 font-semibold">
         Projects
       </button>
-
     </div>
-
   </div>
 
-  <!-- CONTENT -->
-  <div class="flex-1 p-6">
-    <router-outlet></router-outlet>
+  <!-- MAIN CONTENT -->
+  <div class="flex-1">
+
+    <!-- TOP BAR -->
+    <div class="h-16 border-b border-white/10 flex justify-end items-center px-6">
+      <app-notifications />
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <div class="p-6">
+      <router-outlet></router-outlet>
+    </div>
+
   </div>
 
 </div>

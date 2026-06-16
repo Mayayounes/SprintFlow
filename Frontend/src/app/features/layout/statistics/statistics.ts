@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Api } from '../../../core/services/api/api';
 import { Auth } from '../../../core/services/Auth/auth';
 

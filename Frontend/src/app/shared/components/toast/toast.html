@@ -6,7 +6,8 @@
     [ngClass]="{
       'bg-green-600': toast.type === 'success',
       'bg-red-600': toast.type === 'error',
-      'bg-yellow-400': toast.type === 'warning'
+      'bg-yellow-400': toast.type === 'warning',
+      'bg-blue-500': toast.type === 'info'
     }">
 
     <p class="font-semibold">{{ toast.message }}</p>

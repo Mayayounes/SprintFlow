@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("sprintFlow.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9af95930af7360c470a844c33e157db77f43bc5d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78563ef158cf65b852d09e937f21c323e65d217d")]
 [assembly: System.Reflection.AssemblyProductAttribute("sprintFlow.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("sprintFlow.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

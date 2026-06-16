@@ -100,4 +100,13 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
 
         return values?.ToObject() as TaskItem;
     }
+    public async Task<List<TaskItem>> GetActiveAssignedTasksAsync()
+    {
+        return await dbContext.Tasks
+            .Where(t =>
+                t.EmployeeId != null 
+                //t.Deadline <= now.AddDays(1)
+            )
+            .ToListAsync();
+    }
 }

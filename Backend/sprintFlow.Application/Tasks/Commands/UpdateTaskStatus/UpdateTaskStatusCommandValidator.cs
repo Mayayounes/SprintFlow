@@ -10,26 +10,13 @@ public class UpdateTaskStatusCommandValidator : AbstractValidator<UpdateTaskStat
         RuleFor(x => x.Status)
             .NotNull()
             .WithMessage("Enter status.")
-            .Must(BeValidStatus)
-            .WithMessage(GetAllowedValuesMessage);
+            .Must(BeValidEnum)
+            .WithMessage("Invalid status.");
     }
-    private bool BeValidStatus(int? status)
+    private bool BeValidEnum(int? status)
     {
-        if (!status.HasValue) return false;
-
-        return Enum.IsDefined(typeof(TaskItemStatus), status.Value)
-               && status.Value != (int)TaskItemStatus.ToDo;
+        return status.HasValue &&
+               Enum.IsDefined(typeof(TaskItemStatus), status.Value);
     }
 
-    private string GetAllowedValuesMessage(UpdateTaskStatusCommand command, int? status)
-    {
-        var allowedValues = string.Join(", ",
-            Enum.GetValues(typeof(TaskItemStatus))
-                .Cast<TaskItemStatus>()
-                .Where(e => e != TaskItemStatus.ToDo)
-                .Select(e => $"{e} = {(int)e}")
-        );
-
-        return $"Invalid status. Allowed values: [{allowedValues}]";
-    }
 }

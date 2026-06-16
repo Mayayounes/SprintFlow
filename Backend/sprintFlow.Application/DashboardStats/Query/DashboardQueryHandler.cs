@@ -13,7 +13,11 @@ public class DashboardQueryHandler(IUserRepository userRepository,IProjectReposi
     {
         var currentUser = userContext.GetCurrentUser();
 
-        
+        if (currentUser is null)
+        {
+            throw new UnauthorizedAccessException("User is not authenticated.");
+        }
+
         var userId = Guid.Parse(currentUser!.Id);
 
         var isLeader = await userRepository.IsUserInRoleAsync(userId, UserRole.Leader);

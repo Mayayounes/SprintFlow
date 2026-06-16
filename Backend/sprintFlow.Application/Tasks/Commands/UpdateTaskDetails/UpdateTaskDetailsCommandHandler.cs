@@ -2,13 +2,14 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using sprintFlow.Application.Common;
+using sprintFlow.Application.Common.Interfaces;
 using sprintFlow.Application.Tasks.Dto;
 using sprintFlow.Application.Users;
 using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Commands.UpdateTaskDetails;
 
-public class UpdateTaskDetailsCommandHandler(IUserContext userContext, IMapper mapper, IProjectRepository projectRepository, ITaskRepository taskRepository) : IRequestHandler<UpdateTaskDetailsCommand, Result<TaskConcurrencyDto>>
+public class UpdateTaskDetailsCommandHandler(IUserContext userContext, IProjectRepository projectRepository, ITaskRepository taskRepository , INotificationService notificationService) : IRequestHandler<UpdateTaskDetailsCommand, Result<TaskConcurrencyDto>>
 {
     public async Task<Result<TaskConcurrencyDto>> Handle(UpdateTaskDetailsCommand request, CancellationToken cancellationToken)
     {
@@ -40,12 +41,20 @@ public class UpdateTaskDetailsCommandHandler(IUserContext userContext, IMapper m
         // Apply updates
         task.Title = request.Title;
         task.Description = request.Description;
+        task.AssignedDate = task.AssignedDate;
         task.Deadline = request.Deadline;
         var submittedVersion = Convert.FromBase64String(request.RowVersion);
         await taskRepository.SetOriginalRowVersion(task, submittedVersion);
         try
         {
             await taskRepository.UpdateAsync(task);
+            if (!string.IsNullOrEmpty(task.EmployeeId))
+            {
+                await notificationService.SendAsync(
+                    Guid.Parse(task.EmployeeId),
+                    $"The task '{task.Title}' information was updated."
+                );
+            }
             return Result<TaskConcurrencyDto>.Success(
                 new TaskConcurrencyDto
                 {
@@ -53,6 +62,7 @@ public class UpdateTaskDetailsCommandHandler(IUserContext userContext, IMapper m
                     Title = task.Title,
                     Description = task.Description,
                     Deadline = task.Deadline,
+                    AssignedDate = task.AssignedDate,
                     RowVersion = Convert.ToBase64String(task.RowVersion)
                 },
                 "Task updated successfully");

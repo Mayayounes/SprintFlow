@@ -8,5 +8,4 @@ public class AssignEmployeeToTaskCommand : IRequest<Result<string>>
     public Guid EmployeeId { get; set; }
     public Guid ProjectId { get; set; }
     public Guid TaskId { get; set; }
-
 }

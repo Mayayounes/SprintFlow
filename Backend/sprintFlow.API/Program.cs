@@ -1,7 +1,10 @@
+using Hangfire;
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using sprintFlow.API.Hubs;
 using sprintFlow.API.Middleware;
 using sprintFlow.Application.Extensions;
 using sprintFlow.Domain.Constants;
@@ -16,12 +19,21 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSignalR();
+
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddHangfire(config =>
+{
+    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("SprintFlowDatabase"));
+});
+
+builder.Services.AddHangfireServer();
 
 builder.Services.AddApplication();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-.AddJwtBearer(options =>
+    .AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -38,6 +50,23 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         ),
         NameClaimType = ClaimTypes.NameIdentifier,
         RoleClaimType = ClaimTypes.Role,
+    };
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var accessToken = context.Request.Query["access_token"];
+
+            var path = context.HttpContext.Request.Path;
+
+            if (!string.IsNullOrEmpty(accessToken) &&
+                path.StartsWithSegments("/notificationHub"))
+            {
+                context.Token = accessToken;
+            }
+
+            return Task.CompletedTask;
+        }
     };
 });
 
@@ -87,9 +116,9 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.UseHangfireDashboard("/hangfire");
+app.MapHub<NotificationHub>("/hubs/notifications");
 app.UseMiddleware<ExceptionMiddleware>();
-
-//app.UseHttpsRedirection();
 
 app.UseCors("AllowAngular");
 
@@ -102,12 +131,7 @@ app.MapGroup("api/identity")
         .MapIdentityApi<User>();
 
 app.MapControllers();
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
-}
+app.MapHub<NotificationHub>("/notificationHub");
 
 
 using (var scope = app.Services.CreateScope())

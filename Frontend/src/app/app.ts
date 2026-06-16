@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { Toast } from './shared/components/toast/toast';
 import { ErrorModalComponent } from './shared/components/error-modal/error-modal';
+import { NotificationSignalRService } from './core/services/notification/notification-signal-rservice';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,11 @@ import { ErrorModalComponent } from './shared/components/error-modal/error-modal
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit{
   protected readonly title = signal('sprintFlow');
+constructor(private signalR: NotificationSignalRService) {}
+ngOnInit() {
+  this.signalR.startConnection();
+}
+
 }

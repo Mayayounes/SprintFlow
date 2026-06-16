@@ -15,7 +15,7 @@ public class UpdateTaskDetailsCommandValidator : AbstractValidator<UpdateTaskDet
             .Length(3, 1000).WithMessage("Description must be between 3 and 1000 characters.");
 
         RuleFor(x => x.Deadline)
-            .GreaterThan(DateOnly.FromDateTime(DateTime.Today))
-            .WithMessage("Deadline must be in the future.");
+            .GreaterThanOrEqualTo(DateOnly.FromDateTime(DateTime.UtcNow))
+            .WithMessage("Deadline must be today or later.");
     }
 }

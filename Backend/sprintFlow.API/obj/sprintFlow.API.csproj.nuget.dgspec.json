@@ -63,6 +63,18 @@
               "target": "Package",
               "version": "[11.3.1, )"
             },
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.8.23, )"
+            },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.8.23, )"
+            },
+            "Hangfire.SqlServer": {
+              "target": "Package",
+              "version": "[1.8.23, )"
+            },
             "MediatR.Extensions.FluentValidation.AspNetCore": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -1287,6 +1299,10 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[10.0.5, )"
+            },
+            "Microsoft.AspNetCore.SignalR.Common": {
+              "target": "Package",
+              "version": "[10.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",

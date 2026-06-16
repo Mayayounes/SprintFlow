@@ -2,22 +2,22 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using sprintFlow.Application.Common;
+using sprintFlow.Application.Common.Interfaces;
 using sprintFlow.Application.Users;
-using sprintFlow.Application.Users.Queries.GetAllUsers;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
 using sprintFlow.Infrastructure.Persistence;
 using sprintFlow.Infrastructure.Repositories;
+using sprintFlow.Infrastructure.Services;
 
 namespace sprintFlow.Infrastructure.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static async Task AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("SprintFlowDatabase");
 
@@ -41,6 +41,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IProjectRepository, ProjectRepository>();
         services.AddScoped<ITaskRepository, TaskRepository>();
-
+        services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<INotificationRepository, NotificationRepository>();
+        return services;
     }
 }

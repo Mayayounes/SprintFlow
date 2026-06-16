@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, NgZone, OnInit } from '@angular/core';
 import { Api } from '../../core/services/api/api';
 import { ToastService } from '../../core/services/toast/toast';
 import { ErrorModalService } from '../../core/services/error-modal/error-modal';
@@ -6,15 +6,23 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Pagination } from '../../shared/components/pagination/pagination';
 import { UiHelperService } from '../../core/services/ui-helper/ui-helper';
+import { Notifications } from '../../shared/models/notifications/notifications';
 
 @Component({
   selector: 'app-employee',
-  imports: [CommonModule, FormsModule, Pagination],
+  imports: [CommonModule, FormsModule, Pagination , Notifications],
   templateUrl: './employee.html',
   styleUrl: './employee.css',
 })
 export class Employee implements OnInit {
 
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.relative')) {
+      this.showNotifications = false;
+    }
+  }
   tasks: any[] = [];
   loading = false;
 
@@ -40,22 +48,87 @@ export class Employee implements OnInit {
   showStatusModal = false;
   selectedTask: any = null;
 
+  //notifications
+  notifications: any[] = [];
+  unreadCount = 0;
+  showNotifications = false;
+
   constructor(
     private api: Api,
     private toast: ToastService,
     private errorModal: ErrorModalService,
     private cdr: ChangeDetectorRef,
     private uiHelper: UiHelperService,
-
+    // private notificationSignalR: NotificationSignalRService
   ) { }
 
   ngOnInit() {
     this.loadMyTasks();
+    // this.loadNotifications();
+    // this.notificationSignalR.startConnection();
+
+    // this.notificationSignalR.notification$.subscribe(notification => {
+    //   this.notifications.unshift(notification);
+    //   this.unreadCount++;
+    //   this.toast.show(notification.message, 'info');
+    //   this.cdr.detectChanges();
+    // });
   }
 
+  // loadNotifications() {
+  //   this.api.getNotifications().subscribe({
+  //     next: (res) => {
+  //       this.notifications = res;
+  //       this.updateUnreadCount();
+  //     }
+  //   });
+
+  //   this.api.getUnreadNotificationsCount().subscribe((count: any) => {
+  //     this.unreadCount = count;
+  //     this.cdr.detectChanges();
+  //   });
+  // }
+
+  // toggleNotifications() {
+  //   this.showNotifications = !this.showNotifications;
+  // }
+  // updateUnreadCount() {
+  //   this.unreadCount = this.notifications.filter(n => !n.isRead).length;
+  // }
+  // markRead(notification: any) {
+  //   console.log('CLICKED NOTIFICATION:', notification);
+  //   if (notification.isRead) return;
+  //   this.api.markNotificationRead(notification.id)
+  //     .subscribe({
+  //       next: () => {
+  //         notification.isRead = true;
+  //         this.updateUnreadCount();
+  //       },
+  //       error: (err) => {
+  //         console.error('API ERROR FULL:', err);
+  //         console.error('STATUS:', err.status);
+  //         console.error('BODY:', err.error);
+  //         console.error('Failed to mark notification as read', err);
+  //       }
+  //     });
+  // }
+  // markAllRead() {
+  //   this.api
+  //     .markAllNotificationsRead()
+  //     .subscribe({
+  //       next: () => {
+  //         this.notifications.forEach(n => n.isRead = true);
+  //         this.updateUnreadCount();
+  //       },
+  //       error: (err) => {
+  //         console.error('Failed to mark all as read', err);
+  //       }
+  //     });
+  // }
+
   formatDuration(seconds: number | null) {
-  return this.uiHelper.formatDuration(seconds);
-}
+    return this.uiHelper.formatDuration(seconds);
+  }
 
   loadMyTasks() {
     this.loading = true;
@@ -119,7 +192,7 @@ export class Employee implements OnInit {
               const data = r.data;
               this.tasks = data.items ?? [];
 
-              this.tasks = [...this.tasks]; // force refresh
+              this.tasks = [...this.tasks];
 
               this.showStatusModal = false;
               this.selectedTask = null;
@@ -127,6 +200,8 @@ export class Employee implements OnInit {
               this.cdr.detectChanges();
             }
           });
+      }, error: (err) => {
+        this.handleError(err);
       }
     });
   }

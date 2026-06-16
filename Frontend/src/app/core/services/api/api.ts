@@ -1,11 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NotificationDto } from '../notification/notification.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Api {
   private baseUrl = 'http://localhost:5134/api';
+  public hubUrl = 'http://localhost:5134';
 
   constructor(private http: HttpClient) { }
   //Auth
@@ -96,5 +98,28 @@ export class Api {
   //get all roles
   getRoles() {
     return this.http.get<string[]>(`${this.baseUrl}/users/roles`);
+  }
+  //Notification
+  getNotifications() {
+    return this.http.get<NotificationDto[]>(
+      `${this.baseUrl}/notifications`
+    );
+  }
+  getUnreadNotificationsCount() {
+    return this.http.get<number>(
+      `${this.baseUrl}/notifications/unread-count`
+    );
+  }
+  markNotificationRead(notificationId: string) {
+    return this.http.put(
+      `${this.baseUrl}/notifications/${notificationId}/read`,
+      {}
+    );
+  }
+  markAllNotificationsRead() {
+    return this.http.put(
+      `${this.baseUrl}/notifications/mark-all-read`,
+      {}
+    );
   }
 }
