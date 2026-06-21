@@ -8,7 +8,6 @@ namespace sprintFlow.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
 public class NotificationsController : ControllerBase
 {
     private readonly INotificationService _notificationService;
@@ -40,7 +39,7 @@ public class NotificationsController : ControllerBase
 
         return Ok(result);
     }
-
+    [Authorize]
     [HttpGet("unread-count")]
     public async Task<ActionResult<int>> GetUnreadCount()
     {

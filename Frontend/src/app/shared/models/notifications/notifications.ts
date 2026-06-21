@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { NotificationDto } from '../../../core/services/notification/notification.model';
 import { Api } from '../../../core/services/api/api';
 import { NotificationSignalRService } from '../../../core/services/notification/notification-signal-rservice';
@@ -22,43 +22,48 @@ export class Notifications implements OnInit {
     }
   }
 
-  constructor(private api: Api, private signalR: NotificationSignalRService, private cdr: ChangeDetectorRef) { }
+  constructor(private api: Api, private signalR: NotificationSignalRService, private cdr: ChangeDetectorRef, private zone: NgZone) { }
 
   notifications: NotificationDto[] = [];
   showDropdown = false;
   unreadCount = 0;
-  hasNewNotification = false;
 
   ngOnInit(): void {
 
     this.loadNotifications();
 
-    this.signalR.notificationCount$
-      .subscribe(count => {
-        this.unreadCount = count;
-      });
+    this.signalR.notificationReceived$.subscribe(n => {
+      this.notifications = [n, ...this.notifications];
+    });
+    this.signalR.notificationCount$.subscribe(count => {
+      this.unreadCount = count;
 
-    this.signalR.hasNewNotification$
-      .subscribe(flag => {
-        console.log('DOT FLAG:', flag);
-        this.hasNewNotification = flag;
-        this.cdr.detectChanges();
-
+      this.zone.run(() => {
+        this.cdr.markForCheck();
       });
+    });
+    this.signalR.notificationRead$.subscribe(notificationId => {
+      this.notifications = this.notifications.map(n =>
+        n.id === notificationId
+          ? { ...n, isRead: true }
+          : n
+      );
+    });
 
-    this.signalR.notificationReceived$
-      .subscribe((data: NotificationDto) => {
-        this.notifications.unshift(data);
-        this.cdr.detectChanges();
-      });
+    this.signalR.notificationAllRead$.subscribe(() => {
+      this.notifications = this.notifications.map(n => ({
+        ...n,
+        isRead: true
+      }));
+    });
   }
-
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
 
     if (this.showDropdown) {
-      this.signalR.clearNewNotificationFlag();
+      console.log('🔔 opening dropdown, clearing UI indicator');
     }
+    this.cdr.detectChanges();
   }
 
   loadNotifications() {
@@ -69,35 +74,20 @@ export class Notifications implements OnInit {
         this.notifications = res;
       });
   }
+  async markAsRead(notification: NotificationDto) {
+    console.log('➡️ markAsRead', notification.id);
 
-  markAsRead(notification: NotificationDto) {
-
-    if (notification.isRead) return;
-
-    this.api.markNotificationRead(notification.id)
-      .subscribe({
-        next: () => {
-
-          this.notifications = this.notifications.map(n =>
-            n.id === notification.id
-              ? { ...n, isRead: true }
-              : n
-          );
-
-          this.signalR.loadInitialCount();
-        }
-      });
+    await this.signalR.markAsRead(notification.id);
   }
-  markAllRead() {
-    this.api.markAllNotificationsRead()
-      .subscribe(() => {
+  async markAllRead() {
+    console.log('➡️ markAllRead');
 
-        this.notifications = this.notifications.map(n => ({
-          ...n,
-          isRead: true
-        }));
-
-        this.signalR.loadInitialCount();
-      });
+    await this.signalR.markAllRead();
+  }
+  get hasNewNotification(): boolean {
+    return this.unreadCount > 0;
+  }
+  trackByNotification(_: number, notification: NotificationDto) {
+    return notification.id;
   }
 }

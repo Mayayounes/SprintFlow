@@ -7,15 +7,10 @@ import { NotificationSignalRService } from './core/services/notification/notific
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet , Toast , ErrorModalComponent],
+  imports: [RouterOutlet, Toast, ErrorModalComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements OnInit{
+export class App{
   protected readonly title = signal('sprintFlow');
-constructor(private signalR: NotificationSignalRService) {}
-ngOnInit() {
-  this.signalR.startConnection();
-}
-
 }

@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using sprintFlow.API.Hubs;
 using sprintFlow.API.Middleware;
+using sprintFlow.Application.Common.Hubs;
 using sprintFlow.Application.Extensions;
 using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Entities;
@@ -117,7 +117,6 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 app.UseHangfireDashboard("/hangfire");
-app.MapHub<NotificationHub>("/hubs/notifications");
 
 app.UseMiddleware<ExceptionMiddleware>();
 

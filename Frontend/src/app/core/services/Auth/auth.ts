@@ -15,6 +15,7 @@ export class Auth {
     localStorage.removeItem('email');
     localStorage.removeItem('role');
   }
+
   isTokenExpired(): boolean {
     const token = this.getToken();
 

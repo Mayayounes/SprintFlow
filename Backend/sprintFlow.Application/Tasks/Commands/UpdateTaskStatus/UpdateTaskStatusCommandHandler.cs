@@ -41,15 +41,11 @@ public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IPro
                 });
         }
 
-        var managerId =
-          await projectRepository.GetProjectManagerIdAsync(task.ProjectId);
+        var managerId =await projectRepository.GetProjectManagerIdAsync(task.ProjectId);
 
-        var employee =
-            await userRepository.GetByIdAsync(EmployeeId!);
+        var employee =await userRepository.GetByIdAsync(EmployeeId!);
 
         string? notificationMessage = null;
-
-        // ToDo -> InProgress
         if (task.Status == TaskItemStatus.ToDo &&
             request.Status == (int)TaskItemStatus.InProgress)
         {
@@ -58,8 +54,6 @@ public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IPro
             notificationMessage =
                 $"{employee!.UserName} started task '{task.Title}'.";
         }
-
-        // InProgress -> Done
         if (task.Status == TaskItemStatus.InProgress &&
             request.Status == (int)TaskItemStatus.Done)
         {
@@ -73,7 +67,6 @@ public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IPro
         await taskRepository.SaveChangesSafe(); ;
         await projectRepository.UpdateStatusAsync(task.ProjectId);
 
-        // Notify manager after successful save
         if (!string.IsNullOrWhiteSpace(notificationMessage)
             && !string.IsNullOrWhiteSpace(managerId))
         {
@@ -81,7 +74,7 @@ public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IPro
                 Guid.Parse(managerId),
                 notificationMessage);
         }
-        return Result<Guid>.Success(task.Id, "Task updated successfully");
+        return Result<Guid>.Success(task.Id, "Task Status updated successfully");
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using sprintFlow.API.Hubs;
+using sprintFlow.Application.Common.Hubs;
 using sprintFlow.Application.Common.Interfaces;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
@@ -68,11 +68,26 @@ public class NotificationService : INotificationService
     {
         await _repository.MarkAsReadAsync(notificationId, userId);
         await _repository.SaveChangesAsync();
+
+        var unreadCount = await _repository.GetUnreadCountAsync(userId);
+        await _hubContext.Clients.User(userId.ToString())
+            .SendAsync("NotificationRead", new
+            {
+                notificationId,
+                unreadCount
+            });
     }
     public async Task MarkAllAsReadAsync(Guid userId)
     {
         await _repository.MarkAllAsReadAsync(userId);
-
         await _repository.SaveChangesAsync();
+
+        await _hubContext.Clients
+            .User(userId.ToString())
+            .SendAsync("UnreadCountUpdated", 0);
+
+        await _hubContext.Clients
+            .User(userId.ToString())
+            .SendAsync("AllNotificationsRead");
     }
 }

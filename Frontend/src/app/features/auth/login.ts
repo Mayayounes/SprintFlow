@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { ToastService } from '../../core/services/toast/toast';
 import { ErrorModalService } from '../../core/services/error-modal/error-modal';
 import { ROLE_ROUTES } from '../../core/guards/auth.util';
+import { NotificationSignalRService } from '../../core/services/notification/notification-signal-rservice';
 
 @Component({
   selector: 'app-login',
@@ -23,12 +24,9 @@ export class Login {
     private api: Api,
     private router: Router,
     private toast: ToastService,
-    private errorModal: ErrorModalService
-  ) {}
-
-  toggle() {
-    this.isLoginMode = !this.isLoginMode;
-  }
+    private errorModal: ErrorModalService,
+    private notificationSignalRService: NotificationSignalRService
+  ) { }
 
   login() {
     const data = {
@@ -37,7 +35,7 @@ export class Login {
     };
 
     this.api.login(data).subscribe({
-      next: (res: any) => {
+      next:async(res: any) => {
         if (!res?.data?.token || !res?.data?.role) {
           this.errorModal.show('Invalid response from server');
           return;
@@ -54,8 +52,8 @@ export class Login {
         localStorage.setItem('email', email);
         localStorage.setItem('userId', userId);
 
+        await this.notificationSignalRService.startConnection();
         this.toast.show('Login Successful', 'success');
-
         const targetRoute = ROLE_ROUTES[role as string];
         if (!targetRoute) {
           console.error('Unknown role:', roleRaw);
@@ -78,5 +76,9 @@ export class Login {
         }
       },
     });
+  }
+
+  toggle() {
+    this.isLoginMode = !this.isLoginMode;
   }
 }

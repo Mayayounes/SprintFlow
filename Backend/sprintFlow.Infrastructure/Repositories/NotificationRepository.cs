@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
 using sprintFlow.Infrastructure.Persistence;
 

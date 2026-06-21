@@ -74,7 +74,7 @@ public class AssignEmployeeToTaskCommandHandler(IUserContext userContext, IProje
 
         await taskRepository.SaveChangesSafe();
         var manager = await userRepository.GetByIdAsync(currentUser.Id);
-        await notificationService.SendAsync(
+        await notificationService.SendAsync( 
             Guid.Parse(task.EmployeeId),
             $"You are assigned to task '{task.Title}' on project '{project.Name}' by {manager!.UserName}."
         );
