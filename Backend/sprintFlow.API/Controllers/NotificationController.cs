@@ -1,75 +1,25 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using sprintFlow.Application.Common.Interfaces;
-using sprintFlow.Application.Notifications.Dto;
-using sprintFlow.Application.Users;
+using sprintFlow.Application.Notifications.Query.GetAllNotifications;
 
 namespace sprintFlow.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class NotificationsController : ControllerBase
+public class NotificationsController(IMediator mediator)
+    : ControllerBase
 {
-    private readonly INotificationService _notificationService;
-    private readonly IUserContext _userContext;
-
-    public NotificationsController(
-        INotificationService notificationService,
-        IUserContext userContext)
-    {
-        _notificationService = notificationService;
-        _userContext = userContext;
-    }
-
     [HttpGet]
-    public async Task<ActionResult<List<NotificationDto>>> GetNotifications()
+    [Authorize]
+    public async Task<IActionResult> GetNotifications(
+        [FromQuery] GetAllNotificationsQuery query)
     {
-        var user = _userContext.GetCurrentUser();
-        var userId = Guid.Parse(user!.Id);
+        var result = await mediator.Send(query);
 
-        var notifications = await _notificationService.GetUserNotificationsAsync(userId);
-
-        var result = notifications.Select(x => new NotificationDto
-        {
-            Id = x.Id,
-            Message = x.Message,
-            IsRead = x.IsRead,
-            CreatedAt = x.CreatedAt
-        }).ToList();
+        if (!result.IsSuccess)
+            return BadRequest(result);
 
         return Ok(result);
-    }
-    [Authorize]
-    [HttpGet("unread-count")]
-    public async Task<ActionResult<int>> GetUnreadCount()
-    {
-        var user = _userContext.GetCurrentUser();
-        var userId = Guid.Parse(user!.Id);
-
-        var count = await _notificationService.GetUnreadCountAsync(userId);
-
-        return Ok(count);
-    }
-
-    [HttpPut("{notificationId}/read")]
-    public async Task<IActionResult> MarkAsRead(Guid notificationId)
-    {
-        var user = _userContext.GetCurrentUser();
-        var userId = Guid.Parse(user!.Id);
-
-        await _notificationService.MarkAsReadAsync(notificationId, userId);
-
-        return NoContent();
-    }
-    [HttpPut("mark-all-read")]
-    public async Task<IActionResult> MarkAllAsRead()
-    {
-        var user = _userContext.GetCurrentUser();
-
-        var userId = Guid.Parse(user!.Id);
-
-        await _notificationService.MarkAllAsReadAsync(userId);
-
-        return NoContent();
     }
 }

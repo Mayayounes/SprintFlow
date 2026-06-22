@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using sprintFlow.Application.Projects.Commands.CreateProject;
+using sprintFlow.Application.Projects.Commands.DeleteProject;
 using sprintFlow.Application.Projects.Commands.UpdateProject;
 using sprintFlow.Application.Projects.Dto;
 using sprintFlow.Application.Projects.Queries.GetAllProjects;
@@ -59,5 +60,15 @@ public class ProjectController(IMediator mediator) : ControllerBase
 
         return Ok(result);
     }
+    [HttpDelete("{id}")]
+    [Authorize(Policy = Policies.LeaderOnly)]
+    public async Task<IActionResult> DeleteProject([FromRoute] Guid id)
+    {
+        var result = await mediator.Send(new DeleteProjectCommand(id));
 
+        if (!result.IsSuccess)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
 }

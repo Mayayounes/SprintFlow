@@ -51,6 +51,12 @@ export class Tasks implements OnInit {
     rowVersion: ''
   };
 
+  //delete
+  showDeleteModal = false;
+  deleteTargetId: string | null = null;
+  deleteType: 'project' | 'task' | null = null;
+  selectedProjectTasksCount = 0;
+  selectedProjectName = '';
   constructor(
     private route: ActivatedRoute,
     private api: Api,
@@ -203,7 +209,10 @@ export class Tasks implements OnInit {
             this.loadTasks();
             this.showForm = false;
           },
-          error: (err) => this.handleError(err)
+          error: (err) => {
+            this.handleError(err);
+            this.showForm = false;
+          }
         });
 
     }
@@ -240,7 +249,10 @@ export class Tasks implements OnInit {
         this.toast.show('Employee assigned successfully', 'success');
         this.showAssignModal = false;
       },
-      error: (err) => this.handleError(err)
+      error: (err) => {
+        this.handleError(err)
+        this.showAssignModal = false;
+      }
     });
   }
 
@@ -341,5 +353,27 @@ export class Tasks implements OnInit {
 
   highlight(text: string) {
     return this.uiHelper.highlight(text, this.SearchTask);
+  }
+  confirmDeleteTask(task: any) {
+    task.showMenu = false;
+    this.deleteTargetId = task.id;
+    this.deleteType = 'task';
+    this.showDeleteModal = true;
+  }
+  deleteConfirmed() {
+    this.api.deleteTask(this.projectId, this.deleteTargetId!).subscribe({
+      next: () => {
+        this.tasks.update(t => t.filter(x => x.id !== this.deleteTargetId));
+        this.toast.show('Task deleted', 'success');
+        this.loadTasks();
+      },
+      error: err => this.handleError(err)
+    });
+    this.closeDeleteModal();
+  }
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+    this.deleteTargetId = null;
+    this.deleteType = null;
   }
 }

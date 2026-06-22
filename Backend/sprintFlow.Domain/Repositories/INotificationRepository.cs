@@ -1,4 +1,6 @@
-﻿namespace sprintFlow.Domain.Repositories;
+﻿using sprintFlow.Domain.Constants;
+
+namespace sprintFlow.Domain.Repositories;
 
 public interface INotificationRepository
 {
@@ -9,4 +11,5 @@ public interface INotificationRepository
     Task MarkAsReadAsync(Guid notificationId, Guid userId);
     Task MarkAllAsReadAsync(Guid userId);
     Task SaveChangesAsync();
+    Task<(List<Notification>, int)> GetAllMatchingAsync(Guid userId,NotificationFilter filter,int pageNumber,int pageSize);
 }

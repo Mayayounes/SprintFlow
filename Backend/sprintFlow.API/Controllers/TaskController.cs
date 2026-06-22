@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using sprintFlow.Application.Tasks.Commands.AssignEmployeeToTask;
 using sprintFlow.Application.Tasks.Commands.CreateTask;
+using sprintFlow.Application.Tasks.Commands.DeleteTask;
 using sprintFlow.Application.Tasks.Commands.UpdateTaskDetails;
 using sprintFlow.Application.Tasks.Commands.UpdateTaskStatus;
 using sprintFlow.Application.Tasks.Dto;
@@ -97,6 +98,17 @@ public class TaskController(IMediator mediator) : ControllerBase
         [FromQuery] TaskItemStatus status)
     {
         var result = await mediator.Send(new GetTasksByStatusQuery(projectId, status));
+
+        if (!result.IsSuccess)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
+    [HttpDelete("{taskId}")]
+    [Authorize(Policy = Policies.LeaderOnly)]
+    public async Task<IActionResult> DeleteTask([FromRoute] Guid projectId, [FromRoute] Guid taskId)
+    {
+        var result = await mediator.Send(new DeleteTaskCommand(taskId));
 
         if (!result.IsSuccess)
             return BadRequest(result);

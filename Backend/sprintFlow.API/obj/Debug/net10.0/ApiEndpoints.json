@@ -417,64 +417,24 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[sprintFlow.Application.Notifications.Dto.NotificationDto, sprintFlow.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "sprintFlow.API.Controllers.NotificationsController",
-    "Method": "MarkAsRead",
-    "RelativePath": "api/Notifications/{notificationId}/read",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
     "Parameters": [
       {
-        "Name": "notificationId",
-        "Type": "System.Guid",
-        "IsRequired": true
+        "Name": "Filter",
+        "Type": "sprintFlow.Domain.Constants.NotificationFilter",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "sprintFlow.API.Controllers.NotificationsController",
-    "Method": "MarkAllAsRead",
-    "RelativePath": "api/Notifications/mark-all-read",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "sprintFlow.API.Controllers.NotificationsController",
-    "Method": "GetUnreadCount",
-    "RelativePath": "api/Notifications/unread-count",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Int32",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
   },
   {
     "ContainingType": "sprintFlow.API.Controllers.ProjectController",
@@ -565,6 +525,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "sprintFlow.API.Controllers.ProjectController",
+    "Method": "DeleteProject",
+    "RelativePath": "api/projects/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "sprintFlow.API.Controllers.TaskController",
     "Method": "GetAllForProject",
     "RelativePath": "api/projects/{projectId}/tasks",
@@ -625,6 +601,27 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "sprintFlow.API.Controllers.TaskController",
+    "Method": "DeleteTask",
+    "RelativePath": "api/projects/{projectId}/tasks/{taskId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "sprintFlow.API.Controllers.TaskController",

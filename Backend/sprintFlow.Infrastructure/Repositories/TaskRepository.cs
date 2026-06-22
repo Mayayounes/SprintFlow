@@ -68,6 +68,13 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
         await SaveChangesSafe();
         return entity.Id;
     }
+    public async Task<bool> IsProjectOwnerOfTask(Guid taskId, Guid userId)
+    {
+        return await dbContext.Tasks
+            .AnyAsync(t =>
+                t.Id == taskId &&
+                t.Project.ManagerId == userId.ToString());
+    }
     public async Task<TaskItem?> GetByIdAsync(Guid id)
     {
         return await dbContext.Tasks
@@ -112,5 +119,9 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
             .OriginalValue = rowVersion;
 
         return Task.CompletedTask;
+    }
+    public async Task Delete(TaskItem task)
+    {
+        dbContext.Tasks.Remove(task);
     }
 }

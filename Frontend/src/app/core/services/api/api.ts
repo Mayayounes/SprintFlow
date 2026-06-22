@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NotificationDto } from '../notification/notification.model';
 
 @Injectable({
   providedIn: 'root',
@@ -58,7 +57,9 @@ export class Api {
   editProject(projectId: string, data: any) {
     return this.http.patch(`${this.baseUrl}/projects/${projectId}`, data);
   }
-
+  deleteProject(projectId: string) {
+    return this.http.delete(`${this.baseUrl}/projects/${projectId}`);
+  }
   //Users
   getAllUsers(searchRole: string, pageNumber: number, pageSize: number) {
     const params = new HttpParams()
@@ -95,31 +96,19 @@ export class Api {
     const params = new HttpParams().set('status', status);
     return this.http.get(`${this.baseUrl}/projects/${projectId}/tasks/filter`, { params });
   }
+  deleteTask(projectId: string, taskId: string) {
+    return this.http.delete(`${this.baseUrl}/projects/${projectId}/tasks/${taskId}`);
+  }
   //get all roles
   getRoles() {
     return this.http.get<string[]>(`${this.baseUrl}/users/roles`);
   }
   //Notification
-  getNotifications() {
-    return this.http.get<NotificationDto[]>(
-      `${this.baseUrl}/notifications`
-    );
-  }
-  getUnreadNotificationsCount() {
-    return this.http.get<number>(
-      `${this.baseUrl}/notifications/unread-count`
-    );
-  }
-  markNotificationRead(notificationId: string) {
-    return this.http.put(
-      `${this.baseUrl}/notifications/${notificationId}/read`,
-      {}
-    );
-  }
-  markAllNotificationsRead() {
-    return this.http.put(
-      `${this.baseUrl}/notifications/mark-all-read`,
-      {}
-    );
+  getNotifications(filter: string = '', pageNumber: number, pageSize: number) {
+    let params = new HttpParams()
+      .set('filter', filter)
+      .set('pageNumber', pageNumber)
+      .set('pageSize', pageSize);
+    return this.http.get(`${this.baseUrl}/notifications`, { params });
   }
 }

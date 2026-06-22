@@ -115,4 +115,8 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
             return (false, dbValues?.ToObject() as Project);
         }
     }
+    public async Task Delete(Project project)
+    {
+        dbContext.Projects.Remove(project);
+    }
 }

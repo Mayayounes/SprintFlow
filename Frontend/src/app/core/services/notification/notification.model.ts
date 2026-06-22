@@ -3,5 +3,6 @@ export interface NotificationDto {
   message: string;
   isRead: boolean;
   createdAt: string;
+  updatedAt : string;
   unreadCount: number;
 }

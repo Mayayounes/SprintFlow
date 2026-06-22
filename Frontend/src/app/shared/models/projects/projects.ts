@@ -41,6 +41,12 @@ export class Projects implements OnInit {
     rowVersion: ''
   };
 
+  //delete
+  showDeleteModal = false;
+  deleteTargetId: string | null = null;
+  deleteType: 'project' | 'task' | null = null;
+  selectedProjectTasksCount = 0;
+  selectedProjectName = '';
   constructor(
     private api: Api,
     private router: Router,
@@ -58,7 +64,6 @@ export class Projects implements OnInit {
   get isAdmin(): boolean {
     return this.auth.isAdmin();
   }
-
   loadProjects() {
     this.loading = true;
 
@@ -81,7 +86,6 @@ export class Projects implements OnInit {
         }
       });
   }
-
   openCreateForm() {
     this.showForm = true;
     this.isEditMode = false;
@@ -166,32 +170,30 @@ export class Projects implements OnInit {
             this.loadProjects();
             this.closeForm();
           },
-          error: (err) => this.handleError(err)
+          error: (err) => {
+            this.handleError(err)
+            this.closeForm();
+          }
         });
 
     }
   }
-
   goToTasks(project: any) {
     this.router.navigate([`/${this.auth.getRole()}/projects`, project.id, 'tasks'], { state: { projectName: project.name } });
   }
-
   trackByProjectId(index: number, project: any) {
     return project.id;
   }
-
   toggleMenu(project: any) {
     this.projects().forEach(p => {
       if (p !== project) p.showMenu = false;
     });
     project.showMenu = !project.showMenu;
   }
-
   onSearchChange() {
     this.pageNumber = 1;
     this.loadProjects();
   }
-
   highlight(text: string): string {
     if (!this.searchPhrase) return text;
     const regex = new RegExp(`(${this.searchPhrase})`, 'gi');
@@ -200,18 +202,15 @@ export class Projects implements OnInit {
       `<mark class="bg-yellow-300 text-white px-1 rounded">$1</mark>`
     );
   }
-
   onPageChange(page: number) {
     this.pageNumber = page;
     this.loadProjects();
   }
-
   onPageSizeChange(size: number) {
     this.pageSize = size;
     this.pageNumber = 1;
     this.loadProjects();
   }
-
   private handleError(err: any) {
     const backendErrors = err?.error?.errors;
 
@@ -222,5 +221,30 @@ export class Projects implements OnInit {
     }
 
     this.cdr.detectChanges();
+  }
+  confirmDeleteProject(project: any) {
+    project.showMenu = false;
+    this.deleteTargetId = project.id;
+    this.deleteType = 'project';
+    this.selectedProjectTasksCount = project.tasksCount || 0;
+    this.selectedProjectName = project.name;
+    this.showDeleteModal = true;
+  }
+  deleteConfirmed() {
+    this.api.deleteProject(this.deleteTargetId!).subscribe({
+      next: () => {
+        this.projects.update(p => p.filter(x => x.id !== this.deleteTargetId));
+        this.toast.show('Project deleted', 'success');
+        this.loadProjects();
+      },
+      error: err => this.handleError(err)
+    });
+    this.closeDeleteModal();
+
+  }
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+    this.deleteTargetId = null;
+    this.deleteType = null;
   }
 }
