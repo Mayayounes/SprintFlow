@@ -16,7 +16,5 @@ public interface IProjectRepository
     Task<List<Project>> GetAllWithTasksAsync();
     Task UpdateStatusAsync(Guid projectId);
     Task SetOriginalRowVersion(Project project, byte[] rowVersion);
-    Task<(bool Success, Project? Latest)> SaveChangesSafe();
     Task Delete(Project project);
-
 }

@@ -17,4 +17,6 @@ public class DashboardController(IMediator mediator) : ControllerBase
         var result = await mediator.Send(new GetDashboardStatsQuery());
         return Ok(result);
     }
+
+
 }

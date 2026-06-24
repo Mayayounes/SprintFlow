@@ -8,7 +8,7 @@ using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Commands.UpdateTaskStatus;
 
-public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IProjectRepository projectRepository ,IUserContext userContext , INotificationService notificationService , IUserRepository userRepository) : IRequestHandler<UpdateTaskStatusCommand, Result<Guid>>
+public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IProjectRepository projectRepository ,IUserContext userContext , INotificationService notificationService , IUserRepository userRepository , IUnitOfWork unitOfWork) : IRequestHandler<UpdateTaskStatusCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(UpdateTaskStatusCommand request, CancellationToken cancellationToken)
     {
@@ -64,15 +64,21 @@ public class UpdateTaskStatusCommandHandler(ITaskRepository taskRepository, IPro
         }
 
         task.Status = (TaskItemStatus)request.Status!.Value;
-        await taskRepository.SaveChangesSafe(); ;
         await projectRepository.UpdateStatusAsync(task.ProjectId);
 
-        if (!string.IsNullOrWhiteSpace(notificationMessage)
-            && !string.IsNullOrWhiteSpace(managerId))
-        {
-            await notificationService.SendAsync(
+        Notification? notification = null;
+
+        if (!string.IsNullOrWhiteSpace(notificationMessage))
+        { 
+            notification = await notificationService.CreateAsync(
                 Guid.Parse(managerId),
                 notificationMessage);
+        }
+        await unitOfWork.SaveChangesAsync();
+
+        if (notification != null)
+        {
+            await notificationService.PublishAsync(notification);
         }
         return Result<Guid>.Success(task.Id, "Task Status updated successfully");
 

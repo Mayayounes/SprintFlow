@@ -28,6 +28,7 @@ public static class ServiceCollectionExtensions
             .AddEntityFrameworkStores<AppDbContext>();
 
         var applicationAssembly = typeof(ServiceCollectionExtensions).Assembly;
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         services.AddAutoMapper(typeof(ServiceCollectionExtensions).Assembly);
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceCollectionExtensions).Assembly));
@@ -43,6 +44,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITaskRepository, TaskRepository>();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<INotificationRepository, NotificationRepository>();
+
         return services;
     }
 }

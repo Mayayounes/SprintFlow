@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using sprintFlow.Application.Common;
+using sprintFlow.Application.Common.Interfaces;
 using sprintFlow.Application.Users;
 using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Projects.Commands.DeleteProject;
 
-public class DeleteProjectCommandHandler(IProjectRepository projectRepository , IUserContext userContext): IRequestHandler<DeleteProjectCommand, Result<bool>>
+public class DeleteProjectCommandHandler(IProjectRepository projectRepository , IUserContext userContext , IUnitOfWork unitOfWork): IRequestHandler<DeleteProjectCommand, Result<bool>>
 {
     public async Task<Result<bool>> Handle(DeleteProjectCommand request, CancellationToken ct)
     {
@@ -29,7 +30,7 @@ public class DeleteProjectCommandHandler(IProjectRepository projectRepository , 
         }
         await projectRepository.Delete(project);
 
-        await projectRepository.SaveChangesSafe();
+        await unitOfWork.SaveChangesAsync();
 
         return Result<bool>.Success(true, "Project deleted successfully");
     }

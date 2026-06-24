@@ -14,29 +14,28 @@ public class ExceptionMiddleware
 
     public async Task Invoke(HttpContext context)
     {
+        Console.WriteLine("Middleware entered");
+
         try
         {
             await _next(context);
         }
         catch (ConcurrencyException ex)
         {
-            context.Response.StatusCode = StatusCodes.Status409Conflict;
-            context.Response.ContentType = "application/json";
+            Console.WriteLine("Concurrency middleware hit");
 
-            var response = Result<object>.Failure(
-                new List<string>
-                {
-                "This record was modified by another user. Refresh and try again."
-                },
-                "ConcurrencyConflict",
-                ex.LatestState
+            context.Response.StatusCode = StatusCodes.Status409Conflict;
+
+            var response = Result<string>.Failure(
+                new List<string> { ex.Message },
+                "ConcurrencyConflict"
             );
 
             await context.Response.WriteAsJsonAsync(response);
         }
         catch (Exception ex)
         {
-            context.Response.StatusCode = 500;
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             context.Response.ContentType = "application/json";
 
             var response = Result<string>.Failure(

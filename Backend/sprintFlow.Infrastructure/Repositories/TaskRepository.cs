@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using sprintFlow.Application.Common.Exceptions;
+using sprintFlow.Application.Common.Interfaces;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
 using sprintFlow.Infrastructure.Persistence;
@@ -62,11 +62,10 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
 
         return (tasks, count);
     }
-    public async Task<Guid> Create(TaskItem entity)
+    public Task<Guid> Create(TaskItem entity)
     {
         dbContext.Tasks.Add(entity);
-        await SaveChangesSafe();
-        return entity.Id;
+        return Task.FromResult(entity.Id);
     }
     public async Task<bool> IsProjectOwnerOfTask(Guid taskId, Guid userId)
     {
@@ -87,21 +86,6 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
             .Include(t => t.Employee)
             .Where(t => t.EmployeeId != null)
             .ToListAsync();
-    }
-    public async Task<(bool Success, TaskItem? Latest)> SaveChangesSafe()
-    {
-        try
-        {
-            await dbContext.SaveChangesAsync();
-            return (true, null);
-        }
-        catch (DbUpdateConcurrencyException ex)
-        {
-            var entry = ex.Entries.First();
-            var dbValues = await entry.GetDatabaseValuesAsync();
-
-            return (false, dbValues?.ToObject() as TaskItem);
-        }
     }
     public async Task<List<TaskItem>> GetActiveAssignedTasksAsync()
     {

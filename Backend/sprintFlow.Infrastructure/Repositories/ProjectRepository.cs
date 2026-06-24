@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using sprintFlow.Application.Common.Exceptions;
 using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
@@ -9,11 +8,10 @@ namespace sprintFlow.Infrastructure.Repositories;
 
 public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
 {
-    public async Task<Guid> Create(Project entity)
+    public Task<Guid> Create(Project entity)
     {
         dbContext.Projects.Add(entity);
-        await SaveChangesSafe();
-        return entity.Id;
+        return Task.FromResult(entity.Id);
     }
     public async Task<int> CountAllProjectsAsync()
     {
@@ -76,21 +74,14 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
             .AllAsync(t => t.Status == TaskItemStatus.Done);
 
         var project = await dbContext.Projects
-            .AsNoTracking()
             .FirstOrDefaultAsync(p => p.Id == projectId);
 
         if (project == null)
             return;
 
-        dbContext.Projects.Attach(project);
-
         project.ProjectStatus = allDone
             ? ProjectStatus.Done
             : ProjectStatus.Pending;
-
-        dbContext.Entry(project).Property(p => p.ProjectStatus).IsModified = true;
-
-        await dbContext.SaveChangesAsync();
     }
     public Task SetOriginalRowVersion(Project project,byte[] rowVersion)
     {
@@ -99,21 +90,6 @@ public class ProjectRepository(AppDbContext dbContext) : IProjectRepository
             .OriginalValue = rowVersion;
 
         return Task.CompletedTask;
-    }
-    public async Task<(bool Success, Project? Latest)> SaveChangesSafe()
-    {
-        try
-        {
-            await dbContext.SaveChangesAsync();
-            return (true, null);
-        }
-        catch (DbUpdateConcurrencyException ex)
-        {
-            var entry = ex.Entries.First();
-            var dbValues = await entry.GetDatabaseValuesAsync();
-
-            return (false, dbValues?.ToObject() as Project);
-        }
     }
     public async Task Delete(Project project)
     {

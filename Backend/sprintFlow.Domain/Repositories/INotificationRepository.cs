@@ -10,6 +10,5 @@ public interface INotificationRepository
     Task<Notification?> GetByIdAsync(Guid notificationId);
     Task MarkAsReadAsync(Guid notificationId, Guid userId);
     Task MarkAllAsReadAsync(Guid userId);
-    Task SaveChangesAsync();
     Task<(List<Notification>, int)> GetAllMatchingAsync(Guid userId,NotificationFilter filter,int pageNumber,int pageSize);
 }

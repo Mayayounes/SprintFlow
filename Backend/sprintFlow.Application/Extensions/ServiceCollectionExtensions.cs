@@ -20,6 +20,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
         services.AddScoped<IUserContext, UserContext>();
+
         services.AddSingleton(TimeProvider.System);
 
         services.AddHttpContextAccessor();

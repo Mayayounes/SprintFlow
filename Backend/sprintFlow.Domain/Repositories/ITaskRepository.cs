@@ -11,7 +11,6 @@ public interface ITaskRepository
     Task<List<TaskItem>> GetAssignedTasksWithEmployeesAsync();
     Task<bool> IsProjectOwnerOfTask(Guid taskId, Guid userId);
     Task<List<TaskItem>> GetActiveAssignedTasksAsync();
-    Task<(bool Success, TaskItem? Latest)> SaveChangesSafe();
     Task SetOriginalRowVersion(TaskItem task, byte[] rowVersion);
     Task Delete(TaskItem task);
 }

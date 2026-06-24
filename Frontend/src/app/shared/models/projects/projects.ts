@@ -143,21 +143,11 @@ export class Projects implements OnInit {
           error: (err) => {
 
             if (err.error?.message === 'ConcurrencyConflict') {
-              const latest = err.error.data;
-              this.form = {
-                name: latest.name,
-                description: latest.description,
-                rowVersion: latest.rowVersion
-              };
-              this.toast.show(
-                'Project was modified by another user. Latest version loaded.',
-                'warning'
-              );
-
-              return;
+              this.handleError(err);
+              this.loadProjects();
+              this.closeForm();
             }
 
-            this.handleError(err);
           }
         });
 

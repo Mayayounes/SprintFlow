@@ -6,7 +6,7 @@ using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Commands.DeleteTask;
 
-public class DeleteTaskCommandHandler(ITaskRepository taskRepository ,IUserContext userContext , INotificationService notificationService): IRequestHandler<DeleteTaskCommand, Result<bool>>
+public class DeleteTaskCommandHandler(ITaskRepository taskRepository ,IUserContext userContext , INotificationService notificationService , IUnitOfWork unitOfWork): IRequestHandler<DeleteTaskCommand, Result<bool>>
 {
     public async Task<Result<bool>> Handle(DeleteTaskCommand request, CancellationToken ct)
     {
@@ -42,7 +42,7 @@ public class DeleteTaskCommandHandler(ITaskRepository taskRepository ,IUserConte
             );
         }
         await taskRepository.Delete(task);
-        await taskRepository.SaveChangesSafe();
+        await unitOfWork.SaveChangesAsync();
 
         return Result<bool>.Success(true, "Task deleted successfully");
     }

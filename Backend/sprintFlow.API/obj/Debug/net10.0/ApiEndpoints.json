@@ -850,5 +850,15 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "sprintFlow.API.Controllers.TestController",
+    "Method": "Test",
+    "RelativePath": "Test/test",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]

@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using sprintFlow.Application.Common;
 using sprintFlow.Application.Users.Dto;
-using sprintFlow.Domain.Constants;
+
 
 namespace sprintFlow.Application.Users.Commands.UpdateUser;
 
-public class UpdateUserCommand : IRequest<Result<UserConcurrencyDto>>
+public class UpdateUserCommand : IRequest<Result<UserDto>>
 {
     public string UserId { get; set; } = default!;
     public string? UserName { get; set; } = null!;

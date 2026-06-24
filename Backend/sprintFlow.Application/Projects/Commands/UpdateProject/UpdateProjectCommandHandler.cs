@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using sprintFlow.Application.Common;
+using sprintFlow.Application.Common.Interfaces;
 using sprintFlow.Application.Projects.Dto;
 using sprintFlow.Application.Tasks.Dto;
 using sprintFlow.Application.Users;
@@ -10,7 +11,7 @@ using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Projects.Commands.UpdateProject;
 
-public class UpdateProjectCommandHandler(IMapper mapper,IUserContext userContext, IProjectRepository projectRepository) : IRequestHandler<UpdateProjectCommand, Result<ProjectDto>>
+public class UpdateProjectCommandHandler(IMapper mapper,IUserContext userContext, IProjectRepository projectRepository , IUnitOfWork unitOfWork) : IRequestHandler<UpdateProjectCommand, Result<ProjectDto>>
 {
     public async Task<Result<ProjectDto>> Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
     {
@@ -37,22 +38,8 @@ public class UpdateProjectCommandHandler(IMapper mapper,IUserContext userContext
         project.Name = request.Name;
         project.Description = request.Description;
 
-        var result = await projectRepository.SaveChangesSafe();
-        if (!result.Success)
-        {
-            var latestDto = result.Latest == null
-                ? null
-                : mapper.Map<ProjectDto>(result.Latest);
+        await unitOfWork.SaveChangesAsync();
 
-            return Result<ProjectDto>.Failure(
-                new List<string>
-                {
-                "This record was modified by another user. Refresh and try again."
-                },
-                "ConcurrencyConflict",
-                latestDto
-            );
-        }
         var dto = mapper.Map<ProjectDto>(project);
 
         return Result<ProjectDto>.Success(dto, "Project updated successfully"); ;

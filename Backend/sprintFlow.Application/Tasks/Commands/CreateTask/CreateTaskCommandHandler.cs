@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using sprintFlow.Application.Common;
+using sprintFlow.Application.Common.Interfaces;
 using sprintFlow.Application.Users;
 using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Entities;
@@ -9,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace sprintFlow.Application.Tasks.Commands.CreateTask;
 
-public class CreateTaskCommandHandler(IUserContext userContext, IMapper mapper, IProjectRepository projectRepository, ITaskRepository taskRepository) : IRequestHandler<CreateTaskCommand, Result<Guid>>
+public class CreateTaskCommandHandler(IUserContext userContext, IMapper mapper, IProjectRepository projectRepository, ITaskRepository taskRepository , IUnitOfWork unitOfWork) : IRequestHandler<CreateTaskCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
     {
@@ -32,7 +33,7 @@ public class CreateTaskCommandHandler(IUserContext userContext, IMapper mapper, 
         }
         var task = mapper.Map<TaskItem>(request);
         var taskId = await taskRepository.Create(task);
-
+        await unitOfWork.SaveChangesAsync();
         return Result<Guid>.Success(taskId, "Task created successfully");
     }
 }

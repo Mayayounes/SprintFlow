@@ -11,7 +11,7 @@ using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Commands.UpdateTaskDetails;
 
-public class UpdateTaskDetailsCommandHandler(IMapper mapper,IUserContext userContext, IProjectRepository projectRepository, ITaskRepository taskRepository, INotificationService notificationService) : IRequestHandler<UpdateTaskDetailsCommand, Result<TaskItemDto>>
+public class UpdateTaskDetailsCommandHandler(IMapper mapper,IUserContext userContext, IProjectRepository projectRepository, ITaskRepository taskRepository, INotificationService notificationService, IUnitOfWork unitOfWork) : IRequestHandler<UpdateTaskDetailsCommand, Result<TaskItemDto>>
 {
     public async Task<Result<TaskItemDto>> Handle(UpdateTaskDetailsCommand request, CancellationToken cancellationToken)
     {
@@ -49,22 +49,8 @@ public class UpdateTaskDetailsCommandHandler(IMapper mapper,IUserContext userCon
         task.Description = request.Description;
         task.Deadline = request.Deadline;
 
-        var result = await taskRepository.SaveChangesSafe();
-        if (!result.Success)
-        {
-            var latestDto = result.Latest == null
-                ? null
-                : mapper.Map<TaskItemDto>(result.Latest);
+        await unitOfWork.SaveChangesAsync();
 
-            return Result<TaskItemDto>.Failure(
-                new List<string>
-                {
-                "This record was modified by another user. Refresh and try again."
-                },
-                "ConcurrencyConflict",
-                latestDto
-            );
-        }
         if (!string.IsNullOrEmpty(task.EmployeeId))
         {
             await notificationService.SendAsync(

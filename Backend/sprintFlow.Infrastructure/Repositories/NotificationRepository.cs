@@ -2,27 +2,20 @@
 using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Repositories;
 using sprintFlow.Infrastructure.Persistence;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace sprintFlow.Infrastructure.Repositories;
 
-public class NotificationRepository : INotificationRepository
+public class NotificationRepository(AppDbContext dbContext) : INotificationRepository
 {
-    private readonly AppDbContext _context;
-
-    public NotificationRepository(AppDbContext context)
-    {
-        _context = context;
-    }
 
     public async Task AddAsync(Notification notification)
     {
-        await _context.Notifications.AddAsync(notification);
+        await dbContext.Notifications.AddAsync(notification);
     }
 
     public async Task<List<Notification>> GetUserNotificationsAsync(Guid userId)
     {
-        return await _context.Notifications
+        return await dbContext.Notifications
             .Where(x => x.UserId == userId)
             .OrderByDescending(x => x.CreatedAt)
             .ToListAsync();
@@ -30,19 +23,19 @@ public class NotificationRepository : INotificationRepository
 
     public async Task<int> GetUnreadCountAsync(Guid userId)
     {
-        return await _context.Notifications
+        return await dbContext.Notifications
             .CountAsync(x => x.UserId == userId && !x.IsRead);
     }
 
     public async Task<Notification?> GetByIdAsync(Guid notificationId)
     {
-        return await _context.Notifications
+        return await dbContext.Notifications
             .FirstOrDefaultAsync(x => x.Id == notificationId);
     }
 
     public async Task MarkAsReadAsync(Guid notificationId, Guid userId)
     {
-        var notification = await _context.Notifications
+        var notification = await dbContext.Notifications
             .FirstOrDefaultAsync(x => x.Id == notificationId && x.UserId == userId);
 
         if (notification == null) return;
@@ -50,13 +43,9 @@ public class NotificationRepository : INotificationRepository
         notification.IsRead = true;
     }
 
-    public async Task SaveChangesAsync()
-    {
-        await _context.SaveChangesAsync();
-    }
     public async Task MarkAllAsReadAsync(Guid userId)
     {
-        await _context.Notifications
+        await dbContext.Notifications
             .Where(x => x.UserId == userId && !x.IsRead)
             .ExecuteUpdateAsync(s => s
                 .SetProperty(n => n.IsRead, true)
@@ -73,7 +62,7 @@ public class NotificationRepository : INotificationRepository
     int pageNumber,
     int pageSize)
     {
-        var query = _context.Notifications
+        var query = dbContext.Notifications
             .Where(x => x.UserId == userId);
 
         query = filter switch

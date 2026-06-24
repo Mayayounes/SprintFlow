@@ -8,20 +8,9 @@ using sprintFlow.Infrastructure.Persistence;
 
 namespace sprintFlow.Infrastructure.Services;
 
-public class NotificationService : INotificationService
+public class NotificationService(IHubContext<NotificationHub> hubContext , INotificationRepository notificationRepository , IUnitOfWork unitOfWork) : INotificationService
 {
-    private readonly INotificationRepository _repository;
-    private readonly IHubContext<NotificationHub> _hubContext;
-
-    public NotificationService(
-        INotificationRepository repository,
-        IHubContext<NotificationHub> hubContext)
-    {
-        _repository = repository;
-        _hubContext = hubContext;
-    }
-
-    public async Task SendAsync(Guid userId, string message)
+    public async Task<Notification> CreateAsync(Guid userId, string message)
     {
         var notification = new Notification
         {
@@ -32,17 +21,16 @@ public class NotificationService : INotificationService
             IsRead = false
         };
 
-        await SendAsync(notification);
+        await notificationRepository.AddAsync(notification);
+
+        return notification;
     }
-
-    public async Task SendAsync(Notification notification)
+    public async Task PublishAsync(Notification notification)
     {
-        await _repository.AddAsync(notification);
-        await _repository.SaveChangesAsync();
+        var unreadCount =
+            await notificationRepository.GetUnreadCountAsync(notification.UserId);
 
-        var unreadCount = await _repository.GetUnreadCountAsync(notification.UserId);
-
-        await _hubContext.Clients
+        await hubContext.Clients
             .User(notification.UserId.ToString())
             .SendAsync("ReceiveNotification", new
             {
@@ -53,24 +41,26 @@ public class NotificationService : INotificationService
                 unreadCount
             });
     }
-
-    public async Task<List<Notification>> GetUserNotificationsAsync(Guid userId)
+    public async Task SendAsync(Notification notification)
     {
-        return await _repository.GetUserNotificationsAsync(userId);
+        await notificationRepository.AddAsync(notification);
     }
-
-    public async Task<int> GetUnreadCountAsync(Guid userId)
-    {
-        return await _repository.GetUnreadCountAsync(userId);
-    }
-
+    public async Task SendAsync(Guid userId, string message)
+    { 
+        var notification = new Notification { 
+            Id = Guid.NewGuid(), 
+            UserId = userId, 
+            Message = message, 
+            CreatedAt = DateTime.UtcNow, 
+            IsRead = false 
+        }; 
+        await SendAsync(notification); }
     public async Task MarkAsReadAsync(Guid notificationId, Guid userId)
     {
-        await _repository.MarkAsReadAsync(notificationId, userId);
-        await _repository.SaveChangesAsync();
-
-        var unreadCount = await _repository.GetUnreadCountAsync(userId);
-        await _hubContext.Clients.User(userId.ToString())
+        await notificationRepository.MarkAsReadAsync(notificationId, userId);
+        await unitOfWork.SaveChangesAsync();
+        var unreadCount = await notificationRepository.GetUnreadCountAsync(userId);
+        await hubContext.Clients.User(userId.ToString())
             .SendAsync("NotificationRead", new
             {
                 notificationId,
@@ -79,14 +69,13 @@ public class NotificationService : INotificationService
     }
     public async Task MarkAllAsReadAsync(Guid userId)
     {
-        await _repository.MarkAllAsReadAsync(userId);
-        await _repository.SaveChangesAsync();
-
-        await _hubContext.Clients
+        await notificationRepository.MarkAllAsReadAsync(userId);
+        await unitOfWork.SaveChangesAsync();
+        await hubContext.Clients
             .User(userId.ToString())
             .SendAsync("UnreadCountUpdated", 0);
 
-        await _hubContext.Clients
+        await hubContext.Clients
             .User(userId.ToString())
             .SendAsync("AllNotificationsRead");
     }

@@ -176,27 +176,14 @@ export class Tasks implements OnInit {
             this.toast.show('Task updated successfully', 'success');
             this.showForm = false;
           },
-
           error: (err) => {
 
             if (err.error?.message === 'ConcurrencyConflict') {
-              const latest = err.error.data;
-
-              this.form = {
-                title: latest.title,
-                description: latest.description,
-                assignedDate: latest.assignedDate,
-                deadline: latest.deadline,
-                rowVersion: latest.rowVersion
-              };
-
-              this.toast.show(
-                'Task was modified by another user , Refresh to load the new version.',
-                'warning'
-              );
-              return;
+              this.handleError(err);
+              this.loadTasks();
+              this.closeForm();
             }
-            this.handleError(err);
+
           }
         });
 

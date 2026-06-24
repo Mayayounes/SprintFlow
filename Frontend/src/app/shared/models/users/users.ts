@@ -183,52 +183,32 @@ export class Users implements OnInit {
       this.api.updateUser(this.currentUserId, payload)
         .subscribe({
           next: (res: any) => {
-
-            const updated = res.data;
+            const updatedUser = res.data;
 
             this.users.update(users =>
               users.map(user =>
-                user.id === this.currentUserId
+                user.id === updatedUser.id
                   ? {
                     ...user,
-                    userName: updated.userName,
-                    phoneNumber: updated.phoneNumber,
-                    rowVersion: updated.rowVersion
+                    userName: updatedUser.userName,
+                    email: updatedUser.email,
+                    phoneNumber: updatedUser.phoneNumber,
+                    rowVersion: updatedUser.rowVersion
                   }
                   : user
               )
             );
-
             this.toast.show('User updated successfully', 'success');
             this.closeForm();
           },
-          error: (err) => {
-            if (
-              err.error?.code === 'ConcurrencyConflict' ||
-              err.error?.message === 'ConcurrencyConflict'
-            ) {
-
-              const latest = err.error.data;
-console.log('CONFLICT DATA FROM SERVER:', latest);
-              this.form = {
-                userName: latest.userName ?? '',
-                email: latest.email ?? '',
-                phoneNumber: latest.phoneNumber ?? '',
-                role: latest.role ?? '',
-                password: '',
-                rowVersion: latest.rowVersion ?? ''
-              };
-
-              this.toast.show(
-                'User was modified by another process. Latest version loaded.',
-                'warning'
-              );
-
-              return;
+            error: (err) => {
+            if (err?.error?.message === 'ConcurrencyConflict') {
+              this.handleError(err);
+              this.closeForm();
+              this.loadUsers();
             }
           }
         });
-
     } else {
 
       if (!this.form.email || !this.form.password || !this.form.role) {

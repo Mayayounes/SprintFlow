@@ -8,7 +8,7 @@ using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Commands.AssignEmployeeToTask;
 
-public class AssignEmployeeToTaskCommandHandler(IUserContext userContext, IProjectRepository projectRepository, ITaskRepository taskRepository, IUserRepository userRepository, INotificationService notificationService) : IRequestHandler<AssignEmployeeToTaskCommand, Result<string>>
+public class AssignEmployeeToTaskCommandHandler(IUserContext userContext, IProjectRepository projectRepository, ITaskRepository taskRepository, IUserRepository userRepository, INotificationService notificationService , IUnitOfWork unitOfWork) : IRequestHandler<AssignEmployeeToTaskCommand, Result<string>>
 {
     public async Task<Result<string>> Handle(AssignEmployeeToTaskCommand request, CancellationToken cancellationToken)
     {
@@ -71,14 +71,17 @@ public class AssignEmployeeToTaskCommandHandler(IUserContext userContext, IProje
             task.CompletedAt = null;
         }
         task.EmployeeId = request.EmployeeId.ToString();
-
-        await taskRepository.SaveChangesSafe();
         var manager = await userRepository.GetByIdAsync(currentUser.Id);
-        await notificationService.SendAsync( 
+
+        var notification = await notificationService.CreateAsync(
             Guid.Parse(task.EmployeeId),
             $"You are assigned to task '{task.Title}' on project '{project.Name}' by {manager!.UserName}."
         );
-        return Result<string>.Success("Employee assigned to task successfully");
 
+        await unitOfWork.SaveChangesAsync();
+
+        await notificationService.PublishAsync(notification);
+
+        return Result<string>.Success("Employee assigned to task successfully");
     }
 }

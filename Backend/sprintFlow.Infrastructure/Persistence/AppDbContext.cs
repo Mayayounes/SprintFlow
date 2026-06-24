@@ -21,22 +21,22 @@ public class AppDbContext : IdentityDbContext<User>
         builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 
     }
-    public override async Task<int> SaveChangesAsync(
-    CancellationToken cancellationToken = default)
-    {
-        foreach (var entry in ChangeTracker.Entries<BaseEntity>())
-        {
-            if (entry.State == EntityState.Added)
-            {
-                entry.Entity.CreatedAt = DateTime.UtcNow;
-            }
+    //public override async Task<int> SaveChangesAsync(
+    //CancellationToken cancellationToken = default)
+    //{
+    //    foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+    //    {
+    //        if (entry.State == EntityState.Added)
+    //        {
+    //            entry.Entity.CreatedAt = DateTime.UtcNow;
+    //        }
 
-            if (entry.State == EntityState.Modified)
-            {
-                entry.Entity.UpdatedAt = DateTime.UtcNow;
-            }
-        }
+    //        if (entry.State == EntityState.Modified)
+    //        {
+    //            entry.Entity.UpdatedAt = DateTime.UtcNow;
+    //        }
+    //    }
 
-        return await base.SaveChangesAsync(cancellationToken);
-    }
+    //    return await base.SaveChangesAsync(cancellationToken);
+    //}
 }
