@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cJfvoYoVWqg=",
+  "dgSpecHash": "y5JQoOlZ024=",
   "success": true,
   "projectFilePath": "D:\\SprintFlow Project\\Backend\\sprintFlow.Infrastructure\\sprintFlow.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -48,6 +48,8 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.diagnostics\\10.0.5\\microsoft.extensions.diagnostics.10.0.5.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\10.0.5\\microsoft.extensions.diagnostics.abstractions.10.0.5.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.features\\10.0.8\\microsoft.extensions.features.10.0.8.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\10.0.0\\microsoft.extensions.fileproviders.abstractions.10.0.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\10.0.0\\microsoft.extensions.hosting.abstractions.10.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.identity.core\\10.0.5\\microsoft.extensions.identity.core.10.0.5.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.identity.stores\\10.0.5\\microsoft.extensions.identity.stores.10.0.5.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.logging\\10.0.5\\microsoft.extensions.logging.10.0.5.nupkg.sha512",
@@ -67,6 +69,9 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.visualstudio.solutionpersistence\\1.0.52\\microsoft.visualstudio.solutionpersistence.1.0.52.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\quartz\\3.18.1\\quartz.3.18.1.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\quartz.extensions.dependencyinjection\\3.18.1\\quartz.extensions.dependencyinjection.3.18.1.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\quartz.extensions.hosting\\3.18.1\\quartz.extensions.hosting.3.18.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.clientmodel\\1.5.1\\system.clientmodel.1.5.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.composition\\9.0.0\\system.composition.9.0.0.nupkg.sha512",

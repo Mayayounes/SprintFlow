@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using Moq;
+using sprintFlow.Application.Common.Interfaces;
 using sprintFlow.Application.Projects.Commands.UpdateProject;
 using sprintFlow.Application.Users;
 using sprintFlow.Domain.Entities;
@@ -17,6 +18,7 @@ public class UpdateProjectCommandHandlerTests
         var mapperMock = new Mock<IMapper>();
         var userContextMock = new Mock<IUserContext>();
         var projectRepositoryMock = new Mock<IProjectRepository>();
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
 
         var command = new UpdateProjectCommand
         {
@@ -45,7 +47,8 @@ public class UpdateProjectCommandHandlerTests
         var handler = new UpdateProjectCommandHandler(
             mapperMock.Object,
             userContextMock.Object,
-            projectRepositoryMock.Object
+            projectRepositoryMock.Object,
+            unitOfWorkMock.Object
         );
 
         // Act
@@ -56,7 +59,9 @@ public class UpdateProjectCommandHandlerTests
         result.Data.Should().Be(project.Id);
         result.Message.Should().Be("Project updated successfully");
 
-        projectRepositoryMock.Verify(r => r.SaveChanges(), Times.Once);
+        unitOfWorkMock.Verify(
+            u => u.SaveChangesAsync(),
+            Times.Once);
         mapperMock.Verify(m => m.Map(command, project), Times.Once);
     }
     [Fact]
@@ -66,6 +71,7 @@ public class UpdateProjectCommandHandlerTests
         var mapperMock = new Mock<IMapper>();
         var userContextMock = new Mock<IUserContext>();
         var projectRepositoryMock = new Mock<IProjectRepository>();
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
 
         var command = new UpdateProjectCommand
         {
@@ -79,7 +85,8 @@ public class UpdateProjectCommandHandlerTests
         var handler = new UpdateProjectCommandHandler(
             mapperMock.Object,
             userContextMock.Object,
-            projectRepositoryMock.Object
+            projectRepositoryMock.Object,
+            unitOfWorkMock.Object
         );
 
         // Act
@@ -90,7 +97,9 @@ public class UpdateProjectCommandHandlerTests
         result.Message.Should().Be("Not Found");
         result.Errors.Should().Contain("Project not found");
 
-        projectRepositoryMock.Verify(r => r.SaveChanges(), Times.Never);
+        unitOfWorkMock.Verify(
+            u => u.SaveChangesAsync(),
+            Times.Never);
         mapperMock.Verify(m => m.Map(It.IsAny<UpdateProjectCommand>(), It.IsAny<Project>()), Times.Never);
     }
     [Fact]
@@ -100,7 +109,7 @@ public class UpdateProjectCommandHandlerTests
         var mapperMock = new Mock<IMapper>();
         var userContextMock = new Mock<IUserContext>();
         var projectRepositoryMock = new Mock<IProjectRepository>();
-
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
         var command = new UpdateProjectCommand
         {
             Id = Guid.NewGuid()
@@ -125,7 +134,9 @@ public class UpdateProjectCommandHandlerTests
         var handler = new UpdateProjectCommandHandler(
             mapperMock.Object,
             userContextMock.Object,
-            projectRepositoryMock.Object
+            projectRepositoryMock.Object,
+            unitOfWorkMock.Object
+
         );
 
         // Act
@@ -136,7 +147,9 @@ public class UpdateProjectCommandHandlerTests
         result.Message.Should().Be("Forbidden");
         result.Errors.Should().Contain("You are not allowed to update this project");
 
-        projectRepositoryMock.Verify(r => r.SaveChanges(), Times.Never);
+        unitOfWorkMock.Verify(
+            u => u.SaveChangesAsync(),
+            Times.Never);
         mapperMock.Verify(m => m.Map(It.IsAny<UpdateProjectCommand>(), It.IsAny<Project>()), Times.Never);
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "OVPEFJytgBM=",
+  "dgSpecHash": "AFKkOFTfmnw=",
   "success": true,
   "projectFilePath": "D:\\SprintFlow Project\\Backend\\sprintFlow.Application\\sprintFlow.Application.csproj",
   "expectedPackageFiles": [
@@ -38,6 +38,7 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.14.0\\microsoft.identitymodel.jsonwebtokens.8.14.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.identitymodel.logging\\8.14.0\\microsoft.identitymodel.logging.8.14.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.14.0\\microsoft.identitymodel.tokens.8.14.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\quartz\\3.18.1\\quartz.3.18.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.7.1\\system.identitymodel.tokens.jwt.7.7.1.nupkg.sha512"
   ],
   "logs": []

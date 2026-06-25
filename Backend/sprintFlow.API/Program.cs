@@ -1,5 +1,3 @@
-using Hangfire;
-using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +8,7 @@ using sprintFlow.Application.Extensions;
 using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Infrastructure.Extensions;
-using sprintFlow.Infrastructure.Persistence;
+using Quartz;
 using sprintFlow.Infrastructure.Repositories;
 using System.Security.Claims;
 using System.Text;
@@ -22,13 +20,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
 
 builder.Services.AddInfrastructure(builder.Configuration);
-
-builder.Services.AddHangfire(config =>
-{
-    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("SprintFlowDatabase"));
-});
-
-builder.Services.AddHangfireServer();
 
 builder.Services.AddApplication();
 
@@ -115,8 +106,6 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-
-app.UseHangfireDashboard("/hangfire");
 
 app.UseMiddleware<ExceptionMiddleware>();
 

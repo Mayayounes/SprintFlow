@@ -22,3 +22,4 @@ D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Debug\net10.0\sprintFlow.Dom
 D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Debug\net10.0\refint\sprintFlow.Domain.dll
 D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Debug\net10.0\sprintFlow.Domain.pdb
 D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Debug\net10.0\ref\sprintFlow.Domain.dll
+D:\SprintFlow Project\Backend\sprintFlow.Domain\obj\Debug\net10.0\sprintFlow.Domain.sourcelink.json

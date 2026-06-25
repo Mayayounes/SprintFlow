@@ -13,4 +13,5 @@ public interface ITaskRepository
     Task<List<TaskItem>> GetActiveAssignedTasksAsync();
     Task SetOriginalRowVersion(TaskItem task, byte[] rowVersion);
     Task Delete(TaskItem task);
+    Task<List<TaskItem>> GetTasksDueTomorrowAsync();
 }

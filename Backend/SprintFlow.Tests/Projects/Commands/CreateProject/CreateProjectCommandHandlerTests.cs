@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using Moq;
+using sprintFlow.Application.Common.Interfaces;
 using sprintFlow.Application.Projects.Commands.CreateProject;
 using sprintFlow.Application.Users;
 using sprintFlow.Domain.Constants;
@@ -29,8 +30,9 @@ public class CreateProjectCommandHandlerTests
         var userContextMock = new Mock<IUserContext>();
         var currentUser = new CurrentUser("manager_id", "manager@test.com", []);
         userContextMock.Setup(u => u.GetCurrentUser()).Returns(currentUser);
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
 
-        var commandHandler = new CreateProjectCommandHandler(userContextMock.Object, mapperMock.Object, projectRepositoryMock.Object);
+        var commandHandler = new CreateProjectCommandHandler(userContextMock.Object, mapperMock.Object, projectRepositoryMock.Object, unitOfWorkMock.Object);
 
         //Act
         var result = await commandHandler.Handle(command, CancellationToken.None);

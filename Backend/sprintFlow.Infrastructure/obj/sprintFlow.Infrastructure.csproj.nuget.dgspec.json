@@ -75,6 +75,10 @@
               "target": "Package",
               "version": "[14.1.0, )"
             },
+            "Quartz": {
+              "target": "Package",
+              "version": "[3.18.1, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[7.7.1, )"
@@ -790,6 +794,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[10.0.5, )"
+            },
+            "Quartz": {
+              "target": "Package",
+              "version": "[3.18.1, )"
+            },
+            "Quartz.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[3.18.1, )"
             }
           },
           "imports": [

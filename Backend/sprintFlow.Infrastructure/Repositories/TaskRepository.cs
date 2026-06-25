@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using sprintFlow.Application.Common.Interfaces;
+using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
 using sprintFlow.Infrastructure.Persistence;
@@ -107,5 +107,17 @@ public class TaskRepository(AppDbContext dbContext) : ITaskRepository
     public async Task Delete(TaskItem task)
     {
         dbContext.Tasks.Remove(task);
+    }
+    public async Task<List<TaskItem>> GetTasksDueTomorrowAsync()
+    {
+        var tomorrow = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1));
+
+        return await dbContext.Tasks
+            .Where(t =>
+                t.EmployeeId != null &&
+                t.Deadline == tomorrow &&
+                (t.Status == TaskItemStatus.ToDo ||
+                 t.Status == TaskItemStatus.InProgress))
+            .ToListAsync();
     }
 }
