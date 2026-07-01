@@ -16,7 +16,7 @@ export class NotificationSignalRService {
   private countSubject = new BehaviorSubject<number>(0);
   notificationCount$ = this.countSubject.asObservable();
   //read
-  private readSubject = new Subject<string>();
+  private readSubject = new Subject<NotificationDto>();
   notificationRead$ = this.readSubject.asObservable();
   // all read
   private allReadSubject = new Subject<void>();
@@ -49,6 +49,7 @@ export class NotificationSignalRService {
       .withAutomaticReconnect()
       .build();
     this.hubConnection.on('ReceiveNotification', (data: NotificationDto) => {
+      console.log('Receive Notification:', data)
       this.zone.run(() => {
         this.notificationSubject.next(data);
         this.countSubject.next(data.unreadCount);
@@ -64,7 +65,7 @@ export class NotificationSignalRService {
     this.hubConnection.on('NotificationRead', (data: any) => {
       this.zone.run(() => {
         this.countSubject.next(data.unreadCount);
-        this.readSubject.next(data.notificationId);
+        this.readSubject.next(data.notification);
       });
     });
 

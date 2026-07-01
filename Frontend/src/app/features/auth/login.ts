@@ -46,11 +46,13 @@ export class Login {
         const role = roleRaw.toLowerCase().trim();
         const email = res.data.email;
         const userId = res.data.userId;
+        const timeZoneId = res.data.timeZoneId;
 
         localStorage.setItem('token', token);
         localStorage.setItem('role', role);
         localStorage.setItem('email', email);
         localStorage.setItem('userId', userId);
+        localStorage.setItem('timeZoneId', timeZoneId);
 
         await this.notificationSignalRService.startConnection();
         this.toast.show('Login Successful', 'success');

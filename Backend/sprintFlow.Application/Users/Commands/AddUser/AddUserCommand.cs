@@ -11,5 +11,6 @@ public class AddUserCommand : IRequest<Result<string>>
     public string? Password { get; set; }
     public UserRole? Role { get; set; }
     public string PhoneNumber { get; set; } = null!;
+    public string TimeZoneId { get; set; } = "UTC";
 
 }

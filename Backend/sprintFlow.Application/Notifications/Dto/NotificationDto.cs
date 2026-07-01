@@ -7,4 +7,8 @@ public class NotificationDto
     public bool IsRead { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
+
+    // Local times
+    public DateTime CreatedAtLocal { get; set; }
+    public DateTime? UpdatedAtLocal { get; set; }
 }

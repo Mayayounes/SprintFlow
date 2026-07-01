@@ -104,13 +104,13 @@
           <!-- STARTED AT -->
           <div *ngIf="task.startedAtLocal">
             <span class="text-blue-400">Started:</span>
-            {{ task.startedAtLocal | date:'dd/MM/yyyy - HH:mm' }}
+            {{ task.startedAtLocal | date:'dd MMM yyyy, h:mm a' }}
           </div>
 
           <!-- COMPLETED AT -->
           <div *ngIf="task.completedAtLocal">
             <span class="text-green-400">Completed:</span>
-            {{ task.completedAtLocal | date:'dd/MM/yyyy - HH:mm' }}
+            {{ task.completedAtLocal | date:'dd MMM yyyy, h:mm a' }}
           </div>
           <!-- DURATION -->
           <div *ngIf="task.durationInSeconds" class="text-purple-300">

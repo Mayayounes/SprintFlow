@@ -1,4 +1,6 @@
-﻿namespace sprintFlow.Application.Common.Interfaces;
+﻿using sprintFlow.Domain.Entities;
+
+namespace sprintFlow.Application.Common.Interfaces;
 
 public interface INotificationService
 {

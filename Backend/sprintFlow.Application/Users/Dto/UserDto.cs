@@ -13,5 +13,6 @@ public class UserDto
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public UserRole? Role { get; set; }
     public string RowVersion { get; set; } = default!;
+    public string TimeZoneId { get; set; } = "UTC";
 
 }

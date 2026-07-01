@@ -2,13 +2,14 @@
 <div class="w-full flex justify-between p-4 bg-black/30 text-white">
 
   <div>
-    SprintFlow
+    <span>SprintFlow</span>
+    <span> | </span>
+    <span>🌍{{ timeZoneId }}</span>
   </div>
 
   <div class="flex gap-4 items-center">
     <span>{{ email }}</span>
     <span>{{ role }}</span>
-
     <button (click)="logout()" class="bg-red-500 px-3 py-1 rounded">
       Logout
     </button>

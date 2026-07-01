@@ -73,27 +73,32 @@
           </div>
 
           <div class="text-xs text-gray-400 mt-2 space-y-1">
+            <div class="text-xs text-gray-400 mt-2">
 
-            <!-- Created -->
-            <!-- <div>
-              🕒 Created:
-              {{ n.createdAt | date:'dd/MM/yyyy HH:mm' }}
+              <div>
+                📤 Sent:
+                {{ n.createdAtLocal | date:'dd MMM yyyy, h:mm a' }}
+              </div>
+
               <div *ngIf="n.isRead">
                 👁 Seen:
-                {{ n.updatedAt | date:'dd/MM/yyyy HH:mm' }}
-                <div *ngIf="!n.isRead">
-                  ⏳ Not read yet
-                </div> -->
-
+                {{ n.updatedAtLocal | date:'dd MMM yyyy, h:mm a' }}
               </div>
+
+              <div *ngIf="!n.isRead">
+                ⏳ Not read yet
+              </div>
+
             </div>
-
           </div>
-
-          <div *ngIf="notifications.length === 0" class="p-6 text-center text-gray-400">
-            No notifications
-          </div>
-
         </div>
+
       </div>
+
+      <div *ngIf="notifications.length === 0" class="p-6 text-center text-gray-400">
+        No notifications
+      </div>
+
     </div>
+  </div>
+</div>

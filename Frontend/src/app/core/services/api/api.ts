@@ -111,4 +111,8 @@ export class Api {
       .set('pageSize', pageSize);
     return this.http.get(`${this.baseUrl}/notifications`, { params });
   }
+  //get time zones
+  getTimeZones() {
+  return this.http.get<any>(`${this.hubUrl}/time-zones`);
+}
 }

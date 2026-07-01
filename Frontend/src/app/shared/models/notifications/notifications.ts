@@ -57,20 +57,32 @@ export class Notifications implements OnInit {
         this.cdr.markForCheck();
       });
     });
+    this.signalR.notificationRead$.subscribe(updated => {
 
-    this.signalR.notificationRead$.subscribe(notificationId => {
+      if (this.selectedFilter === 'Seen') {
+
+        const exists = this.notifications.some(n => n.id === updated.id);
+
+        if (!exists) {
+          this.notifications = [updated, ...this.notifications];
+        }
+
+        return;
+      }
 
       if (this.selectedFilter === 'Unread') {
         this.notifications =
-          this.notifications.filter(n => n.id !== notificationId);
+          this.notifications.filter(n => n.id !== updated.id);
         return;
       }
 
       this.notifications = this.notifications.map(n =>
-        n.id === notificationId
-          ? { ...n, isRead: true }
+        n.id === updated.id
+          ? updated
           : n
       );
+
+      this.cdr.detectChanges();
     });
 
     this.signalR.notificationAllRead$.subscribe(() => {
@@ -184,10 +196,7 @@ export class Notifications implements OnInit {
 
   async markAllRead() {
     await this.signalR.markAllRead();
-
-    if (this.selectedFilter === 'Unread') {
-      this.loadNotifications();
-    }
+    this.loadNotifications();
   }
 
   get hasNewNotification(): boolean {

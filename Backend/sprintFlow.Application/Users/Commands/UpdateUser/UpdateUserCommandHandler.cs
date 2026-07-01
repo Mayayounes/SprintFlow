@@ -25,6 +25,7 @@ public class UpdateUserCommandHandler(IUserRepository userRepository , IUnitOfWo
 
         user.UserName = request.UserName ?? user.UserName;
         user.PhoneNumber = request.PhoneNumber ?? user.PhoneNumber;
+        user.TimeZoneId = request.TimeZoneId ?? user.TimeZoneId;
 
         await unitOfWork.SaveChangesAsync();
 
@@ -34,7 +35,8 @@ public class UpdateUserCommandHandler(IUserRepository userRepository , IUnitOfWo
             UserName = user.UserName!,
             Email = user.Email!,
             PhoneNumber = user.PhoneNumber!,
-            RowVersion = Convert.ToBase64String(user.RowVersion)
+            RowVersion = Convert.ToBase64String(user.RowVersion),
+            TimeZoneId = user.TimeZoneId,
         };
 
         return Result<UserDto>.Success(

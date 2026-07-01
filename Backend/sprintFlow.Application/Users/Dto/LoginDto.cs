@@ -8,5 +8,6 @@ public class LoginDto
     public string Token { get; set; } = default!;
     public UserRole Role { get; set; }
     public string UserId { get; set; } = default!;
+    public string TimeZoneId { get; set; } = "UTC";
 
 }

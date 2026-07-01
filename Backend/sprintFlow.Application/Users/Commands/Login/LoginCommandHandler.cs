@@ -6,7 +6,6 @@ using sprintFlow.Application.Common;
 using sprintFlow.Application.Users.Dto;
 using sprintFlow.Domain.Constants;
 using sprintFlow.Domain.Entities;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -40,23 +39,23 @@ public class LoginCommandHandler(UserManager<User> userManager, IConfiguration c
             Token = token,
             Role = roleEnum,
             Email = user.Email!,
-            UserId = user.Id
+            UserId = user.Id,
+            TimeZoneId = user.TimeZoneId
         });
     }
 
-    private string GenerateJwtToken(IdentityUser user, IList<string> roles)
+    private string GenerateJwtToken(User user, IList<string> roles)
     {
         var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.NameIdentifier, user.Id),
+        new Claim(ClaimTypes.Email, user.Email!),
+        new Claim("timezone", user.TimeZoneId)
+    };
+
+        foreach (var role in roles)
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.Email, user.Email!),
-
-        };
-
-        foreach (var r in roles)
-        {
-            claims.Add(new Claim(ClaimTypes.Role, r));
-
+            claims.Add(new Claim(ClaimTypes.Role, role));
         }
 
         var key = new SymmetricSecurityKey(

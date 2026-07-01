@@ -5,4 +5,6 @@ export interface NotificationDto {
   createdAt: string;
   updatedAt : string;
   unreadCount: number;
+  createdAtLocal: string;
+  updatedAtLocal?: string;
 }

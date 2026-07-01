@@ -39,6 +39,7 @@ public class GetAllUsersQueryHandler(IUserRepository userRepository, IRoleReposi
                 PhoneNumber = user.PhoneNumber!,
                 RowVersion = Convert.ToBase64String(user.RowVersion),
                 Id = Guid.Parse(user.Id),
+                TimeZoneId = user.TimeZoneId,
             };
         }).ToList();
         var results = new PagedResults<UserDto>(usersDto,totalCount,request.PageNumber,request.PageSize);

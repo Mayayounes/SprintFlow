@@ -1,4 +1,5 @@
 ﻿using sprintFlow.Domain.Constants;
+using sprintFlow.Domain.Entities;
 
 namespace sprintFlow.Domain.Repositories;
 

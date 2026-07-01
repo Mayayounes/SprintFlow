@@ -4,6 +4,7 @@ using sprintFlow.Application.Common;
 using sprintFlow.Application.Common.Interfaces;
 using sprintFlow.Application.Users;
 using sprintFlow.Domain.Constants;
+using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Commands.UpdateTaskStatus;

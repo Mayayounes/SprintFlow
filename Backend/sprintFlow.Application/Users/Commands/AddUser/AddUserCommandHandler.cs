@@ -30,7 +30,8 @@ public class AddUserCommandHandler(UserManager<User> userManager) : IRequestHand
             UserName = request.UserName,
             Email = request.Email,
             PhoneNumber = request.PhoneNumber,
-            EmailConfirmed = true
+            EmailConfirmed = true,
+            TimeZoneId = request.TimeZoneId
         };
         var result = await userManager.CreateAsync(user, request.Password);
 

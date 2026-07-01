@@ -20,7 +20,8 @@ public class UserSeeder
         {
             UserName = adminEmail,
             Email = adminEmail,
-            EmailConfirmed = true
+            EmailConfirmed = true,
+            TimeZoneId = "Egypt Standard Time",
         };
 
         var result = await userManager.CreateAsync(adminUser, adminPassword);

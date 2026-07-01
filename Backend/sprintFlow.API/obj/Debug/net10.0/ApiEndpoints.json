@@ -860,5 +860,15 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "sprintFlow.API.Controllers.TimeZonesController",
+    "Method": "GetTimeZones",
+    "RelativePath": "time-zones",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]

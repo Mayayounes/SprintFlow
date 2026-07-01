@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using sprintFlow.Application.Common;
 using sprintFlow.Application.Tasks.Dto;
 using sprintFlow.Application.Users;
+using sprintFlow.Domain.Helpers;
 using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Queries.GetMyTasks;
@@ -15,28 +16,23 @@ public class GetMyTasksQueryHandler(ITaskRepository taskRepository, IUserContext
         var currentUser = userContext.GetCurrentUser();
 
         var (tasks, totalCount) = await taskRepository.GetMyTasksAsync(currentUser!.Id,request.PageNumber,request.PageSize, request.Status);
-
         var userTimeZone = currentUser.TimeZoneId;
 
         var items = tasks.Select(task => new EmployeeTaskDto
         {
             Id = task.Id,
             Title = task.Title,
-            Description = task.Description,
+            Description = task.Description!,
             Status = task.Status.ToString(),
             AssignedDate = task.AssignedDate,
             Deadline = task.Deadline,
             ProjectId = task.ProjectId,
-            ProjectName = task.Project?.Name,
+            ProjectName = task.Project?.Name!,
             ManagerName = task.Project?.Manager?.UserName,
             StartedAt = task.StartedAt,
             CompletedAt = task.CompletedAt,
-            StartedAtLocal = task.StartedAt == null
-                ? null
-                : TimeZoneHelper.ToUserTime(task.StartedAt.Value, userTimeZone),
-            CompletedAtLocal = task.CompletedAt == null
-                ? null
-                : TimeZoneHelper.ToUserTime(task.CompletedAt.Value, userTimeZone),
+            StartedAtLocal = task.StartedAt == null? null: TimeZoneHelper.ToUserTime(task.StartedAt.Value, userTimeZone),
+            CompletedAtLocal = task.CompletedAt == null? null: TimeZoneHelper.ToUserTime(task.CompletedAt.Value, userTimeZone),
             DurationInSeconds = task.DurationInSeconds,
         }).ToList();
 

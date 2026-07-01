@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using sprintFlow.Domain.Constants;
+using sprintFlow.Domain.Entities;
 using sprintFlow.Domain.Repositories;
 using sprintFlow.Infrastructure.Persistence;
 
@@ -41,6 +42,7 @@ public class NotificationRepository(AppDbContext dbContext) : INotificationRepos
         if (notification == null) return;
 
         notification.IsRead = true;
+        notification.UpdatedAt = DateTime.UtcNow;
     }
 
     public async Task MarkAllAsReadAsync(Guid userId)

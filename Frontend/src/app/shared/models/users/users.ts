@@ -6,6 +6,7 @@ import { ErrorModalService } from '../../../core/services/error-modal/error-moda
 import { Pagination } from '../../components/pagination/pagination';
 import { ToastService } from '../../../core/services/toast/toast';
 import { signal } from '@angular/core';
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -17,7 +18,7 @@ export class Users implements OnInit {
 
   // users: any[] = [];
   users = signal<any[]>([]);
-
+  timeZones: { id: string; displayName: string }[] = [];
   searchRole = '';
   pageNumber = 1;
   pageSize = 5;
@@ -40,7 +41,8 @@ export class Users implements OnInit {
     password: '',
     phoneNumber: '',
     role: '',
-    rowVersion: ''
+    rowVersion: '',
+    timeZoneId: '',
   };
 
   constructor(private api: Api, private cdr: ChangeDetectorRef, private errorModal: ErrorModalService, private toast: ToastService) { }
@@ -48,13 +50,28 @@ export class Users implements OnInit {
   ngOnInit() {
     this.loadUsers();
     this.loadRoles();
+    this.loadTimeZones();
+  }
+  loadTimeZones() {
+    this.api.getTimeZones().subscribe({
+      next: (res: any) => {
+        console.log("TIMEZONES RESPONSE:", res);
+        this.timeZones = [...res.data];
+      },
+      error: () => {
+        this.timeZones = [];
+      }
+    });
+  }
+  getTimeZoneName(id: string): string {
+    return this.timeZones.find(tz => tz.id === id)?.displayName ?? id;
   }
 
   @HostListener('document:click', ['$event'])
-
   onClickOutside(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (target.closest('button')) return;
+
     this.users().forEach(u => u.showMenu = false);
   }
   loadUsers() {
@@ -154,6 +171,7 @@ export class Users implements OnInit {
       password: '',
       phoneNumber: '',
       role: '',
+      timeZoneId: '',
       rowVersion: ''
     };
   }
@@ -177,7 +195,8 @@ export class Users implements OnInit {
         email: this.form.email,
         userName: this.form.userName,
         phoneNumber: this.form.phoneNumber,
-        rowVersion: this.form.rowVersion
+        rowVersion: this.form.rowVersion,
+        timeZoneId: this.form.timeZoneId,
       };
 
       this.api.updateUser(this.currentUserId, payload)
@@ -193,7 +212,8 @@ export class Users implements OnInit {
                     userName: updatedUser.userName,
                     email: updatedUser.email,
                     phoneNumber: updatedUser.phoneNumber,
-                    rowVersion: updatedUser.rowVersion
+                    rowVersion: updatedUser.rowVersion,
+                    timeZoneId: updatedUser.timeZoneId
                   }
                   : user
               )
@@ -201,7 +221,7 @@ export class Users implements OnInit {
             this.toast.show('User updated successfully', 'success');
             this.closeForm();
           },
-            error: (err) => {
+          error: (err) => {
             if (err?.error?.message === 'ConcurrencyConflict') {
               this.handleError(err);
               this.closeForm();
@@ -248,8 +268,14 @@ export class Users implements OnInit {
       password: '',
       phoneNumber: user.phoneNumber,
       role: user.role,
+      timeZoneId: user.timeZoneId,
       rowVersion: user.rowVersion
     };
+    console.log(user.timeZoneId);
+
+console.log(
+  this.timeZones.find(tz => tz.id === user.timeZoneId)
+);
   }
 
   private handleError(err: any) {

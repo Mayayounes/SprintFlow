@@ -494,3 +494,4 @@ D:\SprintFlow Project\Backend\SprintFlow.Tests\bin\Debug\net10.0\sv\Hangfire.Cor
 D:\SprintFlow Project\Backend\SprintFlow.Tests\bin\Debug\net10.0\tr-TR\Hangfire.Core.resources.dll
 D:\SprintFlow Project\Backend\SprintFlow.Tests\bin\Debug\net10.0\zh-TW\Hangfire.Core.resources.dll
 D:\SprintFlow Project\Backend\SprintFlow.Tests\bin\Debug\net10.0\zh\Hangfire.Core.resources.dll
+D:\SprintFlow Project\Backend\SprintFlow.Tests\obj\Debug\net10.0\SprintFlow.Tests.sourcelink.json

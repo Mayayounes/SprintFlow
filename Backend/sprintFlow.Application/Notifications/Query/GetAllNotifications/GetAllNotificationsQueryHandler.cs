@@ -2,6 +2,7 @@
 using sprintFlow.Application.Common;
 using sprintFlow.Application.Notifications.Dto;
 using sprintFlow.Application.Users;
+using sprintFlow.Domain.Helpers;
 using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Notifications.Query.GetAllNotifications;
@@ -12,6 +13,7 @@ public class GetAllNotificationsQueryHandler(IUserContext userContext ,INotifica
     public async Task<Result<PagedResults<NotificationDto>>> Handle(GetAllNotificationsQuery request, CancellationToken cancellationToken)
     {
         var currentUser = userContext.GetCurrentUser();
+        var userTimeZone = currentUser!.TimeZoneId;
 
         var userId = Guid.Parse(currentUser!.Id);
 
@@ -29,7 +31,9 @@ public class GetAllNotificationsQueryHandler(IUserContext userContext ,INotifica
                 Message = x.Message,
                 IsRead = x.IsRead,
                 CreatedAt = x.CreatedAt,
-                UpdatedAt = x.UpdatedAt
+                UpdatedAt = x.UpdatedAt,
+                CreatedAtLocal = TimeZoneHelper.ToUserTime(x.CreatedAt, userTimeZone),
+                UpdatedAtLocal = x.UpdatedAt == null ? null: TimeZoneHelper.ToUserTime(x.UpdatedAt.Value, userTimeZone)
             }).ToList();
 
         var pagedResult =

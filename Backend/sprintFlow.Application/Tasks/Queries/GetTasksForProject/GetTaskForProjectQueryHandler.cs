@@ -7,6 +7,7 @@ using sprintFlow.Application.Projects.Dto;
 using sprintFlow.Application.Tasks.Dto;
 using sprintFlow.Application.Users;
 using sprintFlow.Domain.Constants;
+using sprintFlow.Domain.Helpers;
 using sprintFlow.Domain.Repositories;
 
 namespace sprintFlow.Application.Tasks.Queries.GetTasksForProject;
@@ -35,8 +36,7 @@ public class GetTaskForProjectQueryHandler(IMapper mapper ,IUserContext userCont
             request.PageSize
         );
 
-        var userTimeZone = currentUser!.TimeZoneId;
-
+        var userTimeZone = currentUser.TimeZoneId;
         var tasksDto = tasks.Select(task => new TaskItemDto
         {
             Id = task.Id,
@@ -54,14 +54,8 @@ public class GetTaskForProjectQueryHandler(IMapper mapper ,IUserContext userCont
             UpdatedAt=task.UpdatedAt,
             StartedAt = task.StartedAt,
             CompletedAt = task.CompletedAt,
-            StartedAtLocal = task.StartedAt == null
-                ? null
-                : TimeZoneHelper.ToUserTime(task.StartedAt.Value, userTimeZone),
-
-            CompletedAtLocal = task.CompletedAt == null
-                ? null
-                : TimeZoneHelper.ToUserTime(task.CompletedAt.Value, userTimeZone),
-
+            StartedAtLocal = task.StartedAt == null? null: TimeZoneHelper.ToUserTime(task.StartedAt.Value, userTimeZone),
+            CompletedAtLocal = task.CompletedAt == null? null: TimeZoneHelper.ToUserTime(task.CompletedAt.Value, userTimeZone),
             DurationInSeconds = task.DurationInSeconds,
             CompletionStatus = task.CompletionStatus
         }).ToList();

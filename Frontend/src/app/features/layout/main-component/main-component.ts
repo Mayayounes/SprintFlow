@@ -13,7 +13,7 @@ export class MainComponent {
 
   email = localStorage.getItem('email');
   role = localStorage.getItem('role');
-
+  timeZoneId=localStorage.getItem('timeZoneId')
   constructor(private router: Router , private notificationSignalRService: NotificationSignalRService) {}
 
   async logout() {
